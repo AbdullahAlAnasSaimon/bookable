@@ -1,6 +1,6 @@
-import { ReactElement } from "react";
+import { FC } from "react";
 
-const Home = (): ReactElement => {
+const Home: FC = () => {
   return (
     <div>
       <h1>Home</h1>
