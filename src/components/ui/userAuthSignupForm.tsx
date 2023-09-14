@@ -16,10 +16,15 @@ interface ISignUp {
 export function UserAuthSignupForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
-  const { register, handleSubmit } = useForm<ISignUp>(); // Added type parameter
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ISignUp>(); // Added type parameter
 
   async function onSubmit(data: ISignUp) {
-    setIsLoading(true);
+    // setIsLoading(true);
+    console.log(data);
 
     setTimeout(() => {
       setIsLoading(false);
@@ -34,9 +39,14 @@ export function UserAuthSignupForm({ className, ...props }: UserAuthFormProps) {
             id="name"
             placeholder="Your name"
             type="text"
-            {...register("name")} // Register the input field with React Hook Form
+            {...register("name", { required: "Name is Required" })} // Register the input field with React Hook Form
             disabled={isLoading}
           />
+          {errors.name && (
+            <p className="text-[12px] font-semibold text-red-500">
+              *{errors.name.message}
+            </p>
+          )}
           <Input
             id="email"
             placeholder="name@example.com"
@@ -44,20 +54,29 @@ export function UserAuthSignupForm({ className, ...props }: UserAuthFormProps) {
             autoCapitalize="none"
             autoComplete="email"
             autoCorrect="off"
-            {...register("email")} // Register the input field with React Hook Form
+            {...register("email", { required: "Email is Required" })} // Register the input field with React Hook Form
             disabled={isLoading}
           />
+          {errors.email && (
+            <p className="text-[12px] font-semibold text-red-500">
+              *{errors.email.message}
+            </p>
+          )}
           <Input
             id="password"
             placeholder="Your Password"
             type="password"
             autoCapitalize="none"
-            {...register("password")} // Register the input field with React Hook Form
+            {...register("password", { required: "Password is Required" })} // Register the input field with React Hook Form
             disabled={isLoading}
           />
+          {errors.password && (
+            <p className="text-[12px] font-semibold text-red-500">
+              *{errors.password.message}
+            </p>
+          )}
           <Button className="mt-2" disabled={isLoading} type="submit">
             {" "}
-            {/* Added type="submit" */}
             {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             Create Account
           </Button>
