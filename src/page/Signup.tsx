@@ -3,7 +3,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { UserAuthLoginForm } from "@/components/ui/userAuthLoginForm";
 import { Link } from "react-router-dom";
 
-export default function Login() {
+export default function Signup() {
   return (
     <>
       <div className="md:hidden">
