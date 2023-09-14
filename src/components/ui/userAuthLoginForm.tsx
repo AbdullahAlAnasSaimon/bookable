@@ -27,8 +27,8 @@ export function UserAuthLoginForm({ className, ...props }: UserAuthFormProps) {
     <div className={cn("grid gap-6", className)} {...props}>
       <form onSubmit={onSubmit}>
         <div className="grid gap-2">
-          <div className="grid gap-1">
-            <Label className="sr-only" htmlFor="email">
+          <div className="grid gap-3">
+            <Label className="" htmlFor="email">
               Email
             </Label>
             <Input
@@ -40,10 +40,20 @@ export function UserAuthLoginForm({ className, ...props }: UserAuthFormProps) {
               autoCorrect="off"
               disabled={isLoading}
             />
+            <Label className="" htmlFor="email">
+              Password
+            </Label>
+            <Input
+              id="password"
+              placeholder="**********"
+              type="password"
+              autoCapitalize="none"
+              disabled={isLoading}
+            />
           </div>
-          <Button disabled={isLoading}>
+          <Button className="mt-2" disabled={isLoading}>
             {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            Sign In with Email
+            Log In with Email
           </Button>
         </div>
       </form>
@@ -52,7 +62,7 @@ export function UserAuthLoginForm({ className, ...props }: UserAuthFormProps) {
           <span className="w-full border-t" />
         </div>
         <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-background px-2 text-muted-foreground">
+          <span className="bg-white px-3 text-muted-foreground">
             Or continue with
           </span>
         </div>
