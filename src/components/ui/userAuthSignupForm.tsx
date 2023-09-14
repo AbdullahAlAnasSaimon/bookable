@@ -1,20 +1,24 @@
-"use client";
-
 import * as React from "react";
-
 import { cn } from "@/lib/utils";
 import { Loader2, Github } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useForm } from "react-hook-form";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
+
+interface ISignUp {
+  name: string;
+  email: string;
+  password: string;
+}
 
 export function UserAuthSignupForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
-  async function onSubmit(event: React.SyntheticEvent) {
-    event.preventDefault();
+  const { register, handleSubmit } = useForm<ISignUp>(); // Added type parameter
+
+  async function onSubmit(data: ISignUp) {
     setIsLoading(true);
 
     setTimeout(() => {
@@ -24,33 +28,36 @@ export function UserAuthSignupForm({ className, ...props }: UserAuthFormProps) {
 
   return (
     <div className={cn("grid gap-6", className)} {...props}>
-      <form onSubmit={onSubmit}>
-        <div className="grid gap-2">
-          <div className="grid gap-3">
-            <Input
-              id="name"
-              placeholder="Your name"
-              type="text"
-              disabled={isLoading}
-            />
-            <Input
-              id="email"
-              placeholder="name@example.com"
-              type="email"
-              autoCapitalize="none"
-              autoComplete="email"
-              autoCorrect="off"
-              disabled={isLoading}
-            />
-            <Input
-              id="password"
-              placeholder="Your Password"
-              type="password"
-              autoCapitalize="none"
-              disabled={isLoading}
-            />
-          </div>
-          <Button className="mt-2" disabled={isLoading}>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="grid gap-3">
+          <Input
+            id="name"
+            placeholder="Your name"
+            type="text"
+            {...register("name")} // Register the input field with React Hook Form
+            disabled={isLoading}
+          />
+          <Input
+            id="email"
+            placeholder="name@example.com"
+            type="email"
+            autoCapitalize="none"
+            autoComplete="email"
+            autoCorrect="off"
+            {...register("email")} // Register the input field with React Hook Form
+            disabled={isLoading}
+          />
+          <Input
+            id="password"
+            placeholder="Your Password"
+            type="password"
+            autoCapitalize="none"
+            {...register("password")} // Register the input field with React Hook Form
+            disabled={isLoading}
+          />
+          <Button className="mt-2" disabled={isLoading} type="submit">
+            {" "}
+            {/* Added type="submit" */}
             {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             Create Account
           </Button>
