@@ -30,6 +30,11 @@ const initialState: IUserState = {
   error: null,
 };
 
+/**
+ * Create a new user.
+ * @param {ICredential} param - The email and password of the user.
+ * @returns {Promise<string>} - The email of the created user.
+ */
 export const createUser = createAsyncThunk(
   "user/createUser",
   async ({ email, password }: ICredential) => {
@@ -38,6 +43,11 @@ export const createUser = createAsyncThunk(
   }
 );
 
+/**
+ * Log in an existing user.
+ * @param {ICredential} param - The email and password of the user.
+ * @returns {Promise<string>} - The email of the logged-in user.
+ */
 export const loginUser = createAsyncThunk(
   "user/loginUser",
   async ({ email, password }: ICredential) => {
