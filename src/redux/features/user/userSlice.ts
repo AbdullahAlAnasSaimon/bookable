@@ -2,7 +2,10 @@
 import { auth } from "@/lib/firebase";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 // import type { PayloadAction } from "@reduxjs/toolkit";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 
 interface IUserState {
   user: {
@@ -31,6 +34,14 @@ export const createUser = createAsyncThunk(
   "user/createUser",
   async ({ email, password }: ICredential) => {
     const data = await createUserWithEmailAndPassword(auth, email, password);
+    return data.user.email;
+  }
+);
+
+export const loginUser = createAsyncThunk(
+  "user/loginUser",
+  async ({ email, password }: ICredential) => {
+    const data = await signInWithEmailAndPassword(auth, email, password);
     return data.user.email;
   }
 );
