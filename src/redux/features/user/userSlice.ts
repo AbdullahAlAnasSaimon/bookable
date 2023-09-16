@@ -1,6 +1,6 @@
 // import { ISignUp } from "@/types/globalTypes";
 import { auth } from "@/lib/firebase";
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 // import type { PayloadAction } from "@reduxjs/toolkit";
 import {
   createUserWithEmailAndPassword,
@@ -59,7 +59,11 @@ export const loginUser = createAsyncThunk(
 const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    setUser: (state, action: PayloadAction<string | null>) => {
+      state.user.email = action.payload;
+    },
+  },
 });
 
 // export const { setUser } = userSlice.actions;
