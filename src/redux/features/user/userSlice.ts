@@ -63,6 +63,9 @@ const userSlice = createSlice({
     setUser: (state, action: PayloadAction<string | null>) => {
       state.user.email = action.payload;
     },
+    setLoading: (state, action: PayloadAction<boolean>) => {
+      state.isLoading = action.payload;
+    },
   },
 });
 
