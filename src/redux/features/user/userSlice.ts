@@ -67,6 +67,13 @@ const userSlice = createSlice({
       state.isLoading = action.payload;
     },
   },
+  extraReducers: (builder) => {
+    builder.addCase(createUser.pending, (state) => {
+      state.isLoading = true;
+      state.isError = false;
+      state.error = null;
+    });
+  },
 });
 
 // export const { setUser } = userSlice.actions;
