@@ -73,6 +73,10 @@ const userSlice = createSlice({
       state.isError = false;
       state.error = null;
     });
+    builder.addCase(createUser.fulfilled, (state, action) => {
+      state.user.email = action.payload;
+      state.isLoading = false;
+    });
   },
 });
 
