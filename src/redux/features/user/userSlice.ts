@@ -77,6 +77,12 @@ const userSlice = createSlice({
       state.user.email = action.payload;
       state.isLoading = false;
     });
+    builder.addCase(createUser.rejected, (state, action) => {
+      state.user.email = null;
+      state.isLoading = false;
+      state.isError = true;
+      state.error = action.error.message!;
+    });
   },
 });
 
