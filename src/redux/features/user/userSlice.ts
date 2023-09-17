@@ -83,6 +83,12 @@ const userSlice = createSlice({
       state.isError = true;
       state.error = action.error.message!;
     });
+
+    builder.addCase(loginUser.pending, (state) => {
+      state.isLoading = true;
+      state.isError = false;
+      state.error = null;
+    });
   },
 });
 
