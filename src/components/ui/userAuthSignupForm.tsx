@@ -5,14 +5,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import { useAppDispatch } from "@/redux/hooks";
-import { setUser } from "@/redux/features/user/userSlice";
+import { createUser } from "@/redux/features/user/userSlice";
 import { ISignUp } from "@/types/globalTypes";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function UserAuthSignupForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
   const {
     register,
@@ -23,11 +23,13 @@ export function UserAuthSignupForm({ className, ...props }: UserAuthFormProps) {
   async function onSubmit(data: ISignUp) {
     setIsLoading(true);
     console.log(data);
-    // dispatch(setUser(data));
-
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
+    dispatch(
+      createUser({
+        email: data.email,
+        name: data.name,
+        password: data.password,
+      })
+    );
   }
 
   return (

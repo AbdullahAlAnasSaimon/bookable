@@ -34,14 +34,12 @@ export function UserAuthLoginForm({ className, ...props }: UserAuthFormProps) {
               autoCapitalize="none"
               autoComplete="email"
               autoCorrect="off"
-              disabled={isLoading}
             />
             <Input
               id="password"
               placeholder="Your password"
               type="password"
               autoCapitalize="none"
-              disabled={isLoading}
             />
           </div>
           <Button className="mt-2" disabled={isLoading}>
