@@ -7,13 +7,12 @@ import { useForm } from "react-hook-form";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { createUser } from "@/redux/features/user/userSlice";
 import { ISignUp } from "@/types/globalTypes";
-import { toast } from "./use-toast";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function UserAuthSignupForm({ className, ...props }: UserAuthFormProps) {
   const dispatch = useAppDispatch();
-  const { isLoading, error } = useAppSelector((state) => state.user);
+  const { isLoading } = useAppSelector((state) => state.user);
 
   const {
     register,
@@ -30,15 +29,6 @@ export function UserAuthSignupForm({ className, ...props }: UserAuthFormProps) {
         password: data.password,
       })
     );
-    toast({
-      description: "Account Created Successfully",
-    });
-  }
-
-  if (error) {
-    toast({
-      description: error,
-    });
   }
 
   return (

@@ -2,8 +2,19 @@ import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { UserAuthSignupForm } from "@/components/ui/userAuthSignupForm";
+import { useAppSelector } from "@/redux/hooks";
+import { toast } from "@/components/ui/use-toast";
 
 export default function Signup() {
+  const { error, isError } = useAppSelector((state) => state.user);
+
+  if (isError) {
+    toast({
+      title: "Account Creation Error",
+      description: error,
+    });
+  }
+
   return (
     <>
       <div className="md:hidden">
