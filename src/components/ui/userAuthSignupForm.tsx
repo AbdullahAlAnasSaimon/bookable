@@ -4,15 +4,15 @@ import { Loader2, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
-import { useAppDispatch } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { createUser } from "@/redux/features/user/userSlice";
 import { ISignUp } from "@/types/globalTypes";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function UserAuthSignupForm({ className, ...props }: UserAuthFormProps) {
-  const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const dispatch = useAppDispatch();
+  const { isLoading } = useAppSelector((state) => state.user);
 
   const {
     register,
@@ -21,7 +21,6 @@ export function UserAuthSignupForm({ className, ...props }: UserAuthFormProps) {
   } = useForm<ISignUp>(); // Added type parameter
 
   async function onSubmit(data: ISignUp) {
-    setIsLoading(true);
     console.log(data);
     dispatch(
       createUser({
