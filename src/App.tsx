@@ -1,11 +1,13 @@
 import "./App.css";
-import { Button } from "./components/ui/button";
+import { Toaster } from "./components/ui/toaster";
+import MainLayout from "./layout/MainLayout";
 
 function App() {
   return (
     <>
       <div>
-        <Button>Click Me</Button>
+        <Toaster />
+        <MainLayout />
       </div>
     </>
   );

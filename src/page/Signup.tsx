@@ -1,17 +1,30 @@
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { UserAuthSignupForm } from "@/components/ui/userAuthSignupForm";
+import { UserAuthSignupForm } from "@/components/userAuthSignupForm";
 import { useAppSelector } from "@/redux/hooks";
 import { toast } from "@/components/ui/use-toast";
+import { ToastAction } from "@/components/ui/toast";
 
 export default function Signup() {
-  const { error, isError } = useAppSelector((state) => state.user);
+  const { user, isError } = useAppSelector((state) => state.user);
 
-  if (isError) {
+  if (user.email !== null && !isError) {
     toast({
-      title: "Account Creation Error",
-      description: error,
+      title: "Account Created Successfully",
+      description: "There was a problem with your request.",
+      action: (
+        <Link to="/login">
+          <ToastAction altText="Log In">Log In</ToastAction>
+        </Link>
+      ),
+    });
+  } else if (user.email === null && isError) {
+    toast({
+      variant: "destructive",
+      title: "Uh oh! Something went wrong.",
+      description: "There was a problem with your request.",
+      action: <ToastAction altText="Try again">Try again</ToastAction>,
     });
   }
 

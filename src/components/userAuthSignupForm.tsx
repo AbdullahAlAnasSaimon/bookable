@@ -7,12 +7,15 @@ import { useForm } from "react-hook-form";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { createUser } from "@/redux/features/user/userSlice";
 import { ISignUp } from "@/types/globalTypes";
+import { toast } from "./ui/use-toast";
+import { ToastAction } from "./ui/toast";
+import { Link } from "react-router-dom";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function UserAuthSignupForm({ className, ...props }: UserAuthFormProps) {
   const dispatch = useAppDispatch();
-  const { isLoading } = useAppSelector((state) => state.user);
+  const { user, isLoading, isError } = useAppSelector((state) => state.user);
 
   const {
     register,
@@ -29,6 +32,25 @@ export function UserAuthSignupForm({ className, ...props }: UserAuthFormProps) {
         password: data.password,
       })
     );
+  }
+
+  if (user.email !== null && !isError) {
+    toast({
+      title: "Account Created Successfully",
+      description: "There was a problem with your request.",
+      action: (
+        <Link to="/login">
+          <ToastAction altText="Log In">Log In</ToastAction>
+        </Link>
+      ),
+    });
+  } else if (user.email === null && isError) {
+    toast({
+      variant: "destructive",
+      title: "Uh oh! Something went wrong.",
+      description: "There was a problem with your request.",
+      action: <ToastAction altText="Try again">Try again</ToastAction>,
+    });
   }
 
   return (
