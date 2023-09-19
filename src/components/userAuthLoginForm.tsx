@@ -4,30 +4,34 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 import { Loader2, Github } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { loginUser } from "@/redux/features/user/userSlice";
+import { ILogin } from "@/types/globalTypes";
 // import { ILogin } from "@/types/globalTypes";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function UserAuthLoginForm({ className, ...props }: UserAuthFormProps) {
-  const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const dispatch = useAppDispatch();
+  const { isLoading } = useAppSelector((state) => state.user);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<ILogin>();
 
-  async function onSubmit(data: SubmitHandler<FieldValues>) {
+  async function LoginSubmit(data: ILogin) {
     console.log(data);
+    dispatch(loginUser({ email: data.email, password: data.password }));
   }
 
   return (
     <div className={cn("grid gap-6", className)} {...props}>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(LoginSubmit)}>
         <div className="grid gap-3">
           <Input
             id="email"
