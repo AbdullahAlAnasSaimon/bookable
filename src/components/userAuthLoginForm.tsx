@@ -11,7 +11,6 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { loginUser } from "@/redux/features/user/userSlice";
 import { ILogin } from "@/types/globalTypes";
 import { useNavigate } from "react-router-dom";
-// import { ILogin } from "@/types/globalTypes";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
