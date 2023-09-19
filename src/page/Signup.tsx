@@ -5,7 +5,7 @@ import { UserAuthSignupForm } from "@/components/userAuthSignupForm";
 import { useAppSelector } from "@/redux/hooks";
 
 export default function Signup() {
-  const { error } = useAppSelector((state) => state.user);
+  const { error, user } = useAppSelector((state) => state.user);
 
   /* if (user.email !== null && !isError) {
     toast({
@@ -88,9 +88,15 @@ export default function Signup() {
               <h1 className="text-2xl font-semibold tracking-tight">
                 Create An Account
               </h1>
-              <p className="text-red-500 text-sm font-semibold text-center">
-                {error}
-              </p>
+              {user.email !== null && !error ? (
+                <p className="text-sm text-green-500 font-semibold">
+                  Account Created Successfully
+                </p>
+              ) : (
+                <p className="text-red-500 text-sm font-semibold text-center">
+                  {error}
+                </p>
+              )}
             </div>
             <UserAuthSignupForm />
             <p className="px-8 text-center text-sm text-muted-foreground">

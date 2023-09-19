@@ -7,15 +7,16 @@ import { useForm } from "react-hook-form";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { createUser } from "@/redux/features/user/userSlice";
 import { ISignUp } from "@/types/globalTypes";
-import { toast } from "./ui/use-toast";
-import { ToastAction } from "./ui/toast";
-import { Link } from "react-router-dom";
+// import { toast } from "./ui/use-toast";
+// import { ToastAction } from "./ui/toast";
+import { useNavigate } from "react-router-dom";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function UserAuthSignupForm({ className, ...props }: UserAuthFormProps) {
   const dispatch = useAppDispatch();
-  const { user, isLoading, isError } = useAppSelector((state) => state.user);
+  const { isLoading } = useAppSelector((state) => state.user);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -32,9 +33,10 @@ export function UserAuthSignupForm({ className, ...props }: UserAuthFormProps) {
         password: data.password,
       })
     );
+    navigate("/login");
   }
 
-  if (user.email !== null && !isError) {
+  /* if (user.email !== null && !isError) {
     toast({
       title: "Account Created Successfully",
       description: "There was a problem with your request.",
@@ -51,7 +53,7 @@ export function UserAuthSignupForm({ className, ...props }: UserAuthFormProps) {
       description: "There was a problem with your request.",
       action: <ToastAction altText="Try again">Try again</ToastAction>,
     });
-  }
+  } */
 
   return (
     <div className={cn("grid gap-6", className)} {...props}>
