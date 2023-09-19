@@ -3,16 +3,14 @@ import { buttonVariants } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { UserAuthSignupForm } from "@/components/userAuthSignupForm";
 import { useAppSelector } from "@/redux/hooks";
-import { toast } from "@/components/ui/use-toast";
-import { ToastAction } from "@/components/ui/toast";
 
 export default function Signup() {
-  const { user, isError } = useAppSelector((state) => state.user);
+  const { error } = useAppSelector((state) => state.user);
 
-  if (user.email !== null && !isError) {
+  /* if (user.email !== null && !isError) {
     toast({
       title: "Account Created Successfully",
-      description: "There was a problem with your request.",
+      description: "Your account has been created successfully.", // Corrected description
       action: (
         <Link to="/login">
           <ToastAction altText="Log In">Log In</ToastAction>
@@ -26,7 +24,7 @@ export default function Signup() {
       description: "There was a problem with your request.",
       action: <ToastAction altText="Try again">Try again</ToastAction>,
     });
-  }
+  } */
 
   return (
     <>
@@ -90,6 +88,9 @@ export default function Signup() {
               <h1 className="text-2xl font-semibold tracking-tight">
                 Create An Account
               </h1>
+              <p className="text-red-500 text-sm font-semibold text-center">
+                {error}
+              </p>
             </div>
             <UserAuthSignupForm />
             <p className="px-8 text-center text-sm text-muted-foreground">
