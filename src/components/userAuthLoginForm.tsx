@@ -7,41 +7,56 @@ import { Loader2, Github } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+// import { ILogin } from "@/types/globalTypes";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function UserAuthLoginForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
-  async function onSubmit(event: React.SyntheticEvent) {
-    event.preventDefault();
-    setIsLoading(true);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
+  async function onSubmit(data: SubmitHandler<FieldValues>) {
+    console.log(data);
   }
 
   return (
     <div className={cn("grid gap-6", className)} {...props}>
-      <form onSubmit={onSubmit}>
-        <div className="grid gap-2">
-          <div className="grid gap-3">
-            <Input
-              id="email"
-              placeholder="name@example.com"
-              type="email"
-              autoCapitalize="none"
-              autoComplete="email"
-              autoCorrect="off"
-            />
-            <Input
-              id="password"
-              placeholder="Your password"
-              type="password"
-              autoCapitalize="none"
-            />
-          </div>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="grid gap-3">
+          <Input
+            id="email"
+            placeholder="name@example.com"
+            type="email"
+            autoCapitalize="none"
+            autoComplete="email"
+            autoCorrect="off"
+            {...register("email", { required: "Email is Required" })} // Register the input field with React Hook Form
+            disabled={isLoading}
+          />
+          {errors.email && (
+            <p className="text-[12px] font-semibold text-red-500">
+              *{errors.email.message as React.ReactNode}
+            </p>
+          )}
+          <Input
+            id="password"
+            placeholder="Your Password"
+            type="password"
+            autoCapitalize="none"
+            {...register("password", { required: "Password is Required" })} // Register the input field with React Hook Form
+            disabled={isLoading}
+          />
+          {errors.password && (
+            <p className="text-[12px] font-semibold text-red-500">
+              *{errors.password.message as React.ReactNode}
+            </p>
+          )}
           <Button className="mt-2" disabled={isLoading}>
             {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             Log In with Email
