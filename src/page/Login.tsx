@@ -2,8 +2,10 @@ import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { UserAuthLoginForm } from "@/components/userAuthLoginForm";
 import { Link } from "react-router-dom";
+import { useAppSelector } from "@/redux/hooks";
 
 export default function Login() {
+  const { user, error } = useAppSelector((state) => state.user);
   return (
     <>
       <div className="md:hidden">
@@ -66,6 +68,11 @@ export default function Login() {
               <h1 className="text-2xl font-semibold tracking-tight">
                 Welcome back! Please Login
               </h1>
+              {user.email === null && error && (
+                <p className="text-red-500 text-sm font-semibold text-center">
+                  {error}
+                </p>
+              )}
             </div>
             <UserAuthLoginForm />
           </div>

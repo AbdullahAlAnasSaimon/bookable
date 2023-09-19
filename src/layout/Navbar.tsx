@@ -1,5 +1,4 @@
 import { useAppSelector } from "@/redux/hooks";
-import React from "react";
 
 const Navbar = () => {
   const { user } = useAppSelector((state) => state.user);

@@ -46,7 +46,7 @@ export function UserAuthLoginForm({ className, ...props }: UserAuthFormProps) {
           />
           {errors.email && (
             <p className="text-[12px] font-semibold text-red-500">
-              *{errors.email.message as React.ReactNode}
+              *{errors.email.message}
             </p>
           )}
           <Input
@@ -59,7 +59,7 @@ export function UserAuthLoginForm({ className, ...props }: UserAuthFormProps) {
           />
           {errors.password && (
             <p className="text-[12px] font-semibold text-red-500">
-              *{errors.password.message as React.ReactNode}
+              *{errors.password.message}
             </p>
           )}
           <Button className="mt-2" disabled={isLoading}>
