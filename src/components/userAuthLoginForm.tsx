@@ -10,12 +10,14 @@ import { useForm } from "react-hook-form";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { loginUser } from "@/redux/features/user/userSlice";
 import { ILogin } from "@/types/globalTypes";
+import { useNavigate } from "react-router-dom";
 // import { ILogin } from "@/types/globalTypes";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function UserAuthLoginForm({ className, ...props }: UserAuthFormProps) {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const { isLoading } = useAppSelector((state) => state.user);
 
   const {
@@ -25,8 +27,8 @@ export function UserAuthLoginForm({ className, ...props }: UserAuthFormProps) {
   } = useForm<ILogin>();
 
   async function LoginSubmit(data: ILogin) {
-    console.log(data);
     dispatch(loginUser({ email: data.email, password: data.password }));
+    navigate("/");
   }
 
   return (
