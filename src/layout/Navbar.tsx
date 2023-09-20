@@ -28,7 +28,7 @@ export default function Navbar() {
       <div className="h-full w-11/12 mx-auto">
         <div className="flex items-center justify-between w-full md:max-w-7xl h-full mx-auto ">
           <div>
-            <h1>Bookable</h1>
+            <h1 className="text-lg font-medium">Bookable</h1>
           </div>
           <div>
             <ul className="flex items-center">
@@ -60,7 +60,6 @@ export default function Navbar() {
                     </DropdownMenuContent>
                   </DropdownMenu>
                 ) : (
-                  // <Button onClick={handleLogout}>Logout</Button>
                   <Button variant="default" asChild>
                     <Link to="/login">Login</Link>
                   </Button>
