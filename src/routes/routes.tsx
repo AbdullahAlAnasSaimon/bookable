@@ -3,6 +3,7 @@ import App from "../App";
 import Login from "../page/Login";
 import Home from "@/page/Home";
 import Signup from "@/page/Signup";
+import AllBooks from "@/page/AllBooks";
 
 export const routes = createBrowserRouter([
   {
@@ -12,6 +13,10 @@ export const routes = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+      },
+      {
+        path: "/all-books",
+        element: <AllBooks />,
       },
     ],
   },

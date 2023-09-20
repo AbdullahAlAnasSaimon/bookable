@@ -22,12 +22,10 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="w-full h-12 fixed top backdrop-blur-lg z-10 bg-white-60 drop-shadow-lg">
+    <nav className="w-full h-12 backdrop-blur-lg z-10 bg-white-60 drop-shadow-lg">
       <div className="h-full w-11/12 mx-auto">
         <div className="flex items-center justify-between w-full md:max-w-7xl h-full mx-auto ">
-          <div>
-            <h1 className="text-lg font-medium">Bookable</h1>
-          </div>
+          <h1 className="text-lg font-medium">Bookable</h1>
           <div>
             <ul className="flex items-center">
               <li>
@@ -37,7 +35,7 @@ export default function Navbar() {
               </li>
               <li>
                 <Button variant="link" asChild>
-                  <Link to="/products">All Books</Link>
+                  <Link to="/all-books">All Books</Link>
                 </Button>
               </li>
               <li>
