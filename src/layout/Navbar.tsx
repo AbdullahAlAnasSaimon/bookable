@@ -21,8 +21,6 @@ export default function Navbar() {
     dispatch(setUser(null));
   };
 
-  console.log(user);
-
   return (
     <nav className="w-full h-12 fixed top backdrop-blur-lg z-10 bg-white-60 drop-shadow-lg">
       <div className="h-full w-11/12 mx-auto">
