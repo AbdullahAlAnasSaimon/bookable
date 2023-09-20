@@ -1,27 +1,27 @@
 import { Link } from "react-router-dom";
 import { Button } from "../components/ui/button";
-// import { DropdownMenuSeparator } from "../components/ui/dropdown-menu";
-// import { DropdownMenuLabel } from "../components/ui/dropdown-menu";
-// import {
-//   DropdownMenuItem,
-//   DropdownMenu,
-//   DropdownMenuTrigger,
-//   DropdownMenuContent,
-// } from "../components/ui/dropdown-menu";
-// import { signOut } from "firebase/auth";
-// import { auth } from "@/lib/firebase";
-// import { setUser } from "@/redux/features/user/userSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setUser } from "@/redux/features/user/userSlice";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@radix-ui/react-dropdown-menu";
+import { ChevronDown, LogOut } from "lucide-react";
+import { signOut } from "firebase/auth";
+import { auth } from "@/lib/firebase";
 
 export default function Navbar() {
   const { user } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
 
   const handleLogout = () => {
-    // signOut(auth);
+    signOut(auth);
     dispatch(setUser(null));
   };
+
+  console.log(user);
 
   return (
     <nav className="w-full h-12 fixed top backdrop-blur-lg z-10 bg-white-60 drop-shadow-lg">
@@ -43,12 +43,27 @@ export default function Navbar() {
                 </Button>
               </li>
               <li>
-                {user ? (
+                {user.email ? (
+                  <DropdownMenu>
+                    <DropdownMenuTrigger>
+                      <Button variant="default">
+                        {user?.email} {<ChevronDown className="ml-2 h-4 w-4" />}
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent className="w-30 mt-2">
+                      <DropdownMenuItem>
+                        <Button onClick={handleLogout} variant="default">
+                          <LogOut className="mr-2 h-4 w-4 inline-block" />
+                          Log out
+                        </Button>
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                ) : (
+                  // <Button onClick={handleLogout}>Logout</Button>
                   <Button variant="default" asChild>
                     <Link to="/login">Login</Link>
                   </Button>
-                ) : (
-                  <Button onClick={handleLogout}>Logout</Button>
                 )}
               </li>
             </ul>
