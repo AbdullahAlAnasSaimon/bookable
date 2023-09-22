@@ -9,12 +9,14 @@ const Home = () => {
   console.log(error);
 
   return (
-    <div>
+    <section className="w-11/12 mx-auto">
       <h1>Home</h1>
-      {data?.map((products: IProduct) => (
-        <ProductsCard key={products?._id} product={products} />
-      ))}
-    </div>
+      <div className="grid grid-cols-4 gap-5">
+        {data?.map((products: IProduct) => (
+          <ProductsCard key={products?._id} product={products} />
+        ))}
+      </div>
+    </section>
   );
 };
 
