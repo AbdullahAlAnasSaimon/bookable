@@ -8,22 +8,11 @@ const Home = () => {
   console.log(isLoading);
   console.log(error);
 
-  // interface IProduct {
-  //   name: string;
-  //   genre: string;
-  //   photo: string;
-  //   seller_name: string;
-  //   seller_email: string;
-  //   price: number;
-  //   description: string;
-  //   reviews: string[];
-  // }
-
   return (
     <div>
       <h1>Home</h1>
       {data?.map((products: IProduct) => (
-        <ProductsCard key={products?._id} products={products} />
+        <ProductsCard key={products?._id} product={products} />
       ))}
     </div>
   );
