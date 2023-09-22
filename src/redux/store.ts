@@ -1,10 +1,15 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import userReducer from "./features/user/userSlice";
+import { productApi } from "./features/api/apiSlice";
 
 export const store = configureStore({
   reducer: {
     user: userReducer,
+    [productApi.reducerPath]: productApi.reducer,
   },
+  // Adding the api middleware enables caching, invalidation, polling,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(productApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;
