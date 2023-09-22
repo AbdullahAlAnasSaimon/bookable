@@ -1,3 +1,4 @@
+import ProductsCard from "@/components/ProductsCard";
 import { useGetProductsQuery } from "@/redux/features/api/apiSlice";
 
 const Home = () => {
@@ -9,6 +10,7 @@ const Home = () => {
   return (
     <div>
       <h1>Home</h1>
+      <ProductsCard />
     </div>
   );
 };
