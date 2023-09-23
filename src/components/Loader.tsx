@@ -1,5 +1,3 @@
-import React from "react";
-
 const Loader = () => {
   return (
     <div className="z-50 relative min-h-screen bg-white flex justify-center items-center">
