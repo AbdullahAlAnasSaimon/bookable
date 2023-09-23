@@ -1,5 +1,7 @@
 import Loader from "@/components/Loader";
 import ProductsCard from "@/components/ProductsCard";
+import SearchBar from "@/components/SearchBar";
+import Search from "@/components/SearchBar";
 import { useGetProductsQuery } from "@/redux/features/api/apiSlice";
 import { IProduct } from "@/types/globalTypes";
 
@@ -13,6 +15,7 @@ const AllBooks = () => {
 
   return (
     <section className="w-11/12 mx-auto my-10">
+      <SearchBar />
       <div className="grid grid-cols-4 gap-5">
         {data?.map((products: IProduct) => (
           <ProductsCard key={products?._id} product={products} />
