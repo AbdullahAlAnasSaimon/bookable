@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 
 const initialState = {
   products: [],
@@ -15,16 +15,17 @@ const productSlice = createSlice({
   },
 });
 
-export const fetchProducts = createApi({
+export const fetchProductsApi = createApi({
   reducerPath: "products",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000" }),
   endpoints: (builder) => ({
-    getProducts: builder.query({
+    searchProduct: builder.query({
       query: (query) => `/products?search=${query}`,
     }),
   }),
 });
 
 export const { setProducts } = productSlice.actions;
+export const { useSearchProductQuery } = fetchProductsApi;
 
 export default productSlice.reducer;
