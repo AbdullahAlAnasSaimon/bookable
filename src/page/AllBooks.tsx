@@ -1,11 +1,15 @@
+import Loader from "@/components/Loader";
 import ProductsCard from "@/components/ProductsCard";
 import { useGetProductsQuery } from "@/redux/features/api/apiSlice";
 import { IProduct } from "@/types/globalTypes";
 
 const AllBooks = () => {
   const { data, isLoading, error } = useGetProductsQuery(undefined);
-  console.log(isLoading);
   console.log(error);
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <section className="w-11/12 mx-auto my-10">
