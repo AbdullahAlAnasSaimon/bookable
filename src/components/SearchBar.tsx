@@ -15,7 +15,8 @@ function SearchBar() {
       <Input
         onChange={(e) => setSearchData(e.target.value)}
         type="text"
-        placeholder="Search..."
+        placeholder="Search books by title, author, or genre"
+        value={searchData}
       />
       {/* <Button type="submit">Search</Button> */}
     </div>
