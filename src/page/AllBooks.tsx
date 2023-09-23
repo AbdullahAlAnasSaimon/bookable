@@ -1,7 +1,6 @@
 import Loader from "@/components/Loader";
 import ProductsCard from "@/components/ProductsCard";
 import SearchBar from "@/components/SearchBar";
-import Search from "@/components/SearchBar";
 import { useGetProductsQuery } from "@/redux/features/api/apiSlice";
 import { IProduct } from "@/types/globalTypes";
 

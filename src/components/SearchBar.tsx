@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useSearchProductQuery } from "@/redux/features/product/productSlice";
 import { useState } from "react";
@@ -17,7 +17,7 @@ function SearchBar() {
         type="text"
         placeholder="Search..."
       />
-      <Button type="submit">Search</Button>
+      {/* <Button type="submit">Search</Button> */}
     </div>
   );
 }
