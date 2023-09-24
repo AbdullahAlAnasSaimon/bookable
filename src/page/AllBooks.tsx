@@ -15,7 +15,7 @@ const AllBooks = () => {
 
   return (
     <section className="w-11/12 mx-auto my-10">
-      <Button>Add New</Button>
+      <Button variant="default">Add New</Button>
       <SearchBar />
       <div className="grid grid-cols-4 gap-5">
         {data?.map((products: IProduct) => (
