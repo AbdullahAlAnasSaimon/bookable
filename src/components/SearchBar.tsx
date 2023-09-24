@@ -11,7 +11,7 @@ function SearchBar() {
   console.log(data);
 
   return (
-    <div className="flex w-full max-w-sm items-center space-x-2 my-2 mb-4">
+    <div className="flex w-full max-w-sm items-center space-x-2 my-2 ">
       <Input
         onChange={(e) => setSearchData(e.target.value)}
         type="text"

@@ -16,10 +16,12 @@ const AllBooks = () => {
 
   return (
     <section className="w-11/12 mx-auto my-10">
-      <Link to="/add-new-book">
-        <Button variant="default">Add New</Button>
-      </Link>
-      <SearchBar />
+      <div className="flex justify-center items-center gap-5">
+        <Link to="/add-new-book">
+          <Button variant="default">Add New</Button>
+        </Link>
+        <SearchBar />
+      </div>
       <div className="grid grid-cols-4 gap-5">
         {data?.map((products: IProduct) => (
           <ProductsCard key={products?._id} product={products} />
