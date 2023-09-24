@@ -16,8 +16,8 @@ const AllBooks = () => {
   }
 
   return (
-    <section className="w-11/12 mx-auto my-10">
-      <div className="flex justify-center items-center gap-5">
+    <section className="w-11/12 mx-auto mt-5 mb-20">
+      <div className="flex justify-center items-center gap-5 my-5">
         <Link to="/add-new-book">
           <Button variant="default">Add New</Button>
         </Link>
