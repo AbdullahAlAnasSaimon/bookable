@@ -1,3 +1,4 @@
+import FilterDropdown from "@/components/FilterDropdown";
 import Loader from "@/components/Loader";
 import ProductsCard from "@/components/ProductsCard";
 import SearchBar from "@/components/SearchBar";
@@ -21,6 +22,7 @@ const AllBooks = () => {
           <Button variant="default">Add New</Button>
         </Link>
         <SearchBar />
+        <FilterDropdown />
       </div>
       <div className="grid grid-cols-4 gap-5">
         {data?.map((products: IProduct) => (

@@ -12,6 +12,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { SlidersHorizontal } from "lucide-react";
 
 type Checked = DropdownMenuCheckboxItemProps["checked"];
 
@@ -23,7 +24,10 @@ export function FilterDropdown() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline">Open</Button>
+        <Button variant="default">
+          <SlidersHorizontal className="w-4 mr-2" />
+          Filter
+        </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
         <DropdownMenuLabel>Appearance</DropdownMenuLabel>
