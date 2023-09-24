@@ -4,6 +4,7 @@ import SearchBar from "@/components/SearchBar";
 import { Button } from "@/components/ui/button";
 import { useGetProductsQuery } from "@/redux/features/api/apiSlice";
 import { IProduct } from "@/types/globalTypes";
+import { Link } from "react-router-dom";
 
 const AllBooks = () => {
   const { data, isLoading, error } = useGetProductsQuery(undefined);
@@ -15,7 +16,9 @@ const AllBooks = () => {
 
   return (
     <section className="w-11/12 mx-auto my-10">
-      <Button variant="default">Add New</Button>
+      <Link to="/add-new-book">
+        <Button variant="default">Add New</Button>
+      </Link>
       <SearchBar />
       <div className="grid grid-cols-4 gap-5">
         {data?.map((products: IProduct) => (
