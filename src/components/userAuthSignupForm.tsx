@@ -59,46 +59,52 @@ export function UserAuthSignupForm({ className, ...props }: UserAuthFormProps) {
     <div className={cn("grid gap-6", className)} {...props}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid gap-3">
-          <Input
-            id="name"
-            placeholder="Your name"
-            type="text"
-            {...register("name", { required: "Name is Required" })} // Register the input field with React Hook Form
-            disabled={isLoading}
-          />
-          {errors.name && (
-            <p className="text-[12px] font-semibold text-red-500">
-              *{errors.name.message}
-            </p>
-          )}
-          <Input
-            id="email"
-            placeholder="name@example.com"
-            type="email"
-            autoCapitalize="none"
-            autoComplete="email"
-            autoCorrect="off"
-            {...register("email", { required: "Email is Required" })} // Register the input field with React Hook Form
-            disabled={isLoading}
-          />
-          {errors.email && (
-            <p className="text-[12px] font-semibold text-red-500">
-              *{errors.email.message}
-            </p>
-          )}
-          <Input
-            id="password"
-            placeholder="Your Password"
-            type="password"
-            autoCapitalize="none"
-            {...register("password", { required: "Password is Required" })} // Register the input field with React Hook Form
-            disabled={isLoading}
-          />
-          {errors.password && (
-            <p className="text-[12px] font-semibold text-red-500">
-              *{errors.password.message}
-            </p>
-          )}
+          <div>
+            <Input
+              id="name"
+              placeholder="Your name"
+              type="text"
+              {...register("name", { required: "Name is Required" })} // Register the input field with React Hook Form
+              disabled={isLoading}
+            />
+            {errors.name && (
+              <p className="text-[12px] font-semibold text-red-500">
+                *{errors.name.message}
+              </p>
+            )}
+          </div>
+          <div>
+            <Input
+              id="email"
+              placeholder="name@example.com"
+              type="email"
+              autoCapitalize="none"
+              autoComplete="email"
+              autoCorrect="off"
+              {...register("email", { required: "Email is Required" })} // Register the input field with React Hook Form
+              disabled={isLoading}
+            />
+            {errors.email && (
+              <p className="text-[12px] font-semibold text-red-500">
+                *{errors.email.message}
+              </p>
+            )}
+          </div>
+          <div>
+            <Input
+              id="password"
+              placeholder="Your Password"
+              type="password"
+              autoCapitalize="none"
+              {...register("password", { required: "Password is Required" })} // Register the input field with React Hook Form
+              disabled={isLoading}
+            />
+            {errors.password && (
+              <p className="text-[12px] font-semibold text-red-500">
+                *{errors.password.message}
+              </p>
+            )}
+          </div>
           <Button className="mt-2" disabled={isLoading} type="submit">
             {" "}
             {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
