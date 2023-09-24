@@ -1,7 +1,9 @@
 // import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useSearchProductQuery } from "@/redux/features/product/productSlice";
+import { Search } from "lucide-react";
 import { useState } from "react";
+import { Button } from "./ui/button";
 
 function SearchBar() {
   const [searchData, setSearchData] = useState("");
@@ -18,6 +20,9 @@ function SearchBar() {
         placeholder="Search books by title, author, or genre"
         value={searchData}
       />
+      <Button variant="secondary">
+        <Search className="" />
+      </Button>
       {/* <Button type="submit">Search</Button> */}
     </div>
   );
