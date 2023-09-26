@@ -18,7 +18,11 @@ const BookDetails = () => {
       <div>
         <img src={product?.photo} alt="" />
       </div>
-      <div></div>
+      <div>
+        <h1>{product?.name}</h1>
+        <p>{product?.genre}</p>
+        <p>{product?.seller_name}</p>
+      </div>
     </div>
   );
 };
