@@ -13,7 +13,14 @@ const BookDetails = () => {
   });
 
   console.log(product);
-  return <div></div>;
+  return (
+    <div>
+      <div>
+        <img src={product?.photo} alt="" />
+      </div>
+      <div></div>
+    </div>
+  );
 };
 
 export default BookDetails;
