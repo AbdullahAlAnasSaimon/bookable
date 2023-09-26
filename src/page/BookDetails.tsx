@@ -14,14 +14,16 @@ const BookDetails = () => {
 
   console.log(product);
   return (
-    <div>
-      <div>
+    <div className="flex w-11/12 mx-auto">
+      <div className="w-6/12">
         <img src={product?.photo} alt="" />
       </div>
-      <div>
+      <div className="w-6/12">
         <h1>{product?.name}</h1>
         <p>{product?.genre}</p>
         <p>{product?.seller_name}</p>
+        <p>{product?.price}</p>
+        <p>{product?.description}</p>
       </div>
     </div>
   );
