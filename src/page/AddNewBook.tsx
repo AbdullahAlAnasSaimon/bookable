@@ -6,14 +6,16 @@ const AddNewBook = () => {
   return (
     <div>
       <h1>Add A New Book</h1>
-      <form>
-        <Input type="text" placeholder="Title" />
-        <Input type="text" placeholder="Genre" />
-        <Input type="text" placeholder="Price" />
-        <Input type="text" placeholder="Publication Date" />
-        <Textarea placeholder="Book Description" />
-        <Button variant="default">Add</Button>
-      </form>
+      <section className="w-6/12 mx-auto">
+        <form>
+          <Input type="text" placeholder="Title" />
+          <Input type="text" placeholder="Genre" />
+          <Input type="text" placeholder="Price" />
+          <Input type="text" placeholder="Publication Date" />
+          <Textarea placeholder="Book Description" />
+          <Button variant="default">Add</Button>
+        </form>
+      </section>
     </div>
   );
 };
