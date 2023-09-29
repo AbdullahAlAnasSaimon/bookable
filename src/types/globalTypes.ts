@@ -14,7 +14,7 @@ export interface IProduct {
   title: string;
   genre: string;
   photo: string;
-  autor: string;
+  author: string;
   seller_email: string;
   price: number;
   publication_date: string;
