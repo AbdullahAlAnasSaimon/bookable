@@ -11,12 +11,13 @@ export interface ILogin {
 
 export interface IProduct {
   _id: string;
-  name: string;
+  title: string;
   genre: string;
   photo: string;
-  seller_name: string;
+  autor: string;
   seller_email: string;
   price: number;
+  publication_date: string;
   description: string;
   reviews: string[];
 }
