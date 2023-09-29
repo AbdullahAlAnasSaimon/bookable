@@ -8,12 +8,18 @@ const AddNewBook = () => {
       <h1 className="text-center text-xl font-semibold">Add A New Book</h1>
       <section className="w-6/12 mx-auto mt-5">
         <form>
-          <div>
+          <div className="flex gap-2">
             <Input type="text" placeholder="Title" className="mb-2" />
             <Input type="text" placeholder="Genre" className="mb-2" />
           </div>
-          <Input type="text" placeholder="Price" className="mb-2" />
-          <Input type="text" placeholder="Publication Date" className="mb-2" />
+          <div className="flex gap-2">
+            <Input type="text" placeholder="Price" className="mb-2" />
+            <Input
+              type="text"
+              placeholder="Publication Date"
+              className="mb-2"
+            />
+          </div>
           <Textarea placeholder="Book Description" className="mb-2" />
           <Button variant="default" className="w-full">
             Add
