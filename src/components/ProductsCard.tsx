@@ -1,4 +1,3 @@
-import React from "react";
 import { Card } from "./ui/card";
 import { IProduct } from "@/types/globalTypes";
 import { Link } from "react-router-dom";

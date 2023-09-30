@@ -12,6 +12,7 @@ const AddNewBook = () => {
             <Input type="text" placeholder="Title" className="mb-2" />
             <Input type="text" placeholder="Genre" className="mb-2" />
           </div>
+          <Input type="text" placeholder="Image URL" className="mb-2" />
           <div className="flex gap-2">
             <Input type="text" placeholder="Price" className="mb-2" />
             <Input
