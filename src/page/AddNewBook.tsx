@@ -29,7 +29,7 @@ const AddNewBook = () => {
                 {...register("title", { required: "Title is required" })}
               />
               {errors.title && (
-                <p className="text-[12px] font-semibold text-red-500">
+                <p className="text-[12px] font-semibold text-red-500 mb-2">
                   *{errors.title.message}
                 </p>
               )}
@@ -41,34 +41,55 @@ const AddNewBook = () => {
                 className="mb-2 w-full"
                 {...register("genre", { required: "Genre is required" })}
               />
-              {errors.title && (
-                <p className="text-[12px] font-semibold text-red-500">
-                  *{errors.title.message}
+              {errors.genre && (
+                <p className="text-[12px] font-semibold text-red-500 mb-2">
+                  *{errors.genre.message}
                 </p>
               )}
             </div>
           </div>
-          <Input
-            type="text"
-            placeholder="Image URL"
-            className="mb-2"
-            {...register("photo", { required: "Image URL is required" })}
-          />
-          <div className="flex gap-2">
+          <div>
             <Input
               type="text"
-              placeholder="Price"
+              placeholder="Image URL"
               className="mb-2"
-              {...register("price", { required: "Price is required" })}
+              {...register("photo", { required: "Image URL is required" })}
             />
-            <Input
-              type="date"
-              placeholder="Publication Date"
-              className="mb-2"
-              {...register("publication_date", {
-                required: "Publication Date is required",
-              })}
-            />
+            {errors.photo && (
+              <p className="text-[12px] font-semibold text-red-500 mb-2">
+                *{errors.photo.message}
+              </p>
+            )}
+          </div>
+          <div className="grid grid-cols-2 gap-2">
+            <div>
+              <Input
+                type="number"
+                placeholder="Price"
+                className="mb-2"
+                {...register("price", { required: "Price is required" })}
+              />
+              {errors.price && (
+                <p className="text-[12px] font-semibold text-red-500 mb-2">
+                  *{errors.price.message}
+                </p>
+              )}
+            </div>
+            <div>
+              <Input
+                type="date"
+                placeholder="Publication Date"
+                className="mb-2"
+                {...register("publication_date", {
+                  required: "Publication Date is required",
+                })}
+              />
+              {errors.publication_date && (
+                <p className="text-[12px] font-semibold text-red-500 mb-2">
+                  *{errors.publication_date.message}
+                </p>
+              )}
+            </div>
           </div>
           <Textarea
             placeholder="Book Description"
@@ -77,6 +98,11 @@ const AddNewBook = () => {
               required: "Book Description is required",
             })}
           />
+          {errors.description && (
+            <p className="text-[12px] font-semibold text-red-500 mb-2">
+              *{errors.description.message}
+            </p>
+          )}
           <Button type="submit" variant="default" className="w-full">
             Add
           </Button>
