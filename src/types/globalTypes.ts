@@ -10,14 +10,14 @@ export interface ILogin {
 }
 
 export interface IProduct {
-  _id: string;
+  _id?: string;
   title: string;
   genre: string;
   photo: string;
   author: string;
-  seller_email: string;
+  seller_email?: string;
   price: number;
   publication_date: string;
   description: string;
-  reviews: string[];
+  reviews?: string[];
 }
