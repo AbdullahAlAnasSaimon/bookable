@@ -12,6 +12,9 @@ const AddNewBook = () => {
   } = useForm<IProduct>();
 
   const handleFormSubmit = (data: IProduct) => {
+    const date = new Date(data.publication_date);
+    data.publication_date = date.toString();
+    data.price = parseInt(data.price);
     console.log(data);
   };
 
