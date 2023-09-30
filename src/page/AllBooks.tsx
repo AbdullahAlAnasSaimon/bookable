@@ -4,10 +4,12 @@ import ProductsCard from "@/components/ProductsCard";
 import SearchBar from "@/components/SearchBar";
 import { Button } from "@/components/ui/button";
 import { useGetProductsQuery } from "@/redux/features/api/apiSlice";
+import { useAppSelector } from "@/redux/hooks";
 import { IProduct } from "@/types/globalTypes";
 import { Link } from "react-router-dom";
 
 const AllBooks = () => {
+  const { user } = useAppSelector((state) => state.user);
   const { data, isLoading, error } = useGetProductsQuery(undefined);
   console.log(error);
 
@@ -18,9 +20,11 @@ const AllBooks = () => {
   return (
     <section className="w-11/12 mx-auto mt-5 mb-20">
       <div className="flex justify-center items-center gap-5 my-5">
-        <Link to="/add-new-book">
-          <Button variant="default">Add New</Button>
-        </Link>
+        {user?.email && (
+          <Link to="/add-new-book">
+            <Button variant="default">Add New</Button>
+          </Link>
+        )}
         <SearchBar />
         <FilterDropdown />
       </div>
