@@ -16,7 +16,7 @@ export interface IProduct {
   photo: string;
   author: string;
   seller_email?: string;
-  price: number;
+  price: number | string;
   publication_date: string;
   description: string;
   reviews?: string[];
