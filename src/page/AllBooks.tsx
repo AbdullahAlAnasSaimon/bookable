@@ -28,7 +28,7 @@ const AllBooks = () => {
         <SearchBar />
         <FilterDropdown />
       </div>
-      <div className="grid grid-cols-4 gap-5">
+      <div className="grid grid-cols-5 gap-5">
         {data?.map((products: IProduct) => (
           <ProductsCard key={products?._id} product={products} />
         ))}
