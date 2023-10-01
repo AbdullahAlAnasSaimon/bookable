@@ -14,11 +14,12 @@ import { setUser } from "@/redux/features/user/userSlice";
   DropdownMenuTrigger,
 } from "@radix-ui/react-dropdown-menu"; */
 import {
+  ChevronDown,
   Cloud,
   CreditCard,
   Github,
-  Keyboard,
   LifeBuoy,
+  LogIn,
   LogOut,
   Mail,
   MessageSquare,
@@ -39,7 +40,6 @@ import {
   DropdownMenuLabel,
   DropdownMenuPortal,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
   DropdownMenuSub,
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
@@ -96,7 +96,10 @@ export default function Navbar() {
                 {user.email ? (
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                      <Button variant="link">{user?.email}</Button>
+                      <Button variant="ghost">
+                        {user?.email}
+                        <ChevronDown className="w-4 h-4 ml-1 mt-1" />
+                      </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent className="w-56">
                       <DropdownMenuLabel>My Account</DropdownMenuLabel>
@@ -105,22 +108,17 @@ export default function Navbar() {
                         <DropdownMenuItem>
                           <User className="mr-2 h-4 w-4" />
                           <span>Profile</span>
-                          <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+                          {/* <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut> */}
                         </DropdownMenuItem>
                         <DropdownMenuItem>
                           <CreditCard className="mr-2 h-4 w-4" />
                           <span>Billing</span>
-                          <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+                          {/* <DropdownMenuShortcut>⌘B</DropdownMenuShortcut> */}
                         </DropdownMenuItem>
                         <DropdownMenuItem>
                           <Settings className="mr-2 h-4 w-4" />
                           <span>Settings</span>
-                          <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem>
-                          <Keyboard className="mr-2 h-4 w-4" />
-                          <span>Keyboard shortcuts</span>
-                          <DropdownMenuShortcut>⌘K</DropdownMenuShortcut>
+                          {/* <DropdownMenuShortcut>⌘S</DropdownMenuShortcut> */}
                         </DropdownMenuItem>
                       </DropdownMenuGroup>
                       <DropdownMenuSeparator />
@@ -155,7 +153,7 @@ export default function Navbar() {
                         <DropdownMenuItem>
                           <Plus className="mr-2 h-4 w-4" />
                           <span>New Team</span>
-                          <DropdownMenuShortcut>⌘+T</DropdownMenuShortcut>
+                          {/* <DropdownMenuShortcut>⌘+T</DropdownMenuShortcut> */}
                         </DropdownMenuItem>
                       </DropdownMenuGroup>
                       <DropdownMenuSeparator />
@@ -172,17 +170,24 @@ export default function Navbar() {
                         <span>API</span>
                       </DropdownMenuItem>
                       <DropdownMenuSeparator />
-                      <DropdownMenuItem onClick={handleLogout}>
+                      <DropdownMenuItem
+                        onClick={handleLogout}
+                        className="cursor-pointer"
+                      >
                         <LogOut className="mr-2 h-4 w-4" />
                         <span>Log out</span>
-                        <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+                        {/* <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut> */}
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
                 ) : (
-                  <Button variant="default" asChild>
-                    <Link to="/login">Login</Link>
-                  </Button>
+                  <Link
+                    to="/login"
+                    className="flex items-center justify-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-300 rounded-md hover:bg-gray-100 hover:text-gray-700"
+                  >
+                    <LogIn className="w-4 h-4 mr-2 " />
+                    <span>Log in</span>
+                  </Link>
                 )}
               </li>
             </ul>
