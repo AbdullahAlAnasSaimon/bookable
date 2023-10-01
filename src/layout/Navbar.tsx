@@ -97,12 +97,16 @@ export default function Navbar() {
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button variant="ghost">
-                        {user?.email}
+                        My Account
                         <ChevronDown className="w-4 h-4 ml-1 mt-1" />
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent className="w-56">
-                      <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                      <DropdownMenuLabel>
+                        {" "}
+                        <Mail className="inline-block w-4 h-4 mr-2" />{" "}
+                        {user?.email}
+                      </DropdownMenuLabel>
                       <DropdownMenuSeparator />
                       <DropdownMenuGroup>
                         <DropdownMenuItem>
@@ -123,12 +127,12 @@ export default function Navbar() {
                       </DropdownMenuGroup>
                       <DropdownMenuSeparator />
                       <DropdownMenuGroup>
-                        <DropdownMenuItem>
+                        <DropdownMenuItem disabled>
                           <Users className="mr-2 h-4 w-4" />
                           <span>Team</span>
                         </DropdownMenuItem>
                         <DropdownMenuSub>
-                          <DropdownMenuSubTrigger>
+                          <DropdownMenuSubTrigger disabled>
                             <UserPlus className="mr-2 h-4 w-4" />
                             <span>Invite users</span>
                           </DropdownMenuSubTrigger>
@@ -150,18 +154,18 @@ export default function Navbar() {
                             </DropdownMenuSubContent>
                           </DropdownMenuPortal>
                         </DropdownMenuSub>
-                        <DropdownMenuItem>
+                        <DropdownMenuItem disabled>
                           <Plus className="mr-2 h-4 w-4" />
                           <span>New Team</span>
                           {/* <DropdownMenuShortcut>⌘+T</DropdownMenuShortcut> */}
                         </DropdownMenuItem>
                       </DropdownMenuGroup>
                       <DropdownMenuSeparator />
-                      <DropdownMenuItem>
+                      <DropdownMenuItem disabled>
                         <Github className="mr-2 h-4 w-4" />
                         <span>GitHub</span>
                       </DropdownMenuItem>
-                      <DropdownMenuItem>
+                      <DropdownMenuItem disabled>
                         <LifeBuoy className="mr-2 h-4 w-4" />
                         <span>Support</span>
                       </DropdownMenuItem>
