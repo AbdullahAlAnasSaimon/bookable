@@ -36,15 +36,10 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { signOut } from "firebase/auth";
 import { auth } from "@/lib/firebase";
-import Loader from "@/components/Loader";
 
 export default function Navbar() {
-  const { user, isLoading } = useAppSelector((state) => state.user);
+  const { user } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
-
-  if (!user?.email && isLoading) {
-    return <Loader />;
-  }
 
   const handleLogout = () => {
     signOut(auth);
@@ -68,6 +63,13 @@ export default function Navbar() {
                   <Link to="/all-books">All Books</Link>
                 </Button>
               </li>
+              {user?.email && (
+                <li>
+                  <Button variant="link" asChild>
+                    <Link to="/add-new-book">Add New Book</Link>
+                  </Button>
+                </li>
+              )}
               <li>
                 {user.email ? (
                   <DropdownMenu>
