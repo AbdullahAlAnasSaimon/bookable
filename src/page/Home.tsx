@@ -4,8 +4,7 @@ import { useGetProductsQuery } from "@/redux/features/api/apiSlice";
 import { IProduct } from "@/types/globalTypes";
 
 const Home = () => {
-  const { data, isLoading, error } = useGetProductsQuery(undefined);
-  console.log(error);
+  const { data, isLoading } = useGetProductsQuery(undefined);
 
   if (isLoading) {
     return <Loader />;
