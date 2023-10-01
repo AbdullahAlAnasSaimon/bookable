@@ -2,17 +2,6 @@ import { Link } from "react-router-dom";
 import { Button } from "../components/ui/button";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setUser } from "@/redux/features/user/userSlice";
-/* import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuSub,
-  DropdownMenuSubTrigger,
-  DropdownMenuTrigger,
-} from "@radix-ui/react-dropdown-menu"; */
 import {
   ChevronDown,
   Cloud,
@@ -45,35 +34,22 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-// import { ChevronDown, LogOut } from "lucide-react";
 import { signOut } from "firebase/auth";
 import { auth } from "@/lib/firebase";
-// import { DropdownMenuShortcut } from "@/components/ui/dropdown-menu";
+import Loader from "@/components/Loader";
 
 export default function Navbar() {
-  const { user } = useAppSelector((state) => state.user);
+  const { user, isLoading } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
+
+  if (!user?.email && isLoading) {
+    return <Loader />;
+  }
 
   const handleLogout = () => {
     signOut(auth);
     dispatch(setUser(null));
   };
-
-  /* <DropdownMenu>
-                    <DropdownMenuTrigger>
-                      <Button variant="default">
-                        {user?.email} {<ChevronDown className="ml-2 h-4 w-4" />}
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent className="w-30 mt-2">
-                      <DropdownMenuItem>
-                        <Button onClick={handleLogout} variant="default">
-                          <LogOut className="mr-2 h-4 w-4 inline-block" />
-                          Log out
-                        </Button>
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu> */
 
   return (
     <nav className="w-full h-12 backdrop-blur-lg z-10 bg-white-60 drop-shadow-lg">
@@ -185,13 +161,15 @@ export default function Navbar() {
                     </DropdownMenuContent>
                   </DropdownMenu>
                 ) : (
-                  <Link
-                    to="/login"
-                    className="flex items-center justify-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-300 rounded-md hover:bg-gray-100 hover:text-gray-700"
-                  >
-                    <LogIn className="w-4 h-4 mr-2 " />
-                    <span>Log in</span>
-                  </Link>
+                  <li>
+                    <Link
+                      to="/login"
+                      className="flex items-center justify-center px-4 py-2 text-sm font-medium bg-slate-900 text-slate-50 hover:bg-slate-900/90 rounded-md ml-4"
+                    >
+                      <LogIn className="w-4 h-4 mr-2 " />
+                      <span>Log in</span>
+                    </Link>
+                  </li>
                 )}
               </li>
             </ul>
