@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { toast } from "@/components/ui/use-toast";
+import { useAddProductMutation } from "@/redux/features/api/apiSlice";
 import { IProduct } from "@/types/globalTypes";
 import { useForm } from "react-hook-form";
 
@@ -11,8 +13,23 @@ const AddNewBook = () => {
     formState: { errors },
   } = useForm<IProduct>();
 
-  const handleFormSubmit = (data: IProduct) => {
+  const [addProduct, { isError, isSuccess, error }] = useAddProductMutation();
+
+  const handleFormSubmit = async (data: IProduct) => {
     data.publication_date = new Date(data.publication_date).toString();
+    const result = await addProduct(data).unwrap();
+    if (isSuccess) {
+      toast({
+        title: "Success",
+        description: "Book added Successfully",
+      });
+      console.log(result);
+    } else if (isError) {
+      toast({
+        title: "Error",
+        description: `${error}`,
+      });
+    }
     console.log(data);
   };
 
