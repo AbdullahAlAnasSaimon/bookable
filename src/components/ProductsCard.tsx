@@ -19,7 +19,7 @@ const ProductsCard = ({ product }: { product: IProduct }) => {
         <div className="p-3">
           <Link to={`/book/${_id}`}>
             <h2 className="my-2 text-md font-semibold hover:underline">
-              {title}
+              {title.length > 20 ? title.slice(0, 23) + "..." : title}
             </h2>
           </Link>
           <p className="text-sm">Author: {author}</p>
