@@ -5,17 +5,19 @@ import { toast } from "@/components/ui/use-toast";
 import { useAddProductMutation } from "@/redux/features/api/apiSlice";
 import { useAppSelector } from "@/redux/hooks";
 import { IProduct } from "@/types/globalTypes";
-import { useForm } from "react-hook-form";
+import { Loader } from "lucide-react";
+import { Form, useForm } from "react-hook-form";
 
 const AddNewBook = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<IProduct>();
 
   const { user } = useAppSelector((state) => state.user);
-  const [addProduct, { isError, isSuccess, error }] = useAddProductMutation();
+  const [addProduct, { isError, error, isLoading }] = useAddProductMutation();
 
   const handleFormSubmit = async (data: IProduct) => {
     data.publication_date = new Date(data.publication_date).toString();
@@ -24,17 +26,19 @@ const AddNewBook = () => {
       author: user?.email && user?.email.split("@")[0],
       reviews: [],
     });
-    if (isSuccess) {
+    if (result?.data?.acknowledged) {
       toast({
         title: "Success",
         description: "Book added Successfully",
       });
+      reset();
     } else if (isError) {
       toast({
         title: "Error",
         description: `${error}`,
       });
     }
+
     console.log(result);
     console.log(data);
   };
@@ -127,8 +131,13 @@ const AddNewBook = () => {
               *{errors.description.message}
             </p>
           )}
-          <Button type="submit" variant="default" className="w-full">
-            Add
+          <Button
+            type="submit"
+            variant="default"
+            className="w-full"
+            disabled={isLoading}
+          >
+            {isLoading && <Loader />} Add
           </Button>
         </form>
       </section>
