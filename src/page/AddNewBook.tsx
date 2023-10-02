@@ -6,7 +6,7 @@ import { useAddProductMutation } from "@/redux/features/api/apiSlice";
 import { useAppSelector } from "@/redux/hooks";
 import { IProduct } from "@/types/globalTypes";
 import { Loader } from "lucide-react";
-import { Form, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 const AddNewBook = () => {
   const {
@@ -26,12 +26,14 @@ const AddNewBook = () => {
       author: user?.email && user?.email.split("@")[0],
       reviews: [],
     });
-    if (result?.data?.acknowledged) {
-      toast({
-        title: "Success",
-        description: "Book added Successfully",
-      });
-      reset();
+    if ("data" in result) {
+      if (result?.data?.acknowledged) {
+        toast({
+          title: "Success",
+          description: "Book added Successfully",
+        });
+        reset();
+      }
     } else if (isError) {
       toast({
         title: "Error",
