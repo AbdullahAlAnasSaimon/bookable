@@ -10,7 +10,9 @@ import { Link } from "react-router-dom";
 
 const AllBooks = () => {
   const { user } = useAppSelector((state) => state.user);
-  const { data, isLoading, error } = useGetProductsQuery(undefined);
+  const { data, isLoading, error } = useGetProductsQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+  });
   console.log(error);
 
   if (isLoading) {

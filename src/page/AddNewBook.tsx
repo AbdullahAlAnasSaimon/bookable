@@ -23,19 +23,19 @@ const AddNewBook = () => {
       ...data,
       author: user?.email && user?.email.split("@")[0],
       reviews: [],
-    }).unwrap();
-    if (result.acknowledged && isSuccess) {
+    });
+    if (isSuccess) {
       toast({
         title: "Success",
         description: "Book added Successfully",
       });
-      console.log(result);
     } else if (isError) {
       toast({
         title: "Error",
         description: `${error}`,
       });
     }
+    console.log(result);
     console.log(data);
   };
 
