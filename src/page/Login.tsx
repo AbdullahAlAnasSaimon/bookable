@@ -1,11 +1,20 @@
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { UserAuthLoginForm } from "@/components/userAuthLoginForm";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAppSelector } from "@/redux/hooks";
+import { useEffect } from "react";
 
 export default function Login() {
   const { user, error } = useAppSelector((state) => state.user);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location?.state?.path || "/";
+  useEffect(() => {
+    if (user?.email) {
+      navigate(from, { replace: true });
+    }
+  }, [from, navigate, user?.email]);
   return (
     <>
       <div className="md:hidden">
