@@ -27,13 +27,16 @@ const BookDetails = () => {
         </div>
       </div>
       <section>
-        {product?.reviews.map(
-          (review: { user_name: string; user_email: string; review: string }) =>
-            product?.reviews?.length > 1 ? (
-              <p>{review?.review}</p>
-            ) : (
-              <p>No Reviews Found</p>
-            )
+        {product?.reviews?.length >= 1 ? (
+          product?.reviews.map(
+            (review: {
+              author: string;
+              user_email: string;
+              review: string;
+            }) => <p>{review?.review}</p>
+          )
+        ) : (
+          <p>No Reviews Found</p>
         )}
       </section>
     </div>
