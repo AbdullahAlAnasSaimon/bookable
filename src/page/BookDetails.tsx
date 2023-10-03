@@ -20,8 +20,8 @@ const BookDetails = () => {
   const day = dateObject.getDate();
 
   return (
-    <div className="my-10 bg-gray-100/50 w-11/12 mx-auto p-5 rounded-md">
-      <div className="grid grid-cols-4 gap-10">
+    <div className="my-10  w-11/12 mx-auto">
+      <div className="grid grid-cols-4 gap-10 bg-gray-100/50 p-5 rounded-md">
         <div className="w-full h-auto">
           <img src={product?.photo} alt="" className="h-[380px]" />
         </div>
@@ -47,19 +47,28 @@ const BookDetails = () => {
           </div>
           <Button>Edit</Button>
           <Button variant="destructive">Delete</Button>
+          <Button>Add to Wishlist</Button>
         </div>
       </div>
-      <section>
+      <section className="mt-5">
         {product?.reviews?.length >= 1 ? (
           product?.reviews.map(
             (review: {
               author: string;
               user_email: string;
               review: string;
-            }) => <p>{review?.review}</p>
+            }) => (
+              <div className="bg-gray-100/50 p-5 rounded-md">
+                <p className="mb-2">{product?.reviews?.length} Review Found</p>
+                <p>{review?.author}</p>
+                <p>{review?.review}</p>
+              </div>
+            )
           )
         ) : (
-          <p>No Reviews Found</p>
+          <p className="text-center text-2xl font-bold my-10 text-slate-300">
+            No Reviews Found
+          </p>
         )}
       </section>
     </div>
