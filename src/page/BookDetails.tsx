@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { useGetProductsQuery } from "@/redux/features/api/apiSlice";
 import { IProduct } from "@/types/globalTypes";
 import { useParams } from "react-router-dom";
@@ -13,19 +14,22 @@ const BookDetails = () => {
   });
 
   return (
-    <div>
-      <div className="grid grid-cols-4 gap-5 w-11/12 mx-auto">
+    <div className="my-10 bg-gray-100 w-11/12 mx-auto p-4 rounded-md">
+      <div className="grid grid-cols-4 gap-5">
         <div className="w-full h-auto">
           <img src={product?.photo} alt="" className="h-[380px]" />
         </div>
-        <div>
+        <div className="col-span-2">
           <h1>{product?.title}</h1>
           <p>{product?.genre}</p>
           <p>{product?.seller_name}</p>
           <p>{product?.price}</p>
           <p>{product?.description}</p>
         </div>
-        <div></div>
+        <div className="flex flex-col gap-3">
+          <Button>Edit</Button>
+          <Button variant="destructive">Delete</Button>
+        </div>
       </div>
       <section>
         {product?.reviews?.length >= 1 ? (
