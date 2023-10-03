@@ -5,7 +5,7 @@ import { toast } from "@/components/ui/use-toast";
 import { useAddProductMutation } from "@/redux/features/api/apiSlice";
 import { useAppSelector } from "@/redux/hooks";
 import { IProduct } from "@/types/globalTypes";
-import { Loader } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 
 const AddNewBook = () => {
@@ -139,7 +139,7 @@ const AddNewBook = () => {
             className="w-full"
             disabled={isLoading}
           >
-            {isLoading && <Loader />} Add
+            {isLoading && <Loader2 />} Add
           </Button>
         </form>
       </section>
