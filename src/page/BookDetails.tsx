@@ -14,17 +14,18 @@ const BookDetails = () => {
 
   return (
     <div>
-      <div className="flex w-11/12 mx-auto">
-        <div className="w-6/12">
+      <div className="grid grid-cols-3 gap-5 w-11/12 mx-auto">
+        <div>
           <img src={product?.photo} alt="" />
         </div>
-        <div className="w-6/12">
-          <h1>{product?.name}</h1>
+        <div>
+          <h1>{product?.title}</h1>
           <p>{product?.genre}</p>
           <p>{product?.seller_name}</p>
           <p>{product?.price}</p>
           <p>{product?.description}</p>
         </div>
+        <div></div>
       </div>
       <section>
         {product?.reviews?.length >= 1 ? (
