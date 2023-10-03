@@ -54,14 +54,16 @@ const BookDetails = () => {
         {product?.reviews?.length >= 1 ? (
           product?.reviews.map(
             (review: {
-              author: string;
+              user_name: string;
               user_email: string;
               review: string;
             }) => (
               <div className="bg-gray-100/50 p-5 rounded-md">
                 <p className="mb-2">{product?.reviews?.length} Review Found</p>
-                <p>{review?.author}</p>
-                <p>{review?.review}</p>
+                <div className="bg-slate-300/50 inline-block p-2 rounded-lg">
+                  <p className="text-sm font-semibold">{review?.user_name}</p>
+                  <p>{review?.review}</p>
+                </div>
               </div>
             )
           )
