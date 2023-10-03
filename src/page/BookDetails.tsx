@@ -14,9 +14,9 @@ const BookDetails = () => {
 
   return (
     <div>
-      <div className="grid grid-cols-3 gap-5 w-11/12 mx-auto">
-        <div>
-          <img src={product?.photo} alt="" />
+      <div className="grid grid-cols-4 gap-5 w-11/12 mx-auto">
+        <div className="w-full h-auto">
+          <img src={product?.photo} alt="" className="h-[380px]" />
         </div>
         <div>
           <h1>{product?.title}</h1>
