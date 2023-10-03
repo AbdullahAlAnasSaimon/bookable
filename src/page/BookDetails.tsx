@@ -16,27 +16,34 @@ const BookDetails = () => {
   const dateObject = new Date(product?.publication_date);
 
   const year = dateObject.getFullYear();
-  const month = dateObject.getMonth() + 1; // Months are zero-indexed
+  const month = dateObject.getMonth() + 1;
   const day = dateObject.getDate();
 
   return (
-    <div className="my-10 bg-gray-100 w-11/12 mx-auto p-4 rounded-md">
+    <div className="my-10 bg-gray-100/50 w-11/12 mx-auto p-5 rounded-md">
       <div className="grid grid-cols-4 gap-10">
         <div className="w-full h-auto">
           <img src={product?.photo} alt="" className="h-[380px]" />
         </div>
         <div className="col-span-2">
-          <h1 className="text-2xl font-semibold">{product?.title}</h1>
-          <p>
-            {day}-{month}-{year}
+          <h1 className="text-3xl font-semibold">{product?.title}</h1>
+          <p className="text-sm my-2">
+            <i>
+              Publishing Date: {day}-{month}-{year}
+            </i>
           </p>
+          <p className="font-semibold mb-1">Description</p>
           <p>{product?.description}</p>
         </div>
         <div className="flex flex-col gap-3">
           <div>
-            <p>$ {product?.price}</p>
-            <p>{product?.genre}</p>
-            <p>{product?.author}</p>
+            <p className="text-xl text-slate-900 font-semibold">
+              $ {product?.price}
+            </p>
+            <p className="text-sm px-2 mt-2 rounded-full bg-slate-200 inline-block italic">
+              {product?.genre}
+            </p>
+            <p>Author: {product?.author}</p>
           </div>
           <Button>Edit</Button>
           <Button variant="destructive">Delete</Button>
