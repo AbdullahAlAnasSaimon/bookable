@@ -1,9 +1,12 @@
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { useGetProductsQuery } from "@/redux/features/api/apiSlice";
+import { useAppSelector } from "@/redux/hooks";
 import { IProduct } from "@/types/globalTypes";
 import { useParams } from "react-router-dom";
 
 const BookDetails = () => {
+  const { user } = useAppSelector((state) => state.user);
   const { data } = useGetProductsQuery(undefined);
   const productId = useParams();
 
@@ -50,6 +53,12 @@ const BookDetails = () => {
           <Button>Add to Wishlist</Button>
         </div>
       </div>
+      {user?.email && (
+        <section className="flex gap-5 mt-5 w-10/12 mx-auto">
+          <Input placeholder="Add your valuable reviews" />
+          <Button>Add Review</Button>
+        </section>
+      )}
       <section className="mt-5">
         {product?.reviews?.length >= 1 ? (
           product?.reviews.map(
