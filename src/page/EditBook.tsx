@@ -19,16 +19,13 @@ const EditBook = () => {
 
   const { data } = useGetProductsQuery(undefined);
   // const { user } = useAppSelector((state) => state.user);
-  const { productId } = useParams();
+  const { id: productId } = useParams();
 
   const product = data?.find((item: IProduct) => {
     if (item._id === productId) {
       return item;
     }
   });
-
-  console.log(product);
-  console.log(productId);
 
   /*  const handleFormSubmit = async (data: IProduct) => {
     data.publication_date = new Date(data.publication_date).toString();
@@ -60,7 +57,7 @@ const EditBook = () => {
   return (
     <div>
       <h1 className="text-center text-xl font-semibold">
-        Edit {product?.title}
+        Edit <span className="font-bold">{product?.title}</span> Book
       </h1>
       <section className="w-6/12 mx-auto mt-5">
         <form>
@@ -84,6 +81,7 @@ const EditBook = () => {
                 type="text"
                 placeholder="Genre"
                 className="mb-2 w-full"
+                value={product?.genre}
                 {...register("genre", { required: "Genre is required" })}
               />
               {errors.genre && (
@@ -98,6 +96,7 @@ const EditBook = () => {
               type="text"
               placeholder="Image URL"
               className="mb-2"
+              value={product?.photo}
               {...register("photo", { required: "Image URL is required" })}
             />
             {errors.photo && (
@@ -112,6 +111,7 @@ const EditBook = () => {
                 type="number"
                 placeholder="Price"
                 className="mb-2"
+                value={product?.price}
                 {...register("price", { required: "Price is required" })}
               />
               {errors.price && (
@@ -125,6 +125,7 @@ const EditBook = () => {
                 type="date"
                 placeholder="Publication Date"
                 className="mb-2"
+                value={product?.publication_date}
                 {...register("publication_date", {
                   required: "Publication Date is required",
                 })}
@@ -139,6 +140,7 @@ const EditBook = () => {
           <Textarea
             placeholder="Book Description"
             className="mb-2"
+            value={product?.description}
             {...register("description", {
               required: "Book Description is required",
             })}
