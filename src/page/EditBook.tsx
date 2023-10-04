@@ -10,6 +10,7 @@ import {
 } from "@/redux/features/api/apiSlice";
 import { useAppSelector } from "@/redux/hooks";
 import { IProduct } from "@/types/globalTypes";
+import { Loader2 } from "lucide-react";
 // import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
@@ -25,7 +26,8 @@ const EditBook = () => {
   const { data, isLoading } = useGetProductsQuery(undefined);
   const { user } = useAppSelector((state) => state.user);
   const { id: productId } = useParams();
-  const [editProduct, { error }] = useEditProductMutation();
+  const [editProduct, { isLoading: resultLoading, error }] =
+    useEditProductMutation();
 
   if (isLoading) {
     return <Loader />;
@@ -46,9 +48,10 @@ const EditBook = () => {
   const handleFormSubmit = async (data: IProduct) => {
     data.publication_date = new Date(data.publication_date).toString();
     console.log(data);
-    const result = await editProduct(data);
+    const result = await editProduct({ ...data, id: productId });
+    console.log(result);
     if ("data" in result) {
-      if (result?.data?.acknowledged) {
+      if (result?.data?.modifiedCount > 0) {
         toast({
           title: "Success",
           description: "Book added Successfully",
@@ -59,9 +62,6 @@ const EditBook = () => {
           description: `${error}`,
         });
       }
-
-      console.log(result);
-      console.log(data);
     }
   };
 
@@ -180,9 +180,9 @@ const EditBook = () => {
             type="submit"
             variant="default"
             className="w-full"
-            // disabled={isLoading}
+            disabled={resultLoading}
           >
-            Edit
+            {resultLoading && <Loader2 />} Edit
           </Button>
         </form>
       </section>
