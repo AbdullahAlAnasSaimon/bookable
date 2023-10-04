@@ -163,15 +163,13 @@ export default function Navbar() {
                     </DropdownMenuContent>
                   </DropdownMenu>
                 ) : (
-                  <li>
-                    <Link
-                      to="/login"
-                      className="flex items-center justify-center px-4 py-2 text-sm font-medium bg-slate-900 text-slate-50 hover:bg-slate-900/90 rounded-md ml-4"
-                    >
-                      <LogIn className="w-4 h-4 mr-2 " />
-                      <span>Log in</span>
-                    </Link>
-                  </li>
+                  <Link
+                    to="/login"
+                    className="flex items-center justify-center px-4 py-2 text-sm font-medium bg-slate-900 text-slate-50 hover:bg-slate-900/90 rounded-md ml-4"
+                  >
+                    <LogIn className="w-4 h-4 mr-2 " />
+                    <span>Log in</span>
+                  </Link>
                 )}
               </li>
             </ul>

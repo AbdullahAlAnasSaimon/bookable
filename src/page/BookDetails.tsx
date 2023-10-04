@@ -30,7 +30,7 @@ const BookDetails = () => {
         <div className="col-span-2">
           <h1 className="text-3xl font-semibold">{product?.title}</h1>
           <p className="text-sm my-2">
-            <p>Author: {product?.author}</p>
+            <span>Author: {product?.author}</span>
             <i>
               Publishing Date: {day}-{month}-{year}
             </i>
@@ -49,7 +49,7 @@ const BookDetails = () => {
           </div>
           {user?.email === product?.seller_email && (
             <div className="flex flex-col gap-3">
-              <Link to={`/edit-book/${product?._id}`}>
+              <Link to={`/edit-book/${product._id}`}>
                 <Button className="w-full">Edit</Button>
               </Link>
               <Button variant="destructive">Delete</Button>
