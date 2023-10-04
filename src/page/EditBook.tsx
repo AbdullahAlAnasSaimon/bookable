@@ -28,6 +28,8 @@ const EditBook = () => {
     }
   });
 
+  const newDescription = product?.description.split(/\r?\\n/);
+
   if (user?.email !== product?.seller_email) {
     navigate("/all-books");
   }
@@ -160,7 +162,7 @@ const EditBook = () => {
           <Textarea
             placeholder="Book Description"
             className="mb-2"
-            value={product?.description}
+            value={newDescription?.join("\n")}
             {...register("description", {
               required: "Book Description is required",
             })}
