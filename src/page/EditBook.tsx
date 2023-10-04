@@ -1,3 +1,4 @@
+import Loader from "@/components/Loader";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -18,9 +19,13 @@ const EditBook = () => {
   } = useForm<IProduct>();
 
   const navigate = useNavigate();
-  const { data } = useGetProductsQuery(undefined);
+  const { data, isLoading } = useGetProductsQuery(undefined);
   const { user } = useAppSelector((state) => state.user);
   const { id: productId } = useParams();
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   const product = data?.find((item: IProduct) => {
     if (item._id === productId) {
