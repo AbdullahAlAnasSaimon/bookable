@@ -17,7 +17,6 @@ const BookDetails = () => {
   });
 
   const dateObject = new Date(product?.publication_date);
-
   const year = dateObject.getFullYear();
   const month = dateObject.getMonth() + 1;
   const day = dateObject.getDate();

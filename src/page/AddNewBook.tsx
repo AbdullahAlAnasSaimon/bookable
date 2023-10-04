@@ -17,7 +17,7 @@ const AddNewBook = () => {
   } = useForm<IProduct>();
 
   const { user } = useAppSelector((state) => state.user);
-  const [addProduct, { isError, error, isLoading }] = useAddProductMutation();
+  const [addProduct, { error, isLoading }] = useAddProductMutation();
 
   const handleFormSubmit = async (data: IProduct) => {
     data.publication_date = new Date(data.publication_date).toString();
@@ -33,16 +33,16 @@ const AddNewBook = () => {
           description: "Book added Successfully",
         });
         reset();
+      } else if (!result?.data?.acknowledged) {
+        toast({
+          title: "Error",
+          description: `${error}`,
+        });
       }
-    } else if (isError) {
-      toast({
-        title: "Error",
-        description: `${error}`,
-      });
-    }
 
-    console.log(result);
-    console.log(data);
+      console.log(result);
+      console.log(data);
+    }
   };
 
   return (
