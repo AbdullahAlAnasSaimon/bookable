@@ -2,11 +2,15 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
-import { useAddProductMutation } from "@/redux/features/api/apiSlice";
+import {
+  useAddProductMutation,
+  useGetProductsQuery,
+} from "@/redux/features/api/apiSlice";
 import { useAppSelector } from "@/redux/hooks";
 import { IProduct } from "@/types/globalTypes";
 import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
+import { useParams } from "react-router-dom";
 
 const EditBook = () => {
   const {
@@ -15,6 +19,18 @@ const EditBook = () => {
     reset,
     formState: { errors },
   } = useForm<IProduct>();
+
+  const { productId } = useParams();
+  const { data } = useGetProductsQuery(undefined);
+
+  const product = data?.find((item: IProduct) => {
+    if (item._id === productId) {
+      return item;
+    }
+  });
+
+  console.log(product);
+  console.log(productId);
 
   const { user } = useAppSelector((state) => state.user);
   const [addProduct, { error, isLoading }] = useAddProductMutation();
@@ -48,7 +64,9 @@ const EditBook = () => {
 
   return (
     <div>
-      <h1 className="text-center text-xl font-semibold">Add A New Book</h1>
+      <h1 className="text-center text-xl font-semibold">
+        Edit {product?.title}
+      </h1>
       <section className="w-6/12 mx-auto mt-5">
         <form onSubmit={handleSubmit(handleFormSubmit)}>
           <div className="grid grid-cols-2 gap-2">
@@ -57,6 +75,7 @@ const EditBook = () => {
                 type="text"
                 placeholder="Title"
                 className="mb-2 w-full"
+                value={product?.title}
                 {...register("title", { required: "Title is required" })}
               />
               {errors.title && (

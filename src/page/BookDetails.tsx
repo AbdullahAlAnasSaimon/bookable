@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input";
 import { useGetProductsQuery } from "@/redux/features/api/apiSlice";
 import { useAppSelector } from "@/redux/hooks";
 import { IProduct } from "@/types/globalTypes";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const BookDetails = () => {
   const { user } = useAppSelector((state) => state.user);
@@ -15,8 +15,6 @@ const BookDetails = () => {
       return item;
     }
   });
-
-  console.log(product);
 
   const dateObject = new Date(product?.publication_date);
   const year = dateObject.getFullYear();
@@ -51,7 +49,9 @@ const BookDetails = () => {
           </div>
           {user?.email === product?.seller_email && (
             <div className="flex flex-col gap-3">
-              <Button>Edit</Button>
+              <Button>
+                <Link to={`/edit-book/${product?._id}`}>Edit</Link>
+              </Button>
               <Button variant="destructive">Delete</Button>
             </div>
           )}
