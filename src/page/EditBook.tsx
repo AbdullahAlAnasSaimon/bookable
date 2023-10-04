@@ -2,8 +2,12 @@ import Loader from "@/components/Loader";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { toast } from "@/components/ui/use-toast";
 // import { toast } from "@/components/ui/use-toast";
-import { useGetProductsQuery } from "@/redux/features/api/apiSlice";
+import {
+  useEditProductMutation,
+  useGetProductsQuery,
+} from "@/redux/features/api/apiSlice";
 import { useAppSelector } from "@/redux/hooks";
 import { IProduct } from "@/types/globalTypes";
 // import { Loader2 } from "lucide-react";
@@ -13,8 +17,7 @@ import { useNavigate, useParams } from "react-router-dom";
 const EditBook = () => {
   const {
     register,
-    // handleSubmit,
-    // reset,
+    handleSubmit,
     formState: { errors },
   } = useForm<IProduct>();
 
@@ -22,6 +25,7 @@ const EditBook = () => {
   const { data, isLoading } = useGetProductsQuery(undefined);
   const { user } = useAppSelector((state) => state.user);
   const { id: productId } = useParams();
+  const [editProduct, { error }] = useEditProductMutation();
 
   if (isLoading) {
     return <Loader />;
@@ -39,22 +43,17 @@ const EditBook = () => {
     navigate("/all-books");
   }
 
-  /*  const handleFormSubmit = async (data: IProduct) => {
+  const handleFormSubmit = async (data: IProduct) => {
     data.publication_date = new Date(data.publication_date).toString();
-    const result = await addProduct({
-      ...data,
-      author: user?.email && user?.email.split("@")[0],
-      seller_email: user?.email,
-      reviews: [],
-    });
+    console.log(data);
+    const result = await editProduct(data);
     if ("data" in result) {
       if (result?.data?.acknowledged) {
         toast({
           title: "Success",
           description: "Book added Successfully",
         });
-        reset();
-      } else if (!result?.data?.acknowledged) {
+      } else {
         toast({
           title: "Error",
           description: `${error}`,
@@ -64,7 +63,7 @@ const EditBook = () => {
       console.log(result);
       console.log(data);
     }
-  }; */
+  };
 
   const dateInput = formatDate();
 
@@ -87,7 +86,7 @@ const EditBook = () => {
         Edit <span className="font-bold">{product?.title}</span> Book
       </h1>
       <section className="w-6/12 mx-auto mt-5">
-        <form>
+        <form onSubmit={handleSubmit(handleFormSubmit)}>
           <div className="grid grid-cols-2 gap-2">
             <div>
               <Input
