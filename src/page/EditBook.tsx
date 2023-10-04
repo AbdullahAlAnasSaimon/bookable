@@ -54,7 +54,7 @@ const EditBook = () => {
       if (result?.data?.modifiedCount > 0) {
         toast({
           title: "Success",
-          description: "Book added Successfully",
+          description: "Book Data Modified Successfully",
         });
       } else {
         toast({
