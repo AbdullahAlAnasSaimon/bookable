@@ -25,11 +25,12 @@ const BookDetails = () => {
     }
   });
 
+  const newDescription = product?.description.split(/\r?\\n/);
+
   const dateObject = new Date(product?.publication_date);
   const year = dateObject.getFullYear();
   const month = dateObject.getMonth() + 1;
   const day = dateObject.getDate();
-
   return (
     <div className="my-10  w-11/12 mx-auto">
       <div className="grid grid-cols-4 gap-10 bg-gray-100/50 p-5 rounded-md">
@@ -39,13 +40,17 @@ const BookDetails = () => {
         <div className="col-span-2">
           <h1 className="text-3xl font-semibold">{product?.title}</h1>
           <p className="text-sm my-2">
-            <span>Author: {product?.author}</span>
+            <span className="block">Author: {product?.author}</span>
             <i>
               Publishing Date: {day}-{month}-{year}
             </i>
           </p>
           <p className="font-semibold mb-1">Description</p>
-          <p>{product?.description}</p>
+          {newDescription?.map((item: string, index: number) => (
+            <p className="my-2" key={index}>
+              {item}
+            </p>
+          ))}
         </div>
         <div className="flex flex-col gap-3">
           <div>
