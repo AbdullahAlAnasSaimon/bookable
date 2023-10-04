@@ -54,6 +54,21 @@ const EditBook = () => {
     }
   }; */
 
+  const dateInput = formatDate();
+
+  function padTo2Digits(num: number) {
+    return num.toString().padStart(2, "0");
+  }
+
+  function formatDate() {
+    const dateObject = new Date(product?.publication_date);
+    return [
+      dateObject.getFullYear(),
+      padTo2Digits(dateObject.getMonth() + 1),
+      padTo2Digits(dateObject.getDate()),
+    ].join("-");
+  }
+
   return (
     <div>
       <h1 className="text-center text-xl font-semibold">
@@ -125,7 +140,7 @@ const EditBook = () => {
                 type="date"
                 placeholder="Publication Date"
                 className="mb-2"
-                value={product?.publication_date}
+                value={dateInput}
                 {...register("publication_date", {
                   required: "Publication Date is required",
                 })}
