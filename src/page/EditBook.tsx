@@ -1,27 +1,25 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { toast } from "@/components/ui/use-toast";
-import {
-  useAddProductMutation,
-  useGetProductsQuery,
-} from "@/redux/features/api/apiSlice";
-import { useAppSelector } from "@/redux/hooks";
+// import { toast } from "@/components/ui/use-toast";
+import { useGetProductsQuery } from "@/redux/features/api/apiSlice";
+// import { useAppSelector } from "@/redux/hooks";
 import { IProduct } from "@/types/globalTypes";
-import { Loader2 } from "lucide-react";
+// import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 
 const EditBook = () => {
   const {
     register,
-    handleSubmit,
-    reset,
+    // handleSubmit,
+    // reset,
     formState: { errors },
   } = useForm<IProduct>();
 
-  const { productId } = useParams();
   const { data } = useGetProductsQuery(undefined);
+  // const { user } = useAppSelector((state) => state.user);
+  const { productId } = useParams();
 
   const product = data?.find((item: IProduct) => {
     if (item._id === productId) {
@@ -32,10 +30,7 @@ const EditBook = () => {
   console.log(product);
   console.log(productId);
 
-  const { user } = useAppSelector((state) => state.user);
-  const [addProduct, { error, isLoading }] = useAddProductMutation();
-
-  const handleFormSubmit = async (data: IProduct) => {
+  /*  const handleFormSubmit = async (data: IProduct) => {
     data.publication_date = new Date(data.publication_date).toString();
     const result = await addProduct({
       ...data,
@@ -60,7 +55,7 @@ const EditBook = () => {
       console.log(result);
       console.log(data);
     }
-  };
+  }; */
 
   return (
     <div>
@@ -68,7 +63,7 @@ const EditBook = () => {
         Edit {product?.title}
       </h1>
       <section className="w-6/12 mx-auto mt-5">
-        <form onSubmit={handleSubmit(handleFormSubmit)}>
+        <form>
           <div className="grid grid-cols-2 gap-2">
             <div>
               <Input
@@ -157,9 +152,9 @@ const EditBook = () => {
             type="submit"
             variant="default"
             className="w-full"
-            disabled={isLoading}
+            // disabled={isLoading}
           >
-            {isLoading && <Loader2 />} Add
+            Edit
           </Button>
         </form>
       </section>

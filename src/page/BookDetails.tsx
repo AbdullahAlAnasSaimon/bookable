@@ -49,9 +49,9 @@ const BookDetails = () => {
           </div>
           {user?.email === product?.seller_email && (
             <div className="flex flex-col gap-3">
-              <Button>
-                <Link to={`/edit-book/${product?._id}`}>Edit</Link>
-              </Button>
+              <Link to={`/edit-book/${product?._id}`}>
+                <Button className="w-full">Edit</Button>
+              </Link>
               <Button variant="destructive">Delete</Button>
             </div>
           )}
