@@ -24,6 +24,7 @@ const AddNewBook = () => {
     const result = await addProduct({
       ...data,
       author: user?.email && user?.email.split("@")[0],
+      seller_email: user?.email,
       reviews: [],
     });
     if ("data" in result) {

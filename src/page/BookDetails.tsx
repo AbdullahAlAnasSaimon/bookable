@@ -16,6 +16,8 @@ const BookDetails = () => {
     }
   });
 
+  console.log(product);
+
   const dateObject = new Date(product?.publication_date);
   const year = dateObject.getFullYear();
   const month = dateObject.getMonth() + 1;
@@ -47,8 +49,12 @@ const BookDetails = () => {
             </p>
             <p>Author: {product?.author}</p>
           </div>
-          <Button>Edit</Button>
-          <Button variant="destructive">Delete</Button>
+          {user?.email === product?.seller_email && (
+            <div>
+              <Button>Edit</Button>
+              <Button variant="destructive">Delete</Button>
+            </div>
+          )}
           <Button>Add to Wishlist</Button>
         </div>
       </div>
