@@ -17,7 +17,19 @@ export const productApi = createApi({
       }),
       invalidatesTags: ["books"],
     }),
+    editProduct: builder.mutation({
+      query: (body) => ({
+        url: `/book/${body.id}`,
+        method: "PUT",
+        body,
+      }),
+      invalidatesTags: ["books"],
+    }),
   }),
 });
 
-export const { useGetProductsQuery, useAddProductMutation } = productApi;
+export const {
+  useGetProductsQuery,
+  useAddProductMutation,
+  useEditProductMutation,
+} = productApi;
