@@ -3,11 +3,11 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 // import { toast } from "@/components/ui/use-toast";
 import { useGetProductsQuery } from "@/redux/features/api/apiSlice";
-// import { useAppSelector } from "@/redux/hooks";
+import { useAppSelector } from "@/redux/hooks";
 import { IProduct } from "@/types/globalTypes";
 // import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const EditBook = () => {
   const {
@@ -17,8 +17,9 @@ const EditBook = () => {
     formState: { errors },
   } = useForm<IProduct>();
 
+  const navigate = useNavigate();
   const { data } = useGetProductsQuery(undefined);
-  // const { user } = useAppSelector((state) => state.user);
+  const { user } = useAppSelector((state) => state.user);
   const { id: productId } = useParams();
 
   const product = data?.find((item: IProduct) => {
@@ -26,6 +27,10 @@ const EditBook = () => {
       return item;
     }
   });
+
+  if (user?.email !== product?.seller_email) {
+    navigate("/all-books");
+  }
 
   /*  const handleFormSubmit = async (data: IProduct) => {
     data.publication_date = new Date(data.publication_date).toString();
