@@ -1,9 +1,18 @@
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { useGetProductsQuery } from "@/redux/features/api/apiSlice";
 import { useAppSelector } from "@/redux/hooks";
 import { IProduct } from "@/types/globalTypes";
 import { Link, useParams } from "react-router-dom";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
 
 const BookDetails = () => {
   const { user } = useAppSelector((state) => state.user);
@@ -52,7 +61,24 @@ const BookDetails = () => {
               <Link to={`/edit-book/${product._id}`}>
                 <Button className="w-full">Edit</Button>
               </Link>
-              <Button variant="destructive">Delete</Button>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button variant="destructive">Delete</Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[425px]">
+                  <DialogHeader>
+                    <DialogTitle>Delete {product?.title}</DialogTitle>
+                    <DialogDescription>
+                      Are you sure? you want to delete {product?.title} book.
+                    </DialogDescription>
+                  </DialogHeader>
+                  <DialogFooter>
+                    <Button type="submit" variant="destructive">
+                      Confirm Delete
+                    </Button>
+                  </DialogFooter>
+                </DialogContent>
+              </Dialog>
             </div>
           )}
           <Button>Add to Wishlist</Button>
