@@ -89,7 +89,7 @@ const EditBook = () => {
                 type="text"
                 placeholder="Title"
                 className="mb-2 w-full"
-                value={product?.title}
+                defaultValue={product?.title}
                 {...register("title", { required: "Title is required" })}
               />
               {errors.title && (
@@ -103,7 +103,7 @@ const EditBook = () => {
                 type="text"
                 placeholder="Genre"
                 className="mb-2 w-full"
-                value={product?.genre}
+                defaultValue={product?.genre}
                 {...register("genre", { required: "Genre is required" })}
               />
               {errors.genre && (
@@ -118,7 +118,7 @@ const EditBook = () => {
               type="text"
               placeholder="Image URL"
               className="mb-2"
-              value={product?.photo}
+              defaultValue={product?.photo}
               {...register("photo", { required: "Image URL is required" })}
             />
             {errors.photo && (
@@ -133,7 +133,7 @@ const EditBook = () => {
                 type="number"
                 placeholder="Price"
                 className="mb-2"
-                value={product?.price}
+                defaultValue={product?.price}
                 {...register("price", { required: "Price is required" })}
               />
               {errors.price && (
@@ -147,7 +147,7 @@ const EditBook = () => {
                 type="date"
                 placeholder="Publication Date"
                 className="mb-2"
-                value={dateInput}
+                defaultValue={dateInput}
                 {...register("publication_date", {
                   required: "Publication Date is required",
                 })}
@@ -162,7 +162,7 @@ const EditBook = () => {
           <Textarea
             placeholder="Book Description"
             className="mb-2"
-            value={newDescription?.join("\n")}
+            defaultValue={newDescription?.join("\n")}
             {...register("description", {
               required: "Book Description is required",
             })}
