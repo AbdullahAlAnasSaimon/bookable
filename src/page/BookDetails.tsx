@@ -32,6 +32,7 @@ const BookDetails = () => {
         <div className="col-span-2">
           <h1 className="text-3xl font-semibold">{product?.title}</h1>
           <p className="text-sm my-2">
+            <p>Author: {product?.author}</p>
             <i>
               Publishing Date: {day}-{month}-{year}
             </i>
@@ -45,12 +46,11 @@ const BookDetails = () => {
               $ {product?.price}
             </p>
             <p className="text-sm px-2 mt-2 rounded-full bg-slate-200 inline-block italic">
-              {product?.genre}
+              Genre: {product?.genre}
             </p>
-            <p>Author: {product?.author}</p>
           </div>
           {user?.email === product?.seller_email && (
-            <div>
+            <div className="flex flex-col gap-3">
               <Button>Edit</Button>
               <Button variant="destructive">Delete</Button>
             </div>
@@ -61,7 +61,7 @@ const BookDetails = () => {
       {user?.email && (
         <section className="flex gap-5 mt-5 w-10/12 mx-auto">
           <Input placeholder="Add your valuable reviews" />
-          <Button>Add Review</Button>
+          <Button className="w-[15%]">Add Review</Button>
         </section>
       )}
       <section className="mt-5">
