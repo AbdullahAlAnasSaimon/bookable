@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const productApi = createApi({
   reducerPath: "productApi",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000" }),
-  tagTypes: ["books"],
+  tagTypes: ["books", "review"],
   endpoints: (builder) => ({
     getProducts: builder.query({
       query: () => "/books",
@@ -25,13 +25,17 @@ export const productApi = createApi({
       }),
       invalidatesTags: ["books"],
     }),
+    getReviews: builder.query({
+      query: () => `/reviews`,
+      providesTags: ["review"],
+    }),
     addReview: builder.mutation({
       query: (body) => ({
         url: `/reviews`,
         method: "POST",
         body,
       }),
-      invalidatesTags: ["books"],
+      invalidatesTags: ["review"],
     }),
   }),
 });
@@ -40,5 +44,6 @@ export const {
   useGetProductsQuery,
   useAddProductMutation,
   useEditProductMutation,
+  useGetReviewsQuery,
   useAddReviewMutation,
 } = productApi;

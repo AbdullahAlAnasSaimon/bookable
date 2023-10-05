@@ -51,8 +51,8 @@ const BookDetails = () => {
     const result = await addReview({
       ...data,
       bookId: productId.id,
-      seller_email: user?.email,
-      seller_name: user?.email?.split("@")[0],
+      user_email: user?.email,
+      user_name: user?.email?.split("@")[0],
     });
     if ("data" in result) {
       if (result.data.acknowledged) {
