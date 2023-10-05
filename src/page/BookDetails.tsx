@@ -1,5 +1,8 @@
 import { Button } from "@/components/ui/button";
-import { useGetProductsQuery } from "@/redux/features/api/apiSlice";
+import {
+  useAddReviewMutation,
+  useGetProductsQuery,
+} from "@/redux/features/api/apiSlice";
 import { useAppSelector } from "@/redux/hooks";
 import { IProduct } from "@/types/globalTypes";
 import { Link, useParams } from "react-router-dom";
@@ -16,15 +19,21 @@ import Loader from "@/components/Loader";
 import { Textarea } from "@/components/ui/textarea";
 import { useForm } from "react-hook-form";
 
+interface IReview {
+  review: string;
+  seller_email: string;
+  seller_name: string;
+}
 const BookDetails = () => {
   const { user } = useAppSelector((state) => state.user);
   const { data, isLoading } = useGetProductsQuery(undefined);
+  const [addReview, { isLoading: reviewLoading }] = useAddReviewMutation();
   const productId = useParams();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<IReview>();
 
   if (isLoading) {
     return <Loader />;
@@ -36,12 +45,24 @@ const BookDetails = () => {
     }
   });
 
+  const handleReviewSubmit = async (data: IReview) => {
+    const result = addReview({
+      ...data,
+      bookId: productId.id,
+      seller_email: user?.email,
+      seller_name: user?.email?.split("@")[0],
+    });
+
+    console.log(result);
+  };
+
   const newDescription = product?.description.split(/\r?\\n/);
 
   const dateObject = new Date(product?.publication_date);
   const year = dateObject.getFullYear();
   const month = dateObject.getMonth() + 1;
   const day = dateObject.getDate();
+
   return (
     <div className="my-10  w-11/12 mx-auto">
       <div className="grid grid-cols-4 gap-10 bg-gray-100/50 p-5 rounded-md">
@@ -127,7 +148,7 @@ const BookDetails = () => {
 
       {user?.email && (
         <section className="flex flex-col gap-5 mt-5 w-10/12 mx-auto">
-          <form>
+          <form onSubmit={handleSubmit(handleReviewSubmit)}>
             <Textarea
               placeholder="Add your valuable reviews"
               {...register("review", {
@@ -139,7 +160,9 @@ const BookDetails = () => {
                 *{errors.review.message}
               </p>
             )}
-            <Button className="w-full">Add Review</Button>
+            <Button className="w-full" type="submit" disabled={reviewLoading}>
+              Add Review
+            </Button>
           </form>
         </section>
       )}
