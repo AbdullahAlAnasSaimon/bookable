@@ -27,7 +27,7 @@ export const productApi = createApi({
     }),
     addReview: builder.mutation({
       query: (body) => ({
-        url: `/book/${body.id}/review`,
+        url: `/reviews`,
         method: "POST",
         body,
       }),

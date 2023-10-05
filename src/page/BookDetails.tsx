@@ -18,6 +18,7 @@ import {
 import Loader from "@/components/Loader";
 import { Textarea } from "@/components/ui/textarea";
 import { useForm } from "react-hook-form";
+import { toast } from "@/components/ui/use-toast";
 
 interface IReview {
   review: string;
@@ -27,7 +28,8 @@ interface IReview {
 const BookDetails = () => {
   const { user } = useAppSelector((state) => state.user);
   const { data, isLoading } = useGetProductsQuery(undefined);
-  const [addReview, { isLoading: reviewLoading }] = useAddReviewMutation();
+  const [addReview, { isLoading: reviewLoading, error }] =
+    useAddReviewMutation();
   const productId = useParams();
   const {
     register,
@@ -46,12 +48,25 @@ const BookDetails = () => {
   });
 
   const handleReviewSubmit = async (data: IReview) => {
-    const result = addReview({
+    const result = await addReview({
       ...data,
       bookId: productId.id,
       seller_email: user?.email,
       seller_name: user?.email?.split("@")[0],
     });
+    if ("data" in result) {
+      if (result.data.acknowledged) {
+        toast({
+          title: "Success",
+          description: "Review Added Successfully",
+        });
+      } else {
+        toast({
+          title: "Error",
+          description: `${error}`,
+        });
+      }
+    }
 
     console.log(result);
   };
@@ -160,7 +175,11 @@ const BookDetails = () => {
                 *{errors.review.message}
               </p>
             )}
-            <Button className="w-full" type="submit" disabled={reviewLoading}>
+            <Button
+              className="w-full mt-5"
+              type="submit"
+              disabled={reviewLoading}
+            >
               Add Review
             </Button>
           </form>
