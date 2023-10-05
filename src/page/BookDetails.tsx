@@ -14,11 +14,17 @@ import {
 } from "@/components/ui/dialog";
 import Loader from "@/components/Loader";
 import { Textarea } from "@/components/ui/textarea";
+import { useForm } from "react-hook-form";
 
 const BookDetails = () => {
   const { user } = useAppSelector((state) => state.user);
   const { data, isLoading } = useGetProductsQuery(undefined);
   const productId = useParams();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   if (isLoading) {
     return <Loader />;
@@ -121,8 +127,20 @@ const BookDetails = () => {
 
       {user?.email && (
         <section className="flex flex-col gap-5 mt-5 w-10/12 mx-auto">
-          <Textarea placeholder="Add your valuable reviews" />
-          <Button className="w-full">Add Review</Button>
+          <form>
+            <Textarea
+              placeholder="Add your valuable reviews"
+              {...register("review", {
+                required: "You can't leave this empty",
+              })}
+            />
+            {errors.review && (
+              <p className="text-[12px] font-semibold text-red-500 mb-2">
+                *{errors.review.message}
+              </p>
+            )}
+            <Button className="w-full">Add Review</Button>
+          </form>
         </section>
       )}
     </div>
