@@ -12,8 +12,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
 import Loader from "@/components/Loader";
+import { Textarea } from "@/components/ui/textarea";
 
 const BookDetails = () => {
   const { user } = useAppSelector((state) => state.user);
@@ -94,12 +94,7 @@ const BookDetails = () => {
           <Button>Add to Wishlist</Button>
         </div>
       </div>
-      {user?.email && (
-        <section className="flex gap-5 mt-5 w-10/12 mx-auto">
-          <Input placeholder="Add your valuable reviews" />
-          <Button className="w-[15%]">Add Review</Button>
-        </section>
-      )}
+
       <section className="mt-5">
         {product?.reviews?.length >= 1 ? (
           product?.reviews.map(
@@ -123,6 +118,13 @@ const BookDetails = () => {
           </p>
         )}
       </section>
+
+      {user?.email && (
+        <section className="flex flex-col gap-5 mt-5 w-10/12 mx-auto">
+          <Textarea placeholder="Add your valuable reviews" />
+          <Button className="w-full">Add Review</Button>
+        </section>
+      )}
     </div>
   );
 };
