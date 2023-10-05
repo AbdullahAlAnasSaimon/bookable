@@ -25,6 +25,14 @@ export const productApi = createApi({
       }),
       invalidatesTags: ["books"],
     }),
+    addReview: builder.mutation({
+      query: (body) => ({
+        url: `/book/${body.id}/review`,
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["books"],
+    }),
   }),
 });
 
@@ -32,4 +40,5 @@ export const {
   useGetProductsQuery,
   useAddProductMutation,
   useEditProductMutation,
+  useAddReviewMutation,
 } = productApi;
