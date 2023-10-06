@@ -13,16 +13,18 @@ function SearchBar() {
   console.log(data);
 
   return (
-    <div className="flex w-full max-w-sm items-center space-x-2 my-2 ">
-      <Input
-        onChange={(e) => setSearchData(e.target.value)}
-        type="text"
-        placeholder="Search books by title, author, or genre"
-        value={searchData}
-      />
-      <Button variant="secondary">
-        <Search className="" />
-      </Button>
+    <div>
+      <form className="flex w-full max-w-sm items-center my-2 ">
+        <Input
+          type="text"
+          className="w-[400px] mr-2"
+          placeholder="Search books by title, author, or genre"
+          value={searchData}
+        />
+        <Button variant="secondary">
+          <Search className="" />
+        </Button>
+      </form>
       {/* <Button type="submit">Search</Button> */}
     </div>
   );
