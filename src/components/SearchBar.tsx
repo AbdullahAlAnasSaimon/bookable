@@ -8,18 +8,22 @@ import { useForm } from "react-hook-form";
 
 function SearchBar() {
   const [searchData, setSearchData] = useState("");
-  const { register } = useForm();
+  const { register, handleSubmit } = useForm<{ searchData: string }>();
   console.log(searchData);
 
   const { data } = useSearchProductQuery(searchData);
 
-  const handleFormSearchBar = (data) => {
-    console.log(searchData);
+  const handleFormSearchBar = (data: { searchData: string }) => {
+    console.log(data);
+    setSearchData(data.searchData);
   };
 
   return (
     <div>
-      <form className="flex w-full max-w-sm items-center my-2 ">
+      <form
+        onSubmit={handleSubmit(handleFormSearchBar)}
+        className="flex w-full max-w-sm items-center my-2 "
+      >
         <Input
           type="text"
           className="w-[400px] mr-2"
