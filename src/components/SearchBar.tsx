@@ -4,13 +4,18 @@ import { useSearchProductQuery } from "@/redux/features/product/productSlice";
 import { Search } from "lucide-react";
 import { useState } from "react";
 import { Button } from "./ui/button";
+import { useForm } from "react-hook-form";
 
 function SearchBar() {
   const [searchData, setSearchData] = useState("");
+  const { register } = useForm();
   console.log(searchData);
 
   const { data } = useSearchProductQuery(searchData);
-  console.log(data);
+
+  const handleFormSearchBar = (data) => {
+    console.log(searchData);
+  };
 
   return (
     <div>
@@ -20,8 +25,9 @@ function SearchBar() {
           className="w-[400px] mr-2"
           placeholder="Search books by title, author, or genre"
           value={searchData}
+          {...register("searchData", { required: true })}
         />
-        <Button variant="secondary">
+        <Button variant="secondary" type="submit">
           <Search className="" />
         </Button>
       </form>
