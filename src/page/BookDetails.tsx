@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import {
   useAddReviewMutation,
   useGetProductsQuery,
+  useGetReviewsQuery,
 } from "@/redux/features/api/apiSlice";
 import { useAppSelector } from "@/redux/hooks";
 import { IProduct } from "@/types/globalTypes";
@@ -27,20 +28,20 @@ interface IReview {
 }
 const BookDetails = () => {
   const { user } = useAppSelector((state) => state.user);
-  const { data, isLoading } = useGetProductsQuery(undefined, {
-    refetchOnMountOrArgChange: true,
-    pollingInterval: 30000,
-  });
+  const { data, isLoading } = useGetProductsQuery(undefined);
   const [addReview, { isLoading: reviewLoading, error }] =
     useAddReviewMutation();
   const productId = useParams();
+  const { data: reviews, isLoading: isReviewLoading } = useGetReviewsQuery(
+    productId.id
+  );
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<IReview>();
 
-  if (isLoading) {
+  if (isLoading || isReviewLoading) {
     return <Loader />;
   }
 
@@ -141,15 +142,15 @@ const BookDetails = () => {
       </div>
 
       <section className="mt-5">
-        {product?.reviews?.length >= 1 ? (
-          product?.reviews.map(
+        <p className="mb-2">{reviews?.length} Review Found</p>
+        {reviews?.length >= 1 ? (
+          reviews.map(
             (review: {
               user_name: string;
               user_email: string;
               review: string;
             }) => (
               <div className="bg-gray-100/50 p-5 rounded-md">
-                <p className="mb-2">{product?.reviews?.length} Review Found</p>
                 <div className="bg-slate-300/50 inline-block p-2 rounded-lg">
                   <p className="text-sm font-semibold">{review?.user_name}</p>
                   <p>{review?.review}</p>

@@ -26,7 +26,7 @@ export const productApi = createApi({
       invalidatesTags: ["books"],
     }),
     getReviews: builder.query({
-      query: () => `/reviews`,
+      query: (id) => `/reviews/${id}`,
       providesTags: ["review"],
     }),
     addReview: builder.mutation({
