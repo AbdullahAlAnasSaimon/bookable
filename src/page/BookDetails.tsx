@@ -27,7 +27,10 @@ interface IReview {
 }
 const BookDetails = () => {
   const { user } = useAppSelector((state) => state.user);
-  const { data, isLoading } = useGetProductsQuery(undefined);
+  const { data, isLoading } = useGetProductsQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+    pollingInterval: 30000,
+  });
   const [addReview, { isLoading: reviewLoading, error }] =
     useAddReviewMutation();
   const productId = useParams();
