@@ -161,7 +161,7 @@ const BookDetails = () => {
         )}
       </section>
 
-      {user?.email && (
+      {user?.email ? (
         <section className="flex flex-col gap-5 mt-5 w-10/12 mx-auto">
           <form onSubmit={handleSubmit(handleReviewSubmit)}>
             <Textarea
@@ -184,6 +184,14 @@ const BookDetails = () => {
             </Button>
           </form>
         </section>
+      ) : (
+        <p className="text-center">
+          Please{" "}
+          <Link className="text-blue-500 underline" to="/login">
+            Login
+          </Link>{" "}
+          to post a review about this product.
+        </p>
       )}
     </div>
   );
