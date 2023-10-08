@@ -4,18 +4,36 @@ import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
 import { useAddWishlistMutation } from "@/redux/features/api/apiSlice";
 import { useAppSelector } from "@/redux/hooks";
+import { toast } from "./ui/use-toast";
 
 const ProductsCard = ({ product }: { product: IProduct }) => {
   const { _id, title, photo, genre, price, author } = product;
   const { user } = useAppSelector((state) => state.user);
   const [addWishlist, { error }] = useAddWishlistMutation();
 
-  const handleAddWishlist = () => {
+  const handleAddWishlist = async () => {
     const data = {
       user_email: user?.email,
       productId: _id,
     };
-    console.log(data);
+    const result = await addWishlist(data);
+
+    if ("data" in result) {
+      if (result?.data?.acknowledged) {
+        toast({
+          title: "Success",
+          description: "Book added Successfully",
+        });
+      } else if (!result?.data?.acknowledged) {
+        toast({
+          title: "Error",
+          description: `${error}`,
+        });
+      }
+
+      console.log(result);
+      console.log(data);
+    }
   };
 
   return (
