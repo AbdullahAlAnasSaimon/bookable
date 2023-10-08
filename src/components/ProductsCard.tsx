@@ -24,7 +24,7 @@ const ProductsCard = ({ product }: { product: IProduct }) => {
           title: "Success",
           description: "Book added Successfully",
         });
-      } else if (!result?.data?.acknowledged) {
+      } else {
         toast({
           title: "Error",
           description: `${error}`,
