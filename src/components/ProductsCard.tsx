@@ -2,9 +2,21 @@ import { Card } from "./ui/card";
 import { IProduct } from "@/types/globalTypes";
 import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
+import { useAddWishlistMutation } from "@/redux/features/api/apiSlice";
+import { useAppSelector } from "@/redux/hooks";
 
 const ProductsCard = ({ product }: { product: IProduct }) => {
   const { _id, title, photo, genre, price, author } = product;
+  const { user } = useAppSelector((state) => state.user);
+  const [addWishlist, { error }] = useAddWishlistMutation();
+
+  const handleAddWishlist = () => {
+    const data = {
+      user_email: user?.email,
+      productId: _id,
+    };
+    console.log(data);
+  };
 
   return (
     <>
@@ -25,7 +37,11 @@ const ProductsCard = ({ product }: { product: IProduct }) => {
           <p className="text-sm">Author: {author}</p>
           <p className="my-1 text-sm">{genre}</p>
           <p className="mb-2 text-lg text-slate-900 font-bold">${price}</p>
-          <Button className="w-full" variant="default">
+          <Button
+            onClick={handleAddWishlist}
+            className="w-full"
+            variant="default"
+          >
             Add to Wishlist
           </Button>
         </div>
