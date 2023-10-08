@@ -7,6 +7,7 @@ import {
   Cloud,
   CreditCard,
   Github,
+  Heart,
   LifeBuoy,
   LogIn,
   LogOut,
@@ -15,7 +16,7 @@ import {
   Plus,
   PlusCircle,
   Settings,
-  User,
+  // User,
   UserPlus,
   Users,
 } from "lucide-react";
@@ -88,8 +89,10 @@ export default function Navbar() {
                       <DropdownMenuSeparator />
                       <DropdownMenuGroup>
                         <DropdownMenuItem>
-                          <User className="mr-2 h-4 w-4" />
-                          <span>Profile</span>
+                          <Heart className="mr-2 h-4 w-4" />
+                          <Link to="/wishlist">
+                            <span>Wishlist</span>
+                          </Link>
                           {/* <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut> */}
                         </DropdownMenuItem>
                         <DropdownMenuItem>

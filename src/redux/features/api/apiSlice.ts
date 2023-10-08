@@ -37,6 +37,13 @@ export const productApi = createApi({
       }),
       invalidatesTags: ["review"],
     }),
+    addWishlist: builder.mutation({
+      query: (body) => ({
+        url: "/wishlist",
+        method: "POST",
+        body,
+      }),
+    }),
   }),
 });
 
@@ -46,4 +53,5 @@ export const {
   useEditProductMutation,
   useGetReviewsQuery,
   useAddReviewMutation,
+  useAddWishlistMutation,
 } = productApi;
