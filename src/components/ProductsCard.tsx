@@ -13,7 +13,7 @@ const ProductsCard = ({ product }: { product: IProduct }) => {
 
   const handleAddWishlist = async () => {
     const data = {
-      user_email: user?.email,
+      email: user?.email,
       productId: _id,
     };
     const result = await addWishlist(data);

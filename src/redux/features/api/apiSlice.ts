@@ -60,4 +60,5 @@ export const {
   useGetReviewsQuery,
   useAddReviewMutation,
   useAddWishlistMutation,
+  useGetWishlistQuery,
 } = productApi;
