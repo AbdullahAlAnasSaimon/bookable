@@ -46,7 +46,7 @@ export const productApi = createApi({
     }),
     getWishlist: builder.query({
       query: (email) => ({
-        url: `/user?email=${email}`,
+        url: `/wishlist?email=${email}`,
         providesTags: ["wishlist"],
       }),
     }),

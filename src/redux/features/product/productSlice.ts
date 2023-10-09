@@ -3,6 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 
 const initialState = {
   products: [],
+  wishlist: [],
 };
 
 const productSlice = createSlice({
@@ -11,6 +12,9 @@ const productSlice = createSlice({
   reducers: {
     setProducts: (state, action) => {
       state.products = action.payload;
+    },
+    setWishlist: (state, action) => {
+      state.wishlist = action.payload;
     },
   },
 });
@@ -25,7 +29,7 @@ export const fetchProductsApi = createApi({
   }),
 });
 
-export const { setProducts } = productSlice.actions;
+export const { setProducts, setWishlist } = productSlice.actions;
 export const { useSearchProductQuery } = fetchProductsApi;
 
 export default productSlice.reducer;

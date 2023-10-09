@@ -1,11 +1,15 @@
 import { useGetWishlistQuery } from "@/redux/features/api/apiSlice";
-import { useAppSelector } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 
 const Wishlist = () => {
   const { user } = useAppSelector((state) => state.user);
   const { data } = useGetWishlistQuery(user?.email, {
     refetchOnMountOrArgChange: true,
   });
+  const dispatch = useAppDispatch();
+  if (data !== null) {
+    dispatch(data);
+  }
   console.log(data);
   return (
     <div>
