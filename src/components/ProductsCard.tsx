@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { toast } from "./ui/use-toast";
 import { setWishlist } from "@/redux/features/product/productSlice";
 import Loader from "./Loader";
+import { ToastAction } from "./ui/toast";
 
 const ProductsCard = ({ product }: { product: IProduct }) => {
   const { _id, title, photo, genre, price, author } = product;
@@ -39,7 +40,13 @@ const ProductsCard = ({ product }: { product: IProduct }) => {
       toast({
         title: "Error",
         description: "Please Login to Wishlist",
+        action: (
+          <Link to="/login">
+            <ToastAction altText="Goto schedule to undo">Log In</ToastAction>
+          </Link>
+        ),
       });
+      return;
     }
     const data = {
       email: user?.email,
