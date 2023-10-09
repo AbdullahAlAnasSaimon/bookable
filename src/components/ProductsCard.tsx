@@ -22,7 +22,7 @@ const ProductsCard = ({ product }: { product: IProduct }) => {
       if (result?.data?.acknowledged) {
         toast({
           title: "Success",
-          description: "Book added Successfully",
+          description: "Book Wishlisted",
         });
       } else {
         toast({

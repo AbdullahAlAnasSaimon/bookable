@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const productApi = createApi({
   reducerPath: "productApi",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000" }),
-  tagTypes: ["books", "review"],
+  tagTypes: ["books", "review", "wishlist"],
   endpoints: (builder) => ({
     getProducts: builder.query({
       query: () => "/books",
@@ -42,6 +42,12 @@ export const productApi = createApi({
         url: "/wishlist",
         method: "POST",
         body,
+      }),
+    }),
+    getWishlist: builder.query({
+      query: (email) => ({
+        url: `/user?email=${email}`,
+        providesTags: ["wishlist"],
       }),
     }),
   }),
