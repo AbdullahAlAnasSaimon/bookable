@@ -8,8 +8,13 @@ import { toast } from "./ui/use-toast";
 
 const ProductsCard = ({ product }: { product: IProduct }) => {
   const { _id, title, photo, genre, price, author } = product;
-  const { user } = useAppSelector((state) => state.user);
+  const {
+    user: { user },
+    product: { wishlist },
+  } = useAppSelector((state) => state);
   const [addWishlist, { error }] = useAddWishlistMutation();
+
+  console.log(wishlist);
 
   const handleAddWishlist = async () => {
     const data = {
