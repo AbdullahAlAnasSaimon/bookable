@@ -8,6 +8,16 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { IProduct } from "@/types/globalTypes";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 
 const Wishlist = () => {
   const { products, wishlist } = useAppSelector((state) => state.product);
@@ -50,9 +60,27 @@ const Wishlist = () => {
                   <button className="text-[12px] px-3 py-1 rounded-full mr-2 bg-slate-900 text-white hover:bg-slate-700">
                     Plan to Read
                   </button>
-                  <button className="text-[12px] px-3 py-1 rounded-full mr-2 bg-red-500 text-white hover:bg-red-600">
-                    Remove
-                  </button>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <button className="text-[12px] px-3 py-1 rounded-full mr-2 bg-red-500 text-white hover:bg-red-600">
+                        Remove
+                      </button>
+                    </DialogTrigger>
+                    <DialogContent className="sm:max-w-[425px]">
+                      <DialogHeader>
+                        <DialogTitle>Remove {item?.title}</DialogTitle>
+                        <DialogDescription>
+                          Are you sure? you want to remvoe {item?.title} book
+                          from your wishlist.
+                        </DialogDescription>
+                      </DialogHeader>
+                      <DialogFooter>
+                        <Button type="submit" variant="destructive">
+                          Confirm Delete
+                        </Button>
+                      </DialogFooter>
+                    </DialogContent>
+                  </Dialog>
                 </div>
               </TableCell>
             </TableRow>
