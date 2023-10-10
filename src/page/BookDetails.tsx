@@ -35,6 +35,7 @@ const BookDetails = () => {
   const { data: reviews, isLoading: isReviewLoading } = useGetReviewsQuery(
     productId.id
   );
+  const { wishlist } = useAppSelector((state) => state.product);
   const {
     register,
     handleSubmit,
@@ -50,6 +51,10 @@ const BookDetails = () => {
       return item;
     }
   });
+
+  const matchingProduct = wishlist.some(
+    (item: { productId: string }) => item?.productId === productId?.id
+  );
 
   const handleReviewSubmit = async (data: IReview) => {
     if (!user?.email) {
@@ -139,7 +144,7 @@ const BookDetails = () => {
               </Dialog>
             </div>
           )}
-          <Button>Add to Wishlist</Button>
+          <Button disabled={matchingProduct}>Add to Wishlist</Button>
         </div>
       </div>
 
