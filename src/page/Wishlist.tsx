@@ -33,17 +33,28 @@ const Wishlist = () => {
             <TableHead>Product Info</TableHead>
             <TableHead>Author</TableHead>
             <TableHead className="text-right">Amount</TableHead>
+            <TableHead>Action</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {matchingProducts?.map((item: IProduct, index) => (
             <TableRow key={item?._id}>
               <TableCell className="font-medium">{index + 1}</TableCell>
-              <TableCell>
-                <img src={item?.photo} alt="" className="w-10 h-16" />
+              <TableCell className="flex gap-5">
+                <div>
+                  <img src={item?.photo} alt="" className="w-10 h-16" />
+                </div>
+                <div>
+                  <p>{item?.title}</p>
+                  <p>{item?.genre}</p>
+                  <p>{item?.publication_date?.substring(0, 15).trim()}</p>
+                </div>
               </TableCell>
-              <TableCell>{}</TableCell>
+              <TableCell>
+                <p>{item?.author}</p>
+              </TableCell>
               <TableCell className="text-right">{item.price}</TableCell>
+              <TableCell>{}</TableCell>
             </TableRow>
           ))}
         </TableBody>
