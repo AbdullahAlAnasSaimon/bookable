@@ -4,7 +4,8 @@ import ProductsCard from "@/components/ProductsCard";
 import SearchBar from "@/components/SearchBar";
 import { Button } from "@/components/ui/button";
 import { useGetProductsQuery } from "@/redux/features/api/apiSlice";
-import { useAppSelector } from "@/redux/hooks";
+import { setProducts } from "@/redux/features/product/productSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { IProduct } from "@/types/globalTypes";
 import { Link } from "react-router-dom";
 
@@ -13,6 +14,12 @@ const AllBooks = () => {
   const { data, isLoading, error } = useGetProductsQuery(undefined, {
     refetchOnMountOrArgChange: true,
   });
+  const dispatch = useAppDispatch();
+
+  if (data !== null) {
+    dispatch(setProducts(data));
+  }
+
   console.log(error);
 
   if (isLoading) {
