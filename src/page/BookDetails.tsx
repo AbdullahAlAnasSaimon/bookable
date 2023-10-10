@@ -52,27 +52,29 @@ const BookDetails = () => {
   });
 
   const handleReviewSubmit = async (data: IReview) => {
-    const result = await addReview({
-      ...data,
-      bookId: productId.id,
-      user_email: user?.email,
-      user_name: user?.email?.split("@")[0],
-    });
-    if ("data" in result) {
-      if (result.data.acknowledged) {
-        toast({
-          title: "Success",
-          description: "Review Added Successfully",
-        });
-      } else {
-        toast({
-          title: "Error",
-          description: `${error}`,
-        });
+    if (!user?.email) {
+      return;
+    } else {
+      const result = await addReview({
+        ...data,
+        bookId: productId.id,
+        user_email: user?.email,
+        user_name: user?.email?.split("@")[0],
+      });
+      if ("data" in result) {
+        if (result.data.acknowledged) {
+          toast({
+            title: "Success",
+            description: "Review Added Successfully",
+          });
+        } else {
+          toast({
+            title: "Error",
+            description: `${error}`,
+          });
+        }
       }
     }
-
-    console.log(result);
   };
 
   const newDescription = product?.description.split(/\r?\\n/);
