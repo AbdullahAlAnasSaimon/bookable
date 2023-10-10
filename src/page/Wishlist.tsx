@@ -11,19 +11,14 @@ import { IProduct } from "@/types/globalTypes";
 
 const Wishlist = () => {
   const { products, wishlist } = useAppSelector((state) => state.product);
-  // console.log(wishlist);
-  // console.log(products);
   const matchingProducts = products.filter((product: { _id: string }) =>
     wishlist.some(
       (item: { productId: string }) => item.productId === product._id
     )
   );
 
-  console.log(matchingProducts);
-
   return (
-    <div>
-      <h1>Wishlist</h1>
+    <div className="w-10/12 mx-auto">
       <Table>
         <TableHeader>
           <TableRow>
@@ -43,8 +38,8 @@ const Wishlist = () => {
                 </div>
                 <div>
                   <p>{item?.title}</p>
-                  <p>{item?.genre}</p>
-                  <p>{item?.price}</p>
+                  <p className="text-sm italic">{item?.genre}</p>
+                  <p className="font-semibold text-sm">$ {item?.price}</p>
                 </div>
               </TableCell>
               <TableCell>

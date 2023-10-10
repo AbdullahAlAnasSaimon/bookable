@@ -3,9 +3,9 @@ import { Button } from "../components/ui/button";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setUser } from "@/redux/features/user/userSlice";
 import {
+  BookOpen,
   ChevronDown,
   Cloud,
-  CreditCard,
   Github,
   Heart,
   LifeBuoy,
@@ -96,8 +96,10 @@ export default function Navbar() {
                           {/* <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut> */}
                         </DropdownMenuItem>
                         <DropdownMenuItem>
-                          <CreditCard className="mr-2 h-4 w-4" />
-                          <span>Billing</span>
+                          <BookOpen className="mr-2 h-4 w-4" />
+                          <Link to="/continue-reading">
+                            <span>Continue Reading</span>
+                          </Link>
                           {/* <DropdownMenuShortcut>⌘B</DropdownMenuShortcut> */}
                         </DropdownMenuItem>
                         <DropdownMenuItem>
