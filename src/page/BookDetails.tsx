@@ -148,17 +148,18 @@ const BookDetails = () => {
         </div>
       </div>
 
-      <section className="mt-5">
+      <section className="mt-5 bg-gray-100/50 p-2">
         <p className="mb-2">{reviews?.length} Review Found</p>
         {reviews?.length >= 1 ? (
           reviews.map(
             (review: {
+              _id: string;
               user_name: string;
               user_email: string;
               review: string;
             }) => (
-              <div className="bg-gray-100/50 p-5 rounded-md">
-                <div className="bg-slate-300/50 inline-block p-2 rounded-lg">
+              <div className="my-2" key={review?._id}>
+                <div className="bg-slate-200/50 inline-block p-2 rounded-lg">
                   <p className="text-sm font-semibold">{review?.user_name}</p>
                   <p>{review?.review}</p>
                 </div>
