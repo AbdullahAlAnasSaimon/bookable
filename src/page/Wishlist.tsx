@@ -68,9 +68,9 @@ const Wishlist = () => {
                     </DialogTrigger>
                     <DialogContent className="sm:max-w-[425px]">
                       <DialogHeader>
-                        <DialogTitle>Remove {item?.title}</DialogTitle>
+                        <DialogTitle>Remove - {item?.title}</DialogTitle>
                         <DialogDescription>
-                          Are you sure? you want to remvoe {item?.title} book
+                          Are you sure? you want to remvoe "{item?.title}" book
                           from your wishlist.
                         </DialogDescription>
                       </DialogHeader>

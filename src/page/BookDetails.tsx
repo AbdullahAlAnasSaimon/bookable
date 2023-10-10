@@ -149,7 +149,9 @@ const BookDetails = () => {
       </div>
 
       <section className="mt-5 bg-gray-100/50 p-2">
-        <p className="mb-2">{reviews?.length} Review Found</p>
+        {reviews?.length >= 1 && (
+          <p className="mb-2">{reviews?.length} Review Found</p>
+        )}
         {reviews?.length >= 1 ? (
           reviews.map(
             (review: {
@@ -197,7 +199,7 @@ const BookDetails = () => {
           </form>
         </section>
       ) : (
-        <p className="text-center">
+        <p className="text-center my-5">
           Please{" "}
           <Link className="text-blue-500 underline" to="/login">
             Login
