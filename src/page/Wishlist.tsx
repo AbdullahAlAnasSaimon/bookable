@@ -2,7 +2,6 @@ import { useAppSelector } from "@/redux/hooks";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -26,13 +25,11 @@ const Wishlist = () => {
     <div>
       <h1>Wishlist</h1>
       <Table>
-        <TableCaption>A list of your recent invoices.</TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead className="w-[100px]">S/N</TableHead>
             <TableHead>Product Info</TableHead>
             <TableHead>Author</TableHead>
-            <TableHead className="text-right">Amount</TableHead>
             <TableHead>Action</TableHead>
           </TableRow>
         </TableHeader>
@@ -47,14 +44,22 @@ const Wishlist = () => {
                 <div>
                   <p>{item?.title}</p>
                   <p>{item?.genre}</p>
-                  <p>{item?.publication_date?.substring(0, 15).trim()}</p>
+                  <p>{item?.price}</p>
                 </div>
               </TableCell>
               <TableCell>
                 <p>{item?.author}</p>
               </TableCell>
-              <TableCell className="text-right">{item.price}</TableCell>
-              <TableCell>{}</TableCell>
+              <TableCell>
+                <div>
+                  <button className="text-[12px] px-3 py-1 rounded-full mr-2 bg-slate-900 text-white hover:bg-slate-700">
+                    Plan to Read
+                  </button>
+                  <button className="text-[12px] px-3 py-1 rounded-full mr-2 bg-red-500 text-white hover:bg-red-600">
+                    Remove
+                  </button>
+                </div>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
