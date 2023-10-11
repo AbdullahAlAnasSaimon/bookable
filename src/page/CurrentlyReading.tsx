@@ -58,20 +58,21 @@ const CurrentlyReading = () => {
               <TableCell>
                 <div>
                   <button className="text-[12px] px-3 py-1 rounded-full mr-2 bg-slate-900 text-white hover:bg-slate-700">
-                    Plan to Read
+                    Continue Reading
                   </button>
                   <Dialog>
                     <DialogTrigger asChild>
                       <button className="text-[12px] px-3 py-1 rounded-full mr-2 bg-red-500 text-white hover:bg-red-600">
-                        Remove
+                        Finished Reading
                       </button>
                     </DialogTrigger>
                     <DialogContent className="sm:max-w-[425px]">
                       <DialogHeader>
-                        <DialogTitle>Remove - {item?.title}</DialogTitle>
+                        <DialogTitle>
+                          Finished Reading? - {item?.title}
+                        </DialogTitle>
                         <DialogDescription>
-                          Are you sure? you want to remvoe "{item?.title}" book
-                          from your wishlist.
+                          Are you sure? you finished the "{item?.title}" book.
                         </DialogDescription>
                       </DialogHeader>
                       <DialogFooter>
