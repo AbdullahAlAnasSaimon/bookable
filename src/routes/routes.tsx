@@ -9,7 +9,7 @@ import BookDetails from "@/page/BookDetails";
 import PrivateRoute from "./PrivateRoute";
 import EditBook from "@/page/EditBook";
 import Wishlist from "@/page/Wishlist";
-import ContinueReading from "@/page/ContinueReading";
+import CurrentlyReading from "@/page/CurrentlyReading";
 
 export const routes = createBrowserRouter([
   {
@@ -56,7 +56,7 @@ export const routes = createBrowserRouter([
         path: "/continue-reading",
         element: (
           <PrivateRoute>
-            <ContinueReading />
+            <CurrentlyReading />
           </PrivateRoute>
         ),
       },

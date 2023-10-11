@@ -1,4 +1,4 @@
-const ContinueReading = () => {
+const CurrentlyReading = () => {
   return (
     <div>
       <h1>Continue Reading</h1>
@@ -6,4 +6,4 @@ const ContinueReading = () => {
   );
 };
 
-export default ContinueReading;
+export default CurrentlyReading;
