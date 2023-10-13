@@ -25,6 +25,12 @@ export const productApi = createApi({
       }),
       invalidatesTags: ["books"],
     }),
+    deleteProduct: builder.mutation({
+      query: (id) => ({
+        url: `/books/${id}`,
+        method: "DELETE",
+      }),
+    }),
     getReviews: builder.query({
       query: (id) => `/reviews/${id}`,
       providesTags: ["review"],
@@ -57,6 +63,7 @@ export const {
   useGetProductsQuery,
   useAddProductMutation,
   useEditProductMutation,
+  useDeleteProductMutation,
   useGetReviewsQuery,
   useAddReviewMutation,
   useAddWishlistMutation,
