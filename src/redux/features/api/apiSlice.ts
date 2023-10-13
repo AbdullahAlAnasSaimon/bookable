@@ -59,6 +59,15 @@ export const productApi = createApi({
   }),
 });
 
+export const deleteProductAsync = (id: string) => async (dispatch) => {
+  try {
+    await dispatch(useDeleteProductMutation(id));
+    // Optionally dispatch other actions or update the state as needed
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const {
   useGetProductsQuery,
   useAddProductMutation,
