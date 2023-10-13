@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import {
   useAddReviewMutation,
+  useAddWishlistMutation,
   useGetProductsQuery,
   useGetReviewsQuery,
 } from "@/redux/features/api/apiSlice";
@@ -36,6 +37,7 @@ const BookDetails = () => {
   const { data: reviews, isLoading: isReviewLoading } = useGetReviewsQuery(
     productId.id
   );
+  const [addWishlist] = useAddWishlistMutation();
   const { wishlist } = useAppSelector((state) => state.product);
   const {
     register,
@@ -90,7 +92,7 @@ const BookDetails = () => {
   const month = dateObject.getMonth() + 1;
   const day = dateObject.getDate();
 
-  const handleAddToWishlist = () => {
+  const handleAddToWishlist = async () => {
     if (!user?.email) {
       toast({
         title: "Error",
@@ -102,6 +104,28 @@ const BookDetails = () => {
         ),
       });
       return;
+    }
+    const data = {
+      email: user?.email,
+      productId: product?._id,
+    };
+    const result = await addWishlist(data);
+
+    if ("data" in result) {
+      if (result?.data?.acknowledged) {
+        toast({
+          title: "Success",
+          description: "Book Wishlisted",
+        });
+      } else {
+        toast({
+          title: "Error",
+          description: `${error}`,
+        });
+      }
+
+      console.log(result);
+      console.log(data);
     }
   };
 
