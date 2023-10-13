@@ -1,11 +1,12 @@
 import { Button } from "@/components/ui/button";
 import {
+  deleteProductAsync,
   useAddReviewMutation,
   useAddWishlistMutation,
   useGetProductsQuery,
   useGetReviewsQuery,
 } from "@/redux/features/api/apiSlice";
-import { useAppSelector } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { IProduct } from "@/types/globalTypes";
 import { Link, useParams } from "react-router-dom";
 import {
@@ -44,6 +45,7 @@ const BookDetails = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<IReview>();
+  const dispatch = useAppDispatch();
 
   if (isLoading || isReviewLoading) {
     return <Loader />;
@@ -129,7 +131,9 @@ const BookDetails = () => {
     }
   };
 
-  const handleDeleteProduct = () => {};
+  const handleDeleteProduct = () => {
+    dispatch(deleteProductAsync(product?._id));
+  };
 
   return (
     <div className="my-10  w-11/12 mx-auto">
