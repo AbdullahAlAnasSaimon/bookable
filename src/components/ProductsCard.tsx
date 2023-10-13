@@ -10,7 +10,6 @@ import {
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { toast } from "./ui/use-toast";
 import { setWishlist } from "@/redux/features/product/productSlice";
-import Loader from "./Loader";
 import { ToastAction } from "./ui/toast";
 
 const ProductsCard = ({ product }: { product: IProduct }) => {
@@ -19,7 +18,7 @@ const ProductsCard = ({ product }: { product: IProduct }) => {
     user: { user },
   } = useAppSelector((state) => state);
   const [addWishlist, { error }] = useAddWishlistMutation();
-  const { data, isLoading } = useGetWishlistQuery(user?.email, {
+  const { data } = useGetWishlistQuery(user?.email, {
     refetchOnMountOrArgChange: true,
   });
   const dispatch = useAppDispatch();
@@ -30,10 +29,6 @@ const ProductsCard = ({ product }: { product: IProduct }) => {
       dispatch(setWishlist(data));
     }
   }, [data, dispatch, user?.email]);
-
-  if (isLoading) {
-    return <Loader />;
-  }
 
   const handleAddWishlist = async () => {
     if (!user?.email) {
