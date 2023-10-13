@@ -20,6 +20,7 @@ import Loader from "@/components/Loader";
 import { Textarea } from "@/components/ui/textarea";
 import { useForm } from "react-hook-form";
 import { toast } from "@/components/ui/use-toast";
+import { ToastAction } from "@radix-ui/react-toast";
 
 interface IReview {
   review: string;
@@ -89,6 +90,21 @@ const BookDetails = () => {
   const month = dateObject.getMonth() + 1;
   const day = dateObject.getDate();
 
+  const handleAddToWishlist = () => {
+    if (!user?.email) {
+      toast({
+        title: "Error",
+        description: "Please Login for add product to wishlist",
+        action: (
+          <Link to="/login">
+            <ToastAction altText="Goto schedule to undo">Log In</ToastAction>
+          </Link>
+        ),
+      });
+      return;
+    }
+  };
+
   return (
     <div className="my-10  w-11/12 mx-auto">
       <div className="grid grid-cols-4 gap-10 bg-gray-100/50 p-5 rounded-md">
@@ -144,7 +160,9 @@ const BookDetails = () => {
               </Dialog>
             </div>
           )}
-          <Button disabled={matchingProduct}>Add to Wishlist</Button>
+          <Button onClick={handleAddToWishlist} disabled={matchingProduct}>
+            Add to Wishlist
+          </Button>
         </div>
       </div>
 
