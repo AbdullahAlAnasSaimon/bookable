@@ -1,12 +1,12 @@
 import { Button } from "@/components/ui/button";
 import {
-  deleteProductAsync,
   useAddReviewMutation,
   useAddWishlistMutation,
+  useDeleteProductMutation,
   useGetProductsQuery,
   useGetReviewsQuery,
 } from "@/redux/features/api/apiSlice";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useAppSelector } from "@/redux/hooks";
 import { IProduct } from "@/types/globalTypes";
 import { Link, useParams } from "react-router-dom";
 import {
@@ -39,13 +39,13 @@ const BookDetails = () => {
     productId.id
   );
   const [addWishlist] = useAddWishlistMutation();
+  const [deleteProduct] = useDeleteProductMutation();
   const { wishlist } = useAppSelector((state) => state.product);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<IReview>();
-  const dispatch = useAppDispatch();
 
   if (isLoading || isReviewLoading) {
     return <Loader />;
@@ -132,7 +132,7 @@ const BookDetails = () => {
   };
 
   const handleDeleteProduct = () => {
-    dispatch(deleteProductAsync(product?._id));
+    deleteProduct(product?._id);
   };
 
   return (
@@ -182,11 +182,7 @@ const BookDetails = () => {
                     </DialogDescription>
                   </DialogHeader>
                   <DialogFooter>
-                    <Button
-                      onClick={handleDeleteProduct}
-                      type="submit"
-                      variant="destructive"
-                    >
+                    <Button onClick={handleDeleteProduct} variant="destructive">
                       Confirm Delete
                     </Button>
                   </DialogFooter>
