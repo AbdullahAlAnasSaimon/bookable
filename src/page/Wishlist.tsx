@@ -19,10 +19,11 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { useDeleteWishlistMutation } from "@/redux/features/api/apiSlice";
+import { toast } from "@/components/ui/use-toast";
 
 const Wishlist = () => {
   const { products, wishlist } = useAppSelector((state) => state.product);
-  const [deleteWishlist] = useDeleteWishlistMutation();
+  const [deleteWishlist, { error }] = useDeleteWishlistMutation();
   const matchingProducts = products.filter((product: { _id: string }) =>
     wishlist.some(
       (item: { productId: string }) => item.productId === product._id
@@ -30,9 +31,20 @@ const Wishlist = () => {
   );
 
   const handleDeleteWishlistItem = async (id: string | undefined) => {
-    console.log(id);
     const result = await deleteWishlist(id);
-    console.log(result);
+    if ("data" in result) {
+      if (result.data.deletedCount > 0) {
+        toast({
+          title: "Success",
+          description: "Book deleted Successfully",
+        });
+      } else {
+        toast({
+          title: "Error",
+          description: `${error}`,
+        });
+      }
+    }
   };
 
   return (
