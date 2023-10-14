@@ -18,14 +18,22 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { useDeleteWishlistMutation } from "@/redux/features/api/apiSlice";
 
 const Wishlist = () => {
   const { products, wishlist } = useAppSelector((state) => state.product);
+  const [deleteWishlist] = useDeleteWishlistMutation();
   const matchingProducts = products.filter((product: { _id: string }) =>
     wishlist.some(
       (item: { productId: string }) => item.productId === product._id
     )
   );
+
+  const handleDeleteWishlistItem = async (id: string | undefined) => {
+    console.log(id);
+    const result = await deleteWishlist(id);
+    console.log(result);
+  };
 
   return (
     <div className="w-10/12 mx-auto">
@@ -75,7 +83,11 @@ const Wishlist = () => {
                         </DialogDescription>
                       </DialogHeader>
                       <DialogFooter>
-                        <Button type="submit" variant="destructive">
+                        <Button
+                          onClick={() => handleDeleteWishlistItem(item?._id)}
+                          type="submit"
+                          variant="destructive"
+                        >
                           Confirm Remove
                         </Button>
                       </DialogFooter>
