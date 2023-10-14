@@ -133,12 +133,11 @@ const BookDetails = () => {
 
   const handleDeleteProduct = async () => {
     const result = await deleteProduct(product?._id);
-    console.log(result);
     if ("data" in result) {
       if (result.data.deletedCount > 0) {
         toast({
           title: "Success",
-          description: "Book added Successfully",
+          description: "Book deleted Successfully",
         });
       } else {
         toast({
