@@ -56,6 +56,12 @@ export const productApi = createApi({
         providesTags: ["wishlist"],
       }),
     }),
+    deleteWishlist: builder.mutation({
+      query: (id) => ({
+        url: `/wishlist/${id}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
@@ -68,4 +74,5 @@ export const {
   useAddReviewMutation,
   useAddWishlistMutation,
   useGetWishlistQuery,
+  useDeleteWishlistMutation,
 } = productApi;

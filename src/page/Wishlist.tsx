@@ -76,7 +76,7 @@ const Wishlist = () => {
                       </DialogHeader>
                       <DialogFooter>
                         <Button type="submit" variant="destructive">
-                          Confirm Delete
+                          Confirm Remove
                         </Button>
                       </DialogFooter>
                     </DialogContent>
