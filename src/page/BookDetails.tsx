@@ -32,7 +32,7 @@ interface IReview {
 const BookDetails = () => {
   const { user } = useAppSelector((state) => state.user);
   const { data, isLoading } = useGetProductsQuery(undefined, {
-    refetchOnMountOrArgChange,
+    refetchOnMountOrArgChange: true,
   });
   const [addReview, { isLoading: reviewLoading, error }] =
     useAddReviewMutation();
