@@ -1,34 +1,24 @@
-import { useEffect } from "react";
 import { Card } from "./ui/card";
 import { IProduct } from "@/types/globalTypes";
 import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
 import {
   useAddWishlistMutation,
-  useGetWishlistQuery,
+  // useGetWishlistQuery,
 } from "@/redux/features/api/apiSlice";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+// import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { toast } from "./ui/use-toast";
-import { setWishlist } from "@/redux/features/product/productSlice";
+// import { setWishlist } from "@/redux/features/product/productSlice";
 import { ToastAction } from "./ui/toast";
+import { useAppSelector } from "@/redux/hooks";
 
 const ProductsCard = ({ product }: { product: IProduct }) => {
   const { _id, title, photo, genre, price, author } = product;
   const {
     user: { user },
+    product: { wishlist },
   } = useAppSelector((state) => state);
   const [addWishlist, { error }] = useAddWishlistMutation();
-  const { data } = useGetWishlistQuery(user?.email, {
-    refetchOnMountOrArgChange: true,
-  });
-  const dispatch = useAppDispatch();
-
-  // Move the dispatch inside a useEffect to avoid unnecessary dispatches
-  useEffect(() => {
-    if (user?.email && data !== null) {
-      dispatch(setWishlist(data));
-    }
-  }, [data, dispatch, user?.email]);
 
   const handleAddWishlist = async () => {
     if (!user?.email) {
@@ -90,7 +80,7 @@ const ProductsCard = ({ product }: { product: IProduct }) => {
             onClick={handleAddWishlist}
             className="w-full"
             variant="default"
-            disabled={data?.find(
+            disabled={wishlist?.find(
               (item: { productId: string | undefined }) =>
                 item?.productId === _id
             )}
