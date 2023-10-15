@@ -31,12 +31,15 @@ interface IReview {
 }
 const BookDetails = () => {
   const { user } = useAppSelector((state) => state.user);
-  const { data, isLoading } = useGetProductsQuery(undefined);
+  const { data, isLoading } = useGetProductsQuery(undefined, {
+    refetchOnMountOrArgChange,
+  });
   const [addReview, { isLoading: reviewLoading, error }] =
     useAddReviewMutation();
   const productId = useParams();
   const { data: reviews, isLoading: isReviewLoading } = useGetReviewsQuery(
-    productId.id
+    productId.id,
+    { refetchOnMountOrArgChange: true }
   );
   const [addWishlist] = useAddWishlistMutation();
   const [deleteProduct] = useDeleteProductMutation();

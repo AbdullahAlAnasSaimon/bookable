@@ -11,20 +11,6 @@ import { Link } from "react-router-dom";
 
 const AllBooks = () => {
   const { user } = useAppSelector((state) => state.user);
-  const { data, isLoading, error } = useGetProductsQuery(undefined, {
-    refetchOnMountOrArgChange: true,
-  });
-  const dispatch = useAppDispatch();
-
-  if (data !== null) {
-    dispatch(setProducts(data));
-  }
-
-  console.log(error);
-
-  if (isLoading) {
-    return <Loader />;
-  }
 
   return (
     <section className="w-11/12 mx-auto mt-5 mb-20">
