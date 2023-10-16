@@ -18,12 +18,19 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { useDeleteWishlistMutation } from "@/redux/features/api/apiSlice";
+import {
+  useAddCurrentlyReadingMutation,
+  useDeleteWishlistMutation,
+} from "@/redux/features/api/apiSlice";
 import { toast } from "@/components/ui/use-toast";
 
 const Wishlist = () => {
-  const { products, wishlist } = useAppSelector((state) => state.product);
+  const {
+    product: { products, wishlist },
+    user: { user },
+  } = useAppSelector((state) => state);
   const [deleteWishlist, { error }] = useDeleteWishlistMutation();
+  const [addCurrentlyReading] = useAddCurrentlyReadingMutation();
   const matchingProducts = products.filter((product: { _id: string }) =>
     wishlist.some(
       (item: { productId: string }) => item.productId === product._id
@@ -47,7 +54,13 @@ const Wishlist = () => {
     }
   };
 
-  const handlePlanToRead = () => {};
+  const handlePlanToRead = (id: string) => {
+    console.log(id);
+    const data = {
+      email: user?.email,
+      productId: id,
+    };
+  };
 
   return (
     <div className="w-10/12 mx-auto">
@@ -80,7 +93,7 @@ const Wishlist = () => {
               <TableCell>
                 <div>
                   <button
-                    onClick={handlePlanToRead}
+                    onClick={() => handlePlanToRead(item?._id)}
                     className="text-[12px] px-3 py-1 rounded-full mr-2 bg-slate-900 text-white hover:bg-slate-700"
                   >
                     Plan to Read
