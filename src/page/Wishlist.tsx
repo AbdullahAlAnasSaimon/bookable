@@ -54,12 +54,26 @@ const Wishlist = () => {
     }
   };
 
-  const handlePlanToRead = (id: string) => {
+  const handlePlanToRead = async (id: string | undefined) => {
     console.log(id);
     const data = {
       email: user?.email,
       productId: id,
     };
+    const result = await addCurrentlyReading(data);
+    if ("data" in result) {
+      if (result?.data?.acknowledged) {
+        toast({
+          title: "Success",
+          description: "Book is now in Currently reading list",
+        });
+      } else {
+        toast({
+          title: "Error",
+          description: `${error}`,
+        });
+      }
+    }
   };
 
   return (
