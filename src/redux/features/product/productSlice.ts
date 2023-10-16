@@ -33,7 +33,8 @@ export const fetchProductsApi = createApi({
   }),
 });
 
-export const { setProducts, setWishlist } = productSlice.actions;
+export const { setProducts, setWishlist, setCurrentlyReadingBook } =
+  productSlice.actions;
 export const { useSearchProductQuery } = fetchProductsApi;
 
 export default productSlice.reducer;

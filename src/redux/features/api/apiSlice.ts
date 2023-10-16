@@ -62,6 +62,13 @@ export const productApi = createApi({
         method: "DELETE",
       }),
     }),
+    addCurrentlyReading: builder.mutation({
+      query: (body) => ({
+        url: "/currently-reading",
+        method: "POST",
+        body,
+      }),
+    }),
   }),
 });
 
@@ -75,4 +82,5 @@ export const {
   useAddWishlistMutation,
   useGetWishlistQuery,
   useDeleteWishlistMutation,
+  useAddCurrentlyReadingMutation,
 } = productApi;
