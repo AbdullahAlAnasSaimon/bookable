@@ -53,7 +53,7 @@ export const routes = createBrowserRouter([
         ),
       },
       {
-        path: "/continue-reading",
+        path: "/currently-reading",
         element: (
           <PrivateRoute>
             <CurrentlyReading />

@@ -51,9 +51,6 @@ const ProductsCard = ({ product }: { product: IProduct }) => {
           description: `${error}`,
         });
       }
-
-      console.log(result);
-      console.log(data);
     }
   };
 

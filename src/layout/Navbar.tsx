@@ -88,20 +88,20 @@ export default function Navbar() {
                       </DropdownMenuLabel>
                       <DropdownMenuSeparator />
                       <DropdownMenuGroup>
-                        <DropdownMenuItem>
-                          <Heart className="mr-2 h-4 w-4" />
-                          <Link to="/wishlist">
+                        <Link to="/wishlist" className="cursor-pointer">
+                          <DropdownMenuItem>
+                            <Heart className="mr-2 h-4 w-4" />
                             <span>Wishlist</span>
-                          </Link>
-                          {/* <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut> */}
-                        </DropdownMenuItem>
-                        <DropdownMenuItem>
-                          <BookOpen className="mr-2 h-4 w-4" />
-                          <Link to="/continue-reading">
-                            <span>Continue Reading</span>
-                          </Link>
-                          {/* <DropdownMenuShortcut>⌘B</DropdownMenuShortcut> */}
-                        </DropdownMenuItem>
+                            {/* <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut> */}
+                          </DropdownMenuItem>
+                        </Link>
+                        <Link to="/currently-reading">
+                          <DropdownMenuItem>
+                            <BookOpen className="mr-2 h-4 w-4" />
+                            <span>Currently Reading</span>
+                            {/* <DropdownMenuShortcut>⌘B</DropdownMenuShortcut> */}
+                          </DropdownMenuItem>
+                        </Link>
                         <DropdownMenuItem>
                           <Settings className="mr-2 h-4 w-4" />
                           <span>Settings</span>
