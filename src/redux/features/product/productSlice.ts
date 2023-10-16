@@ -4,6 +4,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 const initialState = {
   products: [],
   wishlist: [],
+  currentlyReading: [],
 };
 
 const productSlice = createSlice({
@@ -15,6 +16,9 @@ const productSlice = createSlice({
     },
     setWishlist: (state, action) => {
       state.wishlist = action.payload;
+    },
+    setCurrentlyReadingBook: (state, action) => {
+      state.currentlyReading = action.payload;
     },
   },
 });
