@@ -47,6 +47,8 @@ const Wishlist = () => {
     }
   };
 
+  const handlePlanToRead = () => {};
+
   return (
     <div className="w-10/12 mx-auto">
       <Table>
@@ -77,7 +79,10 @@ const Wishlist = () => {
               </TableCell>
               <TableCell>
                 <div>
-                  <button className="text-[12px] px-3 py-1 rounded-full mr-2 bg-slate-900 text-white hover:bg-slate-700">
+                  <button
+                    onClick={handlePlanToRead}
+                    className="text-[12px] px-3 py-1 rounded-full mr-2 bg-slate-900 text-white hover:bg-slate-700"
+                  >
                     Plan to Read
                   </button>
                   <Dialog>
