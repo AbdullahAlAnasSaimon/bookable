@@ -7,6 +7,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./lib/firebase";
 import { setLoading, setUser } from "./redux/features/user/userSlice";
 import {
+  useGetCurrentlyReadingQuery,
   useGetProductsQuery,
   useGetWishlistQuery,
 } from "./redux/features/api/apiSlice";
@@ -37,6 +38,10 @@ function App() {
   const { data: wishlistData } = useGetWishlistQuery(user?.email, {
     refetchOnMountOrArgChange: true,
   });
+  const { data: currentlyReadingData } = useGetCurrentlyReadingQuery(
+    undefined,
+    { refetchOnMountOrArgChange: true }
+  );
 
   if (data !== null || wishlistData !== null) {
     dispatch(setProducts(data));

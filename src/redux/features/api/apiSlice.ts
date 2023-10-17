@@ -89,4 +89,5 @@ export const {
   useGetWishlistQuery,
   useDeleteWishlistMutation,
   useAddCurrentlyReadingMutation,
+  useGetCurrentlyReadingQuery,
 } = productApi;
