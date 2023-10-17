@@ -20,9 +20,11 @@ import {
 import { Button } from "@/components/ui/button";
 
 const CurrentlyReading = () => {
-  const { products, wishlist } = useAppSelector((state) => state.product);
+  const { products, wishlist: currentlyReading } = useAppSelector(
+    (state) => state.product
+  );
   const matchingProducts = products.filter((product: { _id: string }) =>
-    wishlist.some(
+    currentlyReading.some(
       (item: { productId: string }) => item.productId === product._id
     )
   );
