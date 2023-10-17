@@ -55,7 +55,6 @@ const Wishlist = () => {
   };
 
   const handlePlanToRead = async (id: string | undefined) => {
-    console.log(id);
     const data = {
       email: user?.email,
       productId: id,
