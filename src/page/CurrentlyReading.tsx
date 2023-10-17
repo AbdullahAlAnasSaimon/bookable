@@ -20,7 +20,7 @@ import {
 import { Button } from "@/components/ui/button";
 
 const CurrentlyReading = () => {
-  const { products, wishlist: currentlyReading } = useAppSelector(
+  const { products, currentlyReading } = useAppSelector(
     (state) => state.product
   );
   const matchingProducts = products.filter((product: { _id: string }) =>
