@@ -12,6 +12,7 @@ import {
   useGetWishlistQuery,
 } from "./redux/features/api/apiSlice";
 import {
+  setCurrentlyReadingBook,
   setProducts,
   setWishlist,
 } from "./redux/features/product/productSlice";
@@ -43,9 +44,10 @@ function App() {
     { refetchOnMountOrArgChange: true }
   );
 
-  if (data !== null || wishlistData !== null) {
+  if (data !== null || wishlistData !== null || currentlyReadingData !== null) {
     dispatch(setProducts(data));
     dispatch(setWishlist(wishlistData));
+    dispatch(setCurrentlyReadingBook(currentlyReadingData));
   }
 
   if (isLoading) {
