@@ -70,8 +70,8 @@ export const productApi = createApi({
       }),
     }),
     getCurrentlyReading: builder.query({
-      query: () => ({
-        url: "/currently-reding",
+      query: (email) => ({
+        url: `/currently-reding?email=${email}`,
         providesTags: ["currently-reading"],
       }),
     }),

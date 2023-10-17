@@ -39,7 +39,7 @@ function App() {
     refetchOnMountOrArgChange: true,
   });
   const { data: currentlyReadingData } = useGetCurrentlyReadingQuery(
-    undefined,
+    user?.email,
     { refetchOnMountOrArgChange: true }
   );
 
