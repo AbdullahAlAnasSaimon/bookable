@@ -29,6 +29,10 @@ const CurrentlyReading = () => {
     )
   );
 
+  const confirmFinishRading = (id) => {
+    console.log(id);
+  };
+
   return (
     <div className="w-10/12 mx-auto">
       <Table>
@@ -78,8 +82,12 @@ const CurrentlyReading = () => {
                         </DialogDescription>
                       </DialogHeader>
                       <DialogFooter>
-                        <Button type="submit" variant="destructive">
-                          Confirm Delete
+                        <Button
+                          onClick={() => confirmFinishRading(item?._id)}
+                          type="submit"
+                          variant="destructive"
+                        >
+                          Confirm Finish
                         </Button>
                       </DialogFooter>
                     </DialogContent>

@@ -2,13 +2,8 @@ import { Card } from "./ui/card";
 import { IProduct } from "@/types/globalTypes";
 import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
-import {
-  useAddWishlistMutation,
-  // useGetWishlistQuery,
-} from "@/redux/features/api/apiSlice";
-// import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useAddWishlistMutation } from "@/redux/features/api/apiSlice";
 import { toast } from "./ui/use-toast";
-// import { setWishlist } from "@/redux/features/product/productSlice";
 import { ToastAction } from "./ui/toast";
 import { useAppSelector } from "@/redux/hooks";
 
