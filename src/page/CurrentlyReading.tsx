@@ -18,19 +18,23 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { useFinishedReadingBookMutation } from "@/redux/features/api/apiSlice";
 
 const CurrentlyReading = () => {
   const { products, currentlyReading } = useAppSelector(
     (state) => state.product
   );
+  const [finishedReadingBook] = useFinishedReadingBookMutation();
   const matchingProducts = products.filter((product: { _id: string }) =>
     currentlyReading.some(
       (item: { productId: string }) => item.productId === product._id
     )
   );
 
-  const confirmFinishRading = (id: string | undefined) => {
+  const confirmFinishRading = async (id: string | undefined) => {
     console.log(id);
+    const result = await finishedReadingBook(id);
+    console.log(result);
   };
 
   return (
