@@ -75,6 +75,12 @@ export const productApi = createApi({
         providesTags: ["currently-reading"],
       }),
     }),
+    finishedReadingBook: builder.mutation({
+      query: (id) => ({
+        url: `/finish-reading/${id}`,
+        method: "PUT",
+      }),
+    }),
   }),
 });
 
@@ -90,4 +96,5 @@ export const {
   useDeleteWishlistMutation,
   useAddCurrentlyReadingMutation,
   useGetCurrentlyReadingQuery,
+  useFinishedReadingBookMutation,
 } = productApi;

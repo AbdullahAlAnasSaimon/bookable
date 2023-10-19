@@ -29,7 +29,7 @@ const CurrentlyReading = () => {
     )
   );
 
-  const confirmFinishRading = (id) => {
+  const confirmFinishRading = (id: string | undefined) => {
     console.log(id);
   };
 
