@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { useFinishedReadingBookMutation } from "@/redux/features/api/apiSlice";
+import { toast } from "@/components/ui/use-toast";
 
 const CurrentlyReading = () => {
   const { products, currentlyReading } = useAppSelector(
@@ -34,7 +35,14 @@ const CurrentlyReading = () => {
   const confirmFinishRading = async (id: string | undefined) => {
     console.log(id);
     const result = await finishedReadingBook(id);
-    console.log(result);
+    if ("data" in result) {
+      if (result?.data?.acknowledged) {
+        toast({
+          title: "Success",
+          description: "Book added Successfully",
+        });
+      }
+    }
   };
 
   return (
