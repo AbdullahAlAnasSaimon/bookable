@@ -25,7 +25,7 @@ const CurrentlyReading = () => {
   const { products, currentlyReading } = useAppSelector(
     (state) => state.product
   );
-  const [finishedReadingBook] = useFinishedReadingBookMutation();
+  const [finishedReadingBook, { error }] = useFinishedReadingBookMutation();
   const matchingProducts = products.filter((product: { _id: string }) =>
     currentlyReading.some(
       (item: { productId: string }) => item.productId === product._id
@@ -40,6 +40,11 @@ const CurrentlyReading = () => {
         toast({
           title: "Success",
           description: "Book added Successfully",
+        });
+      } else {
+        toast({
+          title: "Error",
+          description: `${error}`,
         });
       }
     }
