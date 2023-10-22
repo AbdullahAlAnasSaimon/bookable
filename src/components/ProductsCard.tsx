@@ -49,8 +49,13 @@ const ProductsCard = ({ product }: { product: IProduct }) => {
     }
   };
 
-  const finishedReadingBook = currentlyReading?.find(
-    (item: { productId: string }) => item?.productId === _id
+  let finishedReadingBook:
+    | { productId: string; finishedReading: boolean }
+    | undefined;
+  // eslint-disable-next-line prefer-const
+  finishedReadingBook = currentlyReading?.find(
+    (item: { productId: string; finishedReading: boolean }) =>
+      item?.productId === _id
   );
   console.log(finishedReadingBook);
 
@@ -77,12 +82,17 @@ const ProductsCard = ({ product }: { product: IProduct }) => {
             onClick={handleAddWishlist}
             className="w-full"
             variant="default"
-            disabled={wishlist?.find(
-              (item: { productId: string | undefined }) =>
-                item?.productId === _id
-            )}
+            disabled={
+              wishlist?.find(
+                (item: { productId: string | undefined }) =>
+                  item?.productId === _id
+              ) ||
+              (finishedReadingBook?.finishedReading ?? false)
+            }
           >
-            Add to Wishlist
+            {finishedReadingBook?.finishedReading
+              ? "Finished Reading"
+              : "Add to Wishlist"}
           </Button>
         </div>
       </Card>
