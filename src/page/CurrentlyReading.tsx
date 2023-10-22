@@ -32,17 +32,17 @@ const CurrentlyReading = () => {
     )
   );
 
-  const matchingPairs = {};
+  const matchingPairs: { finishedReading: boolean } = {
+    finishedReading: false,
+  };
 
-  matchingProducts.forEach((matchingProduct) => {
-    currentlyReading.forEach((item) => {
+  matchingProducts.forEach((matchingProduct: { _id: string }) => {
+    currentlyReading.forEach((item: { productId: string }) => {
       if (item.productId === matchingProduct._id) {
         matchingPairs.finishedReading = true;
       }
     });
   });
-
-  console.log(matchingPairs);
 
   const confirmFinishRading = async (id: string | undefined) => {
     const result = await finishedReadingBook(id);

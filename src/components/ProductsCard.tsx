@@ -49,15 +49,14 @@ const ProductsCard = ({ product }: { product: IProduct }) => {
     }
   };
 
-  let finishedReadingBook:
-    | { productId: string; finishedReading: boolean }
-    | undefined;
-  // eslint-disable-next-line prefer-const
-  finishedReadingBook = currentlyReading?.find(
-    (item: { productId: string; finishedReading: boolean }) =>
-      item?.productId === _id
-  );
-  console.log(finishedReadingBook);
+  interface IFinishedReading {
+    _id?: string;
+    productId?: string;
+    finishedReading: boolean;
+  }
+
+  const finishedReadingBook: IFinishedReading | undefined =
+    currentlyReading?.find((item: IFinishedReading) => item?.productId === _id);
 
   return (
     <>
@@ -86,8 +85,7 @@ const ProductsCard = ({ product }: { product: IProduct }) => {
               wishlist?.find(
                 (item: { productId: string | undefined }) =>
                   item?.productId === _id
-              ) ||
-              (finishedReadingBook?.finishedReading ?? false)
+              ) || finishedReadingBook?.finishedReading
             }
           >
             {finishedReadingBook?.finishedReading
