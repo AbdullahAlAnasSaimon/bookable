@@ -11,7 +11,7 @@ const ProductsCard = ({ product }: { product: IProduct }) => {
   const { _id, title, photo, genre, price, author } = product;
   const {
     user: { user },
-    product: { wishlist },
+    product: { wishlist, currentlyReading },
   } = useAppSelector((state) => state);
   const [addWishlist, { error }] = useAddWishlistMutation();
 
@@ -72,12 +72,23 @@ const ProductsCard = ({ product }: { product: IProduct }) => {
             onClick={handleAddWishlist}
             className="w-full"
             variant="default"
-            disabled={wishlist?.find(
-              (item: { productId: string | undefined }) =>
-                item?.productId === _id
-            )}
+            disabled={
+              wishlist?.find(
+                (item: { productId: string | undefined }) =>
+                  item?.productId === _id
+              ) ||
+              currentlyReading?.find(
+                (item: { finishedReading: boolean }) =>
+                  item?.finishedReading === true
+              )
+            }
           >
-            Add to Wishlist
+            {currentlyReading?.find(
+              (item: { finishedReading: boolean }) =>
+                item?.finishedReading === true
+            )
+              ? "Finished Reading"
+              : "Add to Wishlist"}
           </Button>
         </div>
       </Card>
