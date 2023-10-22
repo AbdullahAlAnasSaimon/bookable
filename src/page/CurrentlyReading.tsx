@@ -32,6 +32,18 @@ const CurrentlyReading = () => {
     )
   );
 
+  const matchingPairs = {};
+
+  matchingProducts.forEach((matchingProduct) => {
+    currentlyReading.forEach((item) => {
+      if (item.productId === matchingProduct._id) {
+        matchingPairs.finishedReading = true;
+      }
+    });
+  });
+
+  console.log(matchingPairs);
+
   const confirmFinishRading = async (id: string | undefined) => {
     const result = await finishedReadingBook(id);
     if ("data" in result) {
@@ -82,11 +94,18 @@ const CurrentlyReading = () => {
                   <button className="text-[12px] px-3 py-1 rounded-full mr-2 bg-slate-900 text-white hover:bg-slate-700">
                     Continue Reading
                   </button>
+                  {matchingPairs?.finishedReading && (
+                    <p className="inline-block text-[12px] px-3 py-1 rounded-full mr-2 bg-green-500 text-white">
+                      Finished Reading
+                    </p>
+                  )}
                   <Dialog>
                     <DialogTrigger asChild>
-                      <button className="text-[12px] px-3 py-1 rounded-full mr-2 bg-red-500 text-white hover:bg-red-600">
-                        Finished Reading
-                      </button>
+                      {!matchingPairs?.finishedReading && (
+                        <button className="text-[12px] px-3 py-1 rounded-full mr-2 bg-red-500 text-white hover:bg-red-600">
+                          Finish Reading
+                        </button>
+                      )}
                     </DialogTrigger>
                     <DialogContent className="sm:max-w-[425px]">
                       <DialogHeader>
