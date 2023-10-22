@@ -49,6 +49,11 @@ const ProductsCard = ({ product }: { product: IProduct }) => {
     }
   };
 
+  const finishedReadingBook = currentlyReading?.find(
+    (item: { productId: string }) => item?.productId === _id
+  );
+  console.log(finishedReadingBook);
+
   return (
     <>
       <Card>
@@ -72,23 +77,12 @@ const ProductsCard = ({ product }: { product: IProduct }) => {
             onClick={handleAddWishlist}
             className="w-full"
             variant="default"
-            disabled={
-              wishlist?.find(
-                (item: { productId: string | undefined }) =>
-                  item?.productId === _id
-              ) ||
-              currentlyReading?.find(
-                (item: { finishedReading: boolean }) =>
-                  item?.finishedReading === true
-              )
-            }
+            disabled={wishlist?.find(
+              (item: { productId: string | undefined }) =>
+                item?.productId === _id
+            )}
           >
-            {currentlyReading?.find(
-              (item: { finishedReading: boolean }) =>
-                item?.finishedReading === true
-            )
-              ? "Finished Reading"
-              : "Add to Wishlist"}
+            Add to Wishlist
           </Button>
         </div>
       </Card>
