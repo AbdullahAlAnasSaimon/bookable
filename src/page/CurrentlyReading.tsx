@@ -33,13 +33,12 @@ const CurrentlyReading = () => {
   );
 
   const confirmFinishRading = async (id: string | undefined) => {
-    console.log(id);
     const result = await finishedReadingBook(id);
     if ("data" in result) {
       if (result?.data?.acknowledged) {
         toast({
           title: "Success",
-          description: "Book added Successfully",
+          description: "Congratulations You have finished reading this book",
         });
       } else {
         toast({
