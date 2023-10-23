@@ -17,7 +17,7 @@ interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 export function UserAuthLoginForm({ className, ...props }: UserAuthFormProps) {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { isLoading } = useAppSelector((state) => state.user);
+  const { user, isLoading } = useAppSelector((state) => state.user);
 
   const {
     register,
@@ -27,7 +27,9 @@ export function UserAuthLoginForm({ className, ...props }: UserAuthFormProps) {
 
   async function LoginSubmit(data: ILogin) {
     dispatch(loginUser({ email: data.email, password: data.password }));
-    navigate("/");
+    if (user?.email) {
+      navigate("/");
+    }
   }
 
   return (
