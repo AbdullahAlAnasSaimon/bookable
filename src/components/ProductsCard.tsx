@@ -6,6 +6,7 @@ import { useAddWishlistMutation } from "@/redux/features/api/apiSlice";
 import { toast } from "./ui/use-toast";
 import { ToastAction } from "./ui/toast";
 import { useAppSelector } from "@/redux/hooks";
+import Loader from "./Loader";
 
 const ProductsCard = ({ product }: { product: IProduct }) => {
   const { _id, title, photo, genre, price, author } = product;
@@ -13,7 +14,11 @@ const ProductsCard = ({ product }: { product: IProduct }) => {
     user: { user },
     product: { wishlist, currentlyReading },
   } = useAppSelector((state) => state);
-  const [addWishlist, { error }] = useAddWishlistMutation();
+  const [addWishlist, { error, isLoading }] = useAddWishlistMutation();
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   const handleAddWishlist = async () => {
     if (!user?.email) {
@@ -85,10 +90,10 @@ const ProductsCard = ({ product }: { product: IProduct }) => {
               wishlist?.find(
                 (item: { productId: string | undefined }) =>
                   item?.productId === _id
-              ) || finishedReadingBook!.finishedReading
+              ) || finishedReadingBook?.finishedReading
             }
           >
-            {finishedReadingBook!.finishedReading
+            {finishedReadingBook?.finishedReading
               ? "Finished Reading"
               : "Add to Wishlist"}
           </Button>

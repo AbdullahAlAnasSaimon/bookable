@@ -46,8 +46,10 @@ function App() {
 
   if (data !== null || wishlistData !== null || currentlyReadingData !== null) {
     dispatch(setProducts(data));
-    dispatch(setWishlist(wishlistData));
-    dispatch(setCurrentlyReadingBook(currentlyReadingData));
+    if (user?.email) {
+      dispatch(setWishlist(wishlistData));
+      dispatch(setCurrentlyReadingBook(currentlyReadingData));
+    }
   }
 
   if (isLoading) {
