@@ -52,7 +52,7 @@ const ProductsCard = ({ product }: { product: IProduct }) => {
   interface IFinishedReading {
     _id?: string;
     productId?: string;
-    finishedReading: boolean;
+    finishedReading?: boolean;
   }
 
   const finishedReadingBook: IFinishedReading | undefined =
@@ -85,10 +85,10 @@ const ProductsCard = ({ product }: { product: IProduct }) => {
               wishlist?.find(
                 (item: { productId: string | undefined }) =>
                   item?.productId === _id
-              ) || finishedReadingBook?.finishedReading
+              ) || finishedReadingBook!.finishedReading
             }
           >
-            {finishedReadingBook?.finishedReading
+            {finishedReadingBook!.finishedReading
               ? "Finished Reading"
               : "Add to Wishlist"}
           </Button>
