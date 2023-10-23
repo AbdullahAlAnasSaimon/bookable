@@ -215,8 +215,13 @@ const BookDetails = () => {
               </Dialog>
             </div>
           )}
-          <Button onClick={handleAddToWishlist} disabled={matchingProduct}>
-            Add to Wishlist
+          <Button
+            onClick={handleAddToWishlist}
+            disabled={matchingProduct || finishedReadingBook?.finishedReading}
+          >
+            {finishedReadingBook?.finishedReading
+              ? "Finished Reading"
+              : "Add to Wishlist"}
           </Button>
         </div>
       </div>
