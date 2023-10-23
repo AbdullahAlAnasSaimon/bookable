@@ -30,7 +30,10 @@ interface IReview {
   seller_name: string;
 }
 const BookDetails = () => {
-  const { user } = useAppSelector((state) => state.user);
+  const {
+    user: { user },
+    product: { currentlyReading, wishlist },
+  } = useAppSelector((state) => state);
   const { data, isLoading } = useGetProductsQuery(undefined, {
     refetchOnMountOrArgChange: true,
   });
@@ -43,7 +46,6 @@ const BookDetails = () => {
   );
   const [addWishlist] = useAddWishlistMutation();
   const [deleteProduct] = useDeleteProductMutation();
-  const { wishlist } = useAppSelector((state) => state.product);
   const {
     register,
     handleSubmit,
@@ -71,7 +73,9 @@ const BookDetails = () => {
   }
 
   const finishedReadingBook: IFinishedReading | undefined =
-    currentlyReading?.find((item: IFinishedReading) => item?.productId === _id);
+    currentlyReading?.find(
+      (item: IFinishedReading) => item?.productId === productId.id
+    );
 
   const handleReviewSubmit = async (data: IReview) => {
     if (!user?.email) {
