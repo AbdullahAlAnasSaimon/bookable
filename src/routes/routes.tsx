@@ -10,6 +10,7 @@ import PrivateRoute from "./PrivateRoute";
 import EditBook from "@/page/EditBook";
 import Wishlist from "@/page/Wishlist";
 import CurrentlyReading from "@/page/CurrentlyReading";
+import FinishedReading from "@/page/FinishedReading";
 
 export const routes = createBrowserRouter([
   {
@@ -57,6 +58,14 @@ export const routes = createBrowserRouter([
         element: (
           <PrivateRoute>
             <CurrentlyReading />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/finished-reading",
+        element: (
+          <PrivateRoute>
+            <FinishedReading />
           </PrivateRoute>
         ),
       },
