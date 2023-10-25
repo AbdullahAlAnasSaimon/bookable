@@ -5,6 +5,9 @@ export const productApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000" }),
   tagTypes: ["books", "review", "wishlist", "currently-reading"],
   endpoints: (builder) => ({
+    searchProduct: builder.query({
+      query: (query) => `/book-search?search=${query}`,
+    }),
     getProducts: builder.query({
       query: () => "/books",
       providesTags: ["books"],
@@ -85,6 +88,7 @@ export const productApi = createApi({
 });
 
 export const {
+  useSearchProductQuery,
   useGetProductsQuery,
   useAddProductMutation,
   useEditProductMutation,

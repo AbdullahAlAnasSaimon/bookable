@@ -1,35 +1,46 @@
 // import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useSearchProductQuery } from "@/redux/features/product/productSlice";
+import { useSearchProductQuery } from "@/redux/features/api/apiSlice";
 import { Search } from "lucide-react";
-import { useState } from "react";
 import { Button } from "./ui/button";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
+import Loader from "./Loader";
+import { setProducts } from "@/redux/features/product/productSlice";
+import { useAppDispatch } from "@/redux/hooks";
 
-function SearchBar() {
-  const [searchData, setSearchData] = useState("");
-  const { register, handleSubmit } = useForm<{ searchData: string }>();
-  console.log(searchData);
+const SearchBar = () => {
+  const dispatch = useAppDispatch();
+  const [search, setSearch] = useState("");
+  const { register, handleSubmit } = useForm<{
+    searchData: string;
+  }>();
 
-  const { data } = useSearchProductQuery(searchData);
-
-  const handleFormSearchBar = (data: { searchData: string }) => {
+  const onSubmit = (data: { searchData: string }) => {
     console.log(data);
-    setSearchData(data.searchData);
+    setSearch(data.searchData);
   };
+
+  const { data, isLoading } = useSearchProductQuery(search);
+  if (isLoading) {
+    return <Loader />;
+  }
+  if (data) {
+    dispatch(setProducts(data.data));
+  }
+  console.log(data);
 
   return (
     <div>
       <form
-        onSubmit={handleSubmit(handleFormSearchBar)}
+        onSubmit={handleSubmit(onSubmit)}
         className="flex w-full max-w-sm items-center my-2 "
       >
         <Input
           type="text"
           className="w-[400px] mr-2"
           placeholder="Search books by title, author, or genre"
-          value={searchData}
-          {...register("searchData", { required: true })}
+          {...register("searchData")}
         />
         <Button variant="secondary" type="submit">
           <Search className="" />
@@ -38,6 +49,6 @@ function SearchBar() {
       {/* <Button type="submit">Search</Button> */}
     </div>
   );
-}
+};
 
 export default SearchBar;
