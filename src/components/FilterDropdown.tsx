@@ -10,8 +10,10 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { SlidersHorizontal } from "lucide-react";
 import { Input } from "./ui/input";
+import { useForm } from "react-hook-form";
 
 export function FilterDropdown() {
+  const { register, handleSubmit } = useForm();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -23,11 +25,23 @@ export function FilterDropdown() {
       <DropdownMenuContent className="w-56">
         <DropdownMenuLabel>Appearance</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <Input type="text" placeholder="By Genre" className="mb-2" />
-        <Input type="date" placeholder="By Publication Date" className="mb-2" />
-        <Button variant="default" className="w-full">
-          Filter
-        </Button>
+        <form onSubmit={handleSubmit}>
+          <Input
+            type="text"
+            placeholder="By Genre"
+            className="mb-2"
+            {...register("genre")}
+          />
+          <Input
+            type="date"
+            placeholder="By Publication Date"
+            className="mb-2"
+            {...register("publication_date")}
+          />
+          <Button variant="default" className="w-full">
+            Filter
+          </Button>
+        </form>
       </DropdownMenuContent>
     </DropdownMenu>
   );
