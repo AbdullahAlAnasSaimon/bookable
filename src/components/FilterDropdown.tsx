@@ -13,7 +13,17 @@ import { Input } from "./ui/input";
 import { useForm } from "react-hook-form";
 
 export function FilterDropdown() {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm<{
+    genre: string;
+    publication_date: string;
+  }>();
+
+  const handleFilter = (data: { genre: string; publication_date: string }) => {
+    const publication_date: string = new Date(data.publication_date).toString();
+    const newData = { genre: data.genre, publication_date };
+    console.log(newData);
+  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -25,7 +35,7 @@ export function FilterDropdown() {
       <DropdownMenuContent className="w-56">
         <DropdownMenuLabel>Appearance</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit(handleFilter)}>
           <Input
             type="text"
             placeholder="By Genre"
