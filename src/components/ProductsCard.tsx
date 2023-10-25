@@ -9,7 +9,7 @@ import { useAppSelector } from "@/redux/hooks";
 import Loader from "./Loader";
 
 const ProductsCard = ({ product }: { product: IProduct }) => {
-  const { _id, title, photo, genre, price, author } = product;
+  const { _id, title, photo, genre, price, author, publication_date } = product;
   const {
     user: { user },
     product: { wishlist, currentlyReading },
@@ -63,6 +63,11 @@ const ProductsCard = ({ product }: { product: IProduct }) => {
   const finishedReadingBook: IFinishedReading | undefined =
     currentlyReading?.find((item: IFinishedReading) => item?.productId === _id);
 
+  const dateObject = new Date(publication_date);
+  const year = dateObject.getFullYear();
+  const month = dateObject.getMonth() + 1;
+  const day = dateObject.getDate();
+
   return (
     <>
       <Card>
@@ -79,6 +84,9 @@ const ProductsCard = ({ product }: { product: IProduct }) => {
               {title.length > 20 ? title.slice(0, 23) + "..." : title}
             </h2>
           </Link>
+          <p className="text-sm italic">
+            Publishing Date: {day}-{month}-{year}
+          </p>
           <p className="text-sm">Author: {author}</p>
           <p className="my-1 text-sm">{genre}</p>
           <p className="mb-2 text-lg text-slate-900 font-bold">${price}</p>

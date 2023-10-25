@@ -24,7 +24,7 @@ export function FilterDropdown() {
         <DropdownMenuLabel>Appearance</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <Input type="text" placeholder="By Genre" className="mb-2" />
-        <Input type="text" placeholder="By Publication Date" className="mb-2" />
+        <Input type="date" placeholder="By Publication Date" className="mb-2" />
         <Button variant="default" className="w-full">
           Filter
         </Button>
