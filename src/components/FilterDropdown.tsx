@@ -17,26 +17,36 @@ import { useAppDispatch } from "@/redux/hooks";
 import { setProducts } from "@/redux/features/product/productSlice";
 
 export function FilterDropdown() {
+  const dispatch = useAppDispatch();
   const [filter, setFilter] = useState({});
   const { register, handleSubmit } = useForm<{
     genre: string;
     publication_date: string;
   }>();
-  const dispatch = useAppDispatch();
 
-  const { data: filteredData, isLoading } = useFilterProductQuery(filter);
+  const { data, isLoading } = useFilterProductQuery(filter);
+
+  if (isLoading) {
+    return <Loader2 />;
+  }
+
+  if (data?.data) {
+    dispatch(setProducts(data?.data));
+  }
+
+  console.log(filter);
 
   const handleFilter = (data: { genre: string; publication_date: string }) => {
-    const publication_date: string = new Date(data.publication_date)
+    const publication_date: string = (
+      data.publication_date === ""
+        ? "undefined"
+        : new Date(data.publication_date)
+    )
       .toString()
       .slice(0, 15);
     const newData = { genre: data.genre, publication_date };
     setFilter(newData);
   };
-
-  if (filteredData?.length > 0 && !isLoading) {
-    dispatch(setProducts(filteredData));
-  }
 
   return (
     <DropdownMenu>
@@ -62,8 +72,8 @@ export function FilterDropdown() {
             className="mb-2"
             {...register("publication_date")}
           />
-          <Button variant="default" className="w-full">
-            {isLoading ? <Loader2 className="animation-spin" /> : "Filter"}
+          <Button type="submit" variant="default" className="w-full">
+            Filter
           </Button>
         </form>
       </DropdownMenuContent>

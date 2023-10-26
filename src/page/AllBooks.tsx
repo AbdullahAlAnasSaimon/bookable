@@ -2,8 +2,6 @@ import FilterDropdown from "@/components/FilterDropdown";
 import ProductsCard from "@/components/ProductsCard";
 import SearchBar from "@/components/SearchBar";
 import { Button } from "@/components/ui/button";
-// import { useGetProductsQuery } from "@/redux/features/api/apiSlice";
-// import { setProducts } from "@/redux/features/product/productSlice";
 import { useAppSelector } from "@/redux/hooks";
 import { IProduct } from "@/types/globalTypes";
 import { Link } from "react-router-dom";
@@ -13,8 +11,6 @@ const AllBooks = () => {
     user,
     product: { products },
   } = useAppSelector((state) => state);
-
-  console.log(products);
 
   return (
     <section className="w-11/12 mx-auto mt-5 mb-20">

@@ -17,11 +17,11 @@ const SearchBar = () => {
   }>();
 
   const onSubmit = (data: { searchData: string }) => {
-    console.log(data);
     setSearch(data.searchData);
   };
 
   const { data, isLoading } = useSearchProductQuery(search);
+
   if (isLoading) {
     return <Loader />;
   }
