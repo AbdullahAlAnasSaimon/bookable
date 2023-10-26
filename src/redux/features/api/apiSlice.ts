@@ -93,6 +93,7 @@ export const productApi = createApi({
 
 export const {
   useSearchProductQuery,
+  useFilterProductQuery,
   useGetProductsQuery,
   useAddProductMutation,
   useEditProductMutation,
