@@ -8,6 +8,10 @@ export const productApi = createApi({
     searchProduct: builder.query({
       query: (query) => `/book-search?search=${query}`,
     }),
+    filterProduct: builder.query({
+      query: (query) =>
+        `/book-filter?genre=${query.genre}&publication_date=${query.publication_date}`,
+    }),
     getProducts: builder.query({
       query: () => "/books",
       providesTags: ["books"],

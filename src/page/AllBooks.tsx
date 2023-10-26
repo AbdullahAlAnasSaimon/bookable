@@ -14,6 +14,8 @@ const AllBooks = () => {
     product: { products },
   } = useAppSelector((state) => state);
 
+  console.log(products);
+
   return (
     <section className="w-11/12 mx-auto mt-5 mb-20">
       <div className="flex justify-center items-center gap-5 my-5">
@@ -25,6 +27,7 @@ const AllBooks = () => {
         <SearchBar />
         <FilterDropdown />
       </div>
+      {!products && <p className="text-center">Sorry, No books found!</p>}
       <div className="grid grid-cols-5 gap-4">
         {products?.map((products: IProduct) => (
           <ProductsCard key={products?._id} product={products} />

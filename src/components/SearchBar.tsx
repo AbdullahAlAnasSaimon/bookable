@@ -28,7 +28,6 @@ const SearchBar = () => {
   if (data) {
     dispatch(setProducts(data.data));
   }
-  console.log(data);
 
   return (
     <div>
@@ -46,7 +45,6 @@ const SearchBar = () => {
           <Search className="" />
         </Button>
       </form>
-      {/* <Button type="submit">Search</Button> */}
     </div>
   );
 };

@@ -11,17 +11,20 @@ import {
 import { SlidersHorizontal } from "lucide-react";
 import { Input } from "./ui/input";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 
 export function FilterDropdown() {
+  const [filter, setFilter] = useState({});
   const { register, handleSubmit } = useForm<{
     genre: string;
     publication_date: string;
   }>();
-
+  console.log(filter);
   const handleFilter = (data: { genre: string; publication_date: string }) => {
     const publication_date: string = new Date(data.publication_date).toString();
     const newData = { genre: data.genre, publication_date };
     console.log(newData);
+    setFilter(newData);
   };
 
   return (
