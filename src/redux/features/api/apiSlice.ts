@@ -9,8 +9,11 @@ export const productApi = createApi({
       query: (query) => `/book-search?search=${query}`,
     }),
     filterProduct: builder.query({
-      query: (filter) =>
-        `/book-filter?genre=${filter.genre}&publication_date=${filter.publication_date}`,
+      query: (filter) => ({
+        url: `/book-filter`,
+        method: "GET",
+        params: filter,
+      }),
     }),
     getProducts: builder.query({
       query: () => "/books",
