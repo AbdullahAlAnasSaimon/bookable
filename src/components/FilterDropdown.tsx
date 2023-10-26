@@ -8,7 +8,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { SlidersHorizontal } from "lucide-react";
+import { Loader2, SlidersHorizontal } from "lucide-react";
 import { Input } from "./ui/input";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
@@ -24,17 +24,19 @@ export function FilterDropdown() {
   }>();
   const dispatch = useAppDispatch();
 
-  const { data: filteredData } = useFilterProductQuery(filter);
-
-  if (filteredData) {
-    dispatch(setProducts(filteredData));
-  }
+  const { data: filteredData, isLoading } = useFilterProductQuery(filter);
 
   const handleFilter = (data: { genre: string; publication_date: string }) => {
-    const publication_date: string = new Date(data.publication_date).toString();
+    const publication_date: string = new Date(data.publication_date)
+      .toString()
+      .slice(0, 15);
     const newData = { genre: data.genre, publication_date };
     setFilter(newData);
   };
+
+  if (filteredData?.length > 0 && !isLoading) {
+    dispatch(setProducts(filteredData));
+  }
 
   return (
     <DropdownMenu>
@@ -52,7 +54,7 @@ export function FilterDropdown() {
             type="text"
             placeholder="By Genre"
             className="mb-2"
-            {...register("genre")}
+            {...register("genre", { required: true })}
           />
           <Input
             type="date"
@@ -61,7 +63,7 @@ export function FilterDropdown() {
             {...register("publication_date")}
           />
           <Button variant="default" className="w-full">
-            Filter
+            {isLoading ? <Loader2 className="animation-spin" /> : "Filter"}
           </Button>
         </form>
       </DropdownMenuContent>
