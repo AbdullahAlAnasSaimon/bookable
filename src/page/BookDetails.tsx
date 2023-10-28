@@ -66,16 +66,9 @@ const BookDetails = () => {
     (item: { productId: string }) => item?.productId === productId?.id
   );
 
-  interface IFinishedReading {
-    _id?: string;
-    productId?: string;
-    finishedReading?: boolean;
-  }
-
-  const finishedReadingBook: IFinishedReading | undefined =
-    currentlyReading?.find(
-      (item: IFinishedReading) => item?.productId === productId.id
-    );
+  const finishedReadingBook: any = currentlyReading?.find(
+    (item: any) => item?.productId === productId.id
+  );
 
   const handleReviewSubmit = async (data: IReview) => {
     if (!user?.email) {

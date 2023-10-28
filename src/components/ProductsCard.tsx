@@ -54,14 +54,9 @@ const ProductsCard = ({ product }: { product: IProduct }) => {
     }
   };
 
-  interface IFinishedReading {
-    _id?: string;
-    productId?: string;
-    finishedReading?: boolean;
-  }
-
-  const finishedReadingBook: IFinishedReading | undefined =
-    currentlyReading?.find((item: IFinishedReading) => item?.productId === _id);
+  const finishedReadingBook: any = currentlyReading?.find(
+    (item: any) => item?.productId === _id
+  );
 
   const dateObject = new Date(publication_date);
   const year = dateObject.getFullYear();
