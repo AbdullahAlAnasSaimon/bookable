@@ -5,20 +5,11 @@ import { setUser } from "@/redux/features/user/userSlice";
 import {
   BookOpen,
   ChevronDown,
-  Cloud,
-  Github,
   Heart,
-  LifeBuoy,
   LogIn,
   LogOut,
   Mail,
-  MessageSquare,
-  Plus,
-  PlusCircle,
   Settings,
-  // User,
-  UserPlus,
-  Users,
 } from "lucide-react";
 
 // import { Button } from "@/components/ui/button"
@@ -28,11 +19,7 @@ import {
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuPortal,
   DropdownMenuSeparator,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { signOut } from "firebase/auth";
@@ -102,60 +89,14 @@ export default function Navbar() {
                             {/* <DropdownMenuShortcut>⌘B</DropdownMenuShortcut> */}
                           </DropdownMenuItem>
                         </Link>
-                        <DropdownMenuItem>
-                          <Settings className="mr-2 h-4 w-4" />
-                          <span>Settings</span>
-                          {/* <DropdownMenuShortcut>⌘S</DropdownMenuShortcut> */}
-                        </DropdownMenuItem>
+                        <Link to="/finished-reading">
+                          <DropdownMenuItem>
+                            <Settings className="mr-2 h-4 w-4" />
+                            <span>Finished Reading</span>
+                            {/* <DropdownMenuShortcut>⌘S</DropdownMenuShortcut> */}
+                          </DropdownMenuItem>
+                        </Link>
                       </DropdownMenuGroup>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuGroup>
-                        <DropdownMenuItem disabled>
-                          <Users className="mr-2 h-4 w-4" />
-                          <span>Team</span>
-                        </DropdownMenuItem>
-                        <DropdownMenuSub>
-                          <DropdownMenuSubTrigger disabled>
-                            <UserPlus className="mr-2 h-4 w-4" />
-                            <span>Invite users</span>
-                          </DropdownMenuSubTrigger>
-                          <DropdownMenuPortal>
-                            <DropdownMenuSubContent>
-                              <DropdownMenuItem>
-                                <Mail className="mr-2 h-4 w-4" />
-                                <span>Email</span>
-                              </DropdownMenuItem>
-                              <DropdownMenuItem>
-                                <MessageSquare className="mr-2 h-4 w-4" />
-                                <span>Message</span>
-                              </DropdownMenuItem>
-                              <DropdownMenuSeparator />
-                              <DropdownMenuItem>
-                                <PlusCircle className="mr-2 h-4 w-4" />
-                                <span>More...</span>
-                              </DropdownMenuItem>
-                            </DropdownMenuSubContent>
-                          </DropdownMenuPortal>
-                        </DropdownMenuSub>
-                        <DropdownMenuItem disabled>
-                          <Plus className="mr-2 h-4 w-4" />
-                          <span>New Team</span>
-                          {/* <DropdownMenuShortcut>⌘+T</DropdownMenuShortcut> */}
-                        </DropdownMenuItem>
-                      </DropdownMenuGroup>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem disabled>
-                        <Github className="mr-2 h-4 w-4" />
-                        <span>GitHub</span>
-                      </DropdownMenuItem>
-                      <DropdownMenuItem disabled>
-                        <LifeBuoy className="mr-2 h-4 w-4" />
-                        <span>Support</span>
-                      </DropdownMenuItem>
-                      <DropdownMenuItem disabled>
-                        <Cloud className="mr-2 h-4 w-4" />
-                        <span>API</span>
-                      </DropdownMenuItem>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem
                         onClick={handleLogout}
