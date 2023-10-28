@@ -3,16 +3,25 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const productApi = createApi({
   reducerPath: "productApi",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000" }),
-  tagTypes: ["books", "review", "wishlist", "currently-reading"],
+  tagTypes: [
+    "searchBooks",
+    "filterBooks",
+    "books",
+    "review",
+    "wishlist",
+    "currently-reading",
+  ],
   endpoints: (builder) => ({
     searchProduct: builder.query({
       query: (query) => `/book-search?search=${query}`,
+      providesTags: ["searchBooks"],
     }),
     filterProduct: builder.query({
       query: ({ genre, publication_date }) => ({
         url: `/book-filter?genre=${
           genre ? genre : "undefined"
         }&publication_date=${publication_date}`,
+        providesTags: ["filterBooks"],
       }),
     }),
     getProducts: builder.query({

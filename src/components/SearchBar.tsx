@@ -12,20 +12,30 @@ import { useAppDispatch } from "@/redux/hooks";
 const SearchBar = () => {
   const dispatch = useAppDispatch();
   const [search, setSearch] = useState("");
+  const [removeSkip, setRemoveSkip] = useState(true);
   const { register, handleSubmit } = useForm<{
     searchData: string;
   }>();
 
   const onSubmit = (data: { searchData: string }) => {
-    setSearch(data.searchData);
+    try {
+      setRemoveSkip(false);
+      setSearch(data.searchData);
+    } catch (err) {
+      console.log(err);
+      setRemoveSkip(true);
+    }
   };
 
-  const { data, isLoading } = useSearchProductQuery(search);
+  const { data, isLoading } = useSearchProductQuery(search, {
+    skip: removeSkip,
+  });
 
   if (isLoading) {
     return <Loader />;
   }
   if (data) {
+    setRemoveSkip(true);
     dispatch(setProducts(data.data));
   }
 

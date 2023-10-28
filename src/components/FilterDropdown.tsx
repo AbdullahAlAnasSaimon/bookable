@@ -19,12 +19,15 @@ import { setProducts } from "@/redux/features/product/productSlice";
 export function FilterDropdown() {
   const dispatch = useAppDispatch();
   const [filter, setFilter] = useState({});
+  const [removeSkip, setRemoveSkip] = useState(true);
   const { register, handleSubmit } = useForm<{
     genre: string;
     publication_date: string;
   }>();
 
-  const { data, isLoading } = useFilterProductQuery(filter);
+  const { data, isLoading } = useFilterProductQuery(filter, {
+    skip: removeSkip,
+  });
 
   if (isLoading) {
     return <Loader2 />;
@@ -32,18 +35,25 @@ export function FilterDropdown() {
 
   if (data?.data) {
     dispatch(setProducts(data?.data));
+    setRemoveSkip(true);
   }
 
   const handleFilter = (data: { genre: string; publication_date: string }) => {
-    const publication_date: string = (
-      data.publication_date === ""
-        ? "undefined"
-        : new Date(data.publication_date)
-    )
-      .toString()
-      .slice(0, 15);
-    const newData = { genre: data.genre, publication_date };
-    setFilter(newData);
+    try {
+      const publication_date: string = (
+        data.publication_date === ""
+          ? "undefined"
+          : new Date(data.publication_date)
+      )
+        .toString()
+        .slice(0, 15);
+      const newData = { genre: data.genre, publication_date };
+      setRemoveSkip(false);
+      setFilter(newData);
+    } catch (err) {
+      console.log(err);
+      setRemoveSkip(true);
+    }
   };
 
   return (
