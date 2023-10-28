@@ -34,8 +34,6 @@ export function FilterDropdown() {
     dispatch(setProducts(data?.data));
   }
 
-  console.log(filter);
-
   const handleFilter = (data: { genre: string; publication_date: string }) => {
     const publication_date: string = (
       data.publication_date === ""

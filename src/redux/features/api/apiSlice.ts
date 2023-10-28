@@ -9,10 +9,10 @@ export const productApi = createApi({
       query: (query) => `/book-search?search=${query}`,
     }),
     filterProduct: builder.query({
-      query: (filter) => ({
+      query: ({ genre, publication_date }) => ({
         url: `/book-filter?genre=${
-          filter?.genre ? filter?.genre : "undefined"
-        }&publication_date=${filter?.publication_date}`,
+          genre ? genre : "undefined"
+        }&publication_date=${publication_date}`,
       }),
     }),
     getProducts: builder.query({
@@ -28,8 +28,8 @@ export const productApi = createApi({
       invalidatesTags: ["books"],
     }),
     editProduct: builder.mutation({
-      query: (body) => ({
-        url: `/book/${body.id}`,
+      query: ({ id, ...body }) => ({
+        url: `/book/${id}`,
         method: "PUT",
         body,
       }),
