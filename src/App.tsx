@@ -36,13 +36,14 @@ function App() {
   const { data, isLoading } = useGetProductsQuery(undefined, {
     refetchOnMountOrArgChange: true,
   });
-  const { data: wishlistData } = useGetWishlistQuery(user?.email, {
-    refetchOnMountOrArgChange: true,
-  });
-  const { data: currentlyReadingData } = useGetCurrentlyReadingQuery(
-    user?.email,
-    { refetchOnMountOrArgChange: true }
-  );
+  const { data: wishlistData, isLoading: isWishlistLoading } =
+    useGetWishlistQuery(user?.email, {
+      refetchOnMountOrArgChange: true,
+    });
+  const { data: currentlyReadingData, isLoading: isCurrentlyReadingLoading } =
+    useGetCurrentlyReadingQuery(user?.email, {
+      refetchOnMountOrArgChange: true,
+    });
 
   if (data !== null || wishlistData !== null || currentlyReadingData !== null) {
     dispatch(setProducts(data));
@@ -52,7 +53,7 @@ function App() {
     }
   }
 
-  if (isLoading) {
+  if (isLoading || isWishlistLoading || isCurrentlyReadingLoading) {
     return <Loader />;
   }
 

@@ -91,7 +91,7 @@ const FinishedReading = () => {
               <TableCell>
                 <div>
                   <button className="text-[12px] px-3 py-1 rounded-full mr-2 bg-slate-900 text-white hover:bg-slate-700">
-                    Continue Reading
+                    Read
                   </button>
                   {matchingPairs?.finishedReading && (
                     <p className="inline-block text-[12px] px-3 py-1 rounded-full mr-2 bg-green-500 text-white">

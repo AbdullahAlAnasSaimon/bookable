@@ -6,7 +6,7 @@ import { useAddWishlistMutation } from "@/redux/features/api/apiSlice";
 import { toast } from "./ui/use-toast";
 import { ToastAction } from "./ui/toast";
 import { useAppSelector } from "@/redux/hooks";
-import Loader from "./Loader";
+import { Loader2 } from "lucide-react";
 
 const ProductsCard = ({ product }: { product: IProduct }) => {
   const { _id, title, photo, genre, price, author, publication_date } = product;
@@ -15,10 +15,6 @@ const ProductsCard = ({ product }: { product: IProduct }) => {
     product: { wishlist, currentlyReading },
   } = useAppSelector((state) => state);
   const [addWishlist, { error, isLoading }] = useAddWishlistMutation();
-
-  if (isLoading) {
-    return <Loader />;
-  }
 
   const handleAddWishlist = async () => {
     if (!user?.email) {
@@ -96,6 +92,7 @@ const ProductsCard = ({ product }: { product: IProduct }) => {
               ) || finishedReadingBook?.finishedReading
             }
           >
+            {isLoading && <Loader2 />}{" "}
             {finishedReadingBook?.finishedReading
               ? "Finished Reading"
               : "Add to Wishlist"}
