@@ -9,7 +9,6 @@ import {
   LogIn,
   LogOut,
   Mail,
-  Settings,
 } from "lucide-react";
 
 // import { Button } from "@/components/ui/button"
@@ -87,13 +86,6 @@ export default function Navbar() {
                             <BookOpen className="mr-2 h-4 w-4" />
                             <span>Currently Reading</span>
                             {/* <DropdownMenuShortcut>⌘B</DropdownMenuShortcut> */}
-                          </DropdownMenuItem>
-                        </Link>
-                        <Link to="/finished-reading">
-                          <DropdownMenuItem>
-                            <Settings className="mr-2 h-4 w-4" />
-                            <span>Finished Reading</span>
-                            {/* <DropdownMenuShortcut>⌘S</DropdownMenuShortcut> */}
                           </DropdownMenuItem>
                         </Link>
                       </DropdownMenuGroup>

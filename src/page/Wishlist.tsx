@@ -1,4 +1,4 @@
-import { useAppSelector } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
   Table,
   TableBody,
@@ -21,14 +21,22 @@ import { Button } from "@/components/ui/button";
 import {
   useAddCurrentlyReadingMutation,
   useDeleteWishlistMutation,
+  useGetWishlistQuery,
 } from "@/redux/features/api/apiSlice";
 import { toast } from "@/components/ui/use-toast";
+import { setWishlist } from "@/redux/features/product/productSlice";
+import Loader from "@/components/Loader";
 
 const Wishlist = () => {
   const {
     product: { products, wishlist },
     user: { user },
   } = useAppSelector((state) => state);
+  const dispatch = useAppDispatch();
+  const { data: wishlistData, isLoading: isWishlistLoading } =
+    useGetWishlistQuery(user?.email, {
+      refetchOnMountOrArgChange: 1000,
+    });
   const [deleteWishlist, { error }] = useDeleteWishlistMutation();
   const [addCurrentlyReading] = useAddCurrentlyReadingMutation();
   const matchingProducts: any = products.filter((product: { _id: string }) =>
@@ -37,10 +45,19 @@ const Wishlist = () => {
     )
   );
 
+  if (isWishlistLoading) {
+    return <Loader />;
+  }
+
+  if (wishlistData.length) {
+    dispatch(setWishlist(wishlistData));
+  }
+
   const handleDeleteWishlistItem = async (id: string | undefined) => {
     const result = await deleteWishlist(id);
     if ("data" in result) {
       if (result.data.deletedCount > 0) {
+        dispatch(setWishlist([]));
         toast({
           title: "Success",
           description: "Book deleted Successfully",
@@ -77,7 +94,7 @@ const Wishlist = () => {
 
   return (
     <div className="w-10/12 mx-auto">
-      {matchingProducts ? (
+      {!matchingProducts?.length ? (
         <p>Currently No Book available in wishlist!</p>
       ) : (
         <Table>
