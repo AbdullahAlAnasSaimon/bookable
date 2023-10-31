@@ -25,8 +25,12 @@ import {
 import { toast } from "@/components/ui/use-toast";
 import Loader from "@/components/Loader";
 import { setCurrentlyReadingBook } from "@/redux/features/product/productSlice";
+import { useEffect, useState } from "react";
 
 const CurrentlyReading = () => {
+  const [finishedReading, setFinishedReading] = useState<boolean | undefined>(
+    false
+  );
   const {
     user: { user },
     product: { products, currentlyReading },
@@ -38,33 +42,34 @@ const CurrentlyReading = () => {
     });
   const [finishedReadingBook, { error }] = useFinishedReadingBookMutation();
   const matchingProducts = products.filter((product: { _id: string }) =>
-    currentlyReading.some(
+    currentlyReading?.some(
       (item: { productId: string }) => item.productId === product._id
     )
   );
 
-  const matchingPairs: { finishedReading: boolean } = {
-    finishedReading: false,
-  };
+  console.log(currentlyReadingData);
+
+  useEffect(() => {
+    matchingProducts.forEach((matchingProduct: IProduct) => {
+      currentlyReading.forEach(
+        (item: { productId: string; finishedReading?: boolean }) => {
+          console.log(matchingProducts);
+          if (item.productId === matchingProduct._id) {
+            // console.log(item);
+            setFinishedReading(item?.finishedReading);
+          }
+        }
+      );
+    });
+  }, [currentlyReading, matchingProducts]);
 
   if (isCurrentlyReadingLoading) {
     return <Loader />;
   }
+
   if (currentlyReadingData.length) {
     dispatch(setCurrentlyReadingBook(currentlyReadingData));
   }
-
-  matchingProducts.forEach((matchingProduct: { _id: string }) => {
-    currentlyReading.forEach(
-      (item: { productId: string; finishedReading?: boolean }) => {
-        if (item.productId === matchingProduct._id) {
-          matchingPairs.finishedReading = item?.finishedReading
-            ? item.finishedReading
-            : false;
-        }
-      }
-    );
-  });
 
   const confirmFinishRading = async (id: string | undefined) => {
     const result = await finishedReadingBook(id);
@@ -82,6 +87,8 @@ const CurrentlyReading = () => {
       }
     }
   };
+
+  console.log(finishedReading);
 
   return (
     <div className="w-10/12 mx-auto">
@@ -115,17 +122,17 @@ const CurrentlyReading = () => {
                   <button className="text-[12px] px-3 py-1 rounded-full mr-2 bg-slate-900 text-white hover:bg-slate-700">
                     Continue Reading
                   </button>
-                  {matchingPairs?.finishedReading && (
+                  {finishedReading === true && (
                     <p className="inline-block text-[12px] px-3 py-1 rounded-full mr-2 bg-green-500 text-white">
                       Finished Reading
                     </p>
                   )}
                   <Dialog>
                     <DialogTrigger asChild>
-                      {!matchingPairs?.finishedReading && (
-                        <button className="text-[12px] px-3 py-1 rounded-full mr-2 bg-red-500 text-white hover:bg-red-600">
+                      {(finishedReading === false || undefined) && (
+                        <p className="text-[12px] px-3 py-1 rounded-full mr-2 bg-red-500 text-white hover:bg-red-600">
                           Finish Reading
-                        </button>
+                        </p>
                       )}
                     </DialogTrigger>
                     <DialogContent className="sm:max-w-[425px]">
