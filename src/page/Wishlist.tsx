@@ -35,7 +35,7 @@ const Wishlist = () => {
   const dispatch = useAppDispatch();
   const { data: wishlistData, isLoading: isWishlistLoading } =
     useGetWishlistQuery(user?.email, {
-      refetchOnMountOrArgChange: 1000,
+      refetchOnMountOrArgChange: true,
     });
   const [deleteWishlist, { error }] = useDeleteWishlistMutation();
   const [addCurrentlyReading] = useAddCurrentlyReadingMutation();
