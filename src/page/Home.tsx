@@ -12,7 +12,7 @@ const Home = () => {
 
   return (
     <section className="w-11/12 mx-auto my-10">
-      <div className="grid grid-cols-4 gap-5">
+      <div className="grid grid-cols-5 gap-5">
         {data?.slice(0, 5)?.map((products: IProduct) => (
           <ProductsCard key={products?._id} product={products} />
         ))}
