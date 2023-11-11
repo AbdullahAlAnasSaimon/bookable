@@ -24,7 +24,10 @@ const AllBooks = () => {
         <FilterDropdown />
       </div>
       <p className="my-5 text-right text-sm">
-        <span className="font-semibold">{products?.length}</span> item
+        <span className="font-semibold">
+          {products?.length ? products?.length : 0}
+        </span>{" "}
+        item
         {products?.length > 1 && "'s"} available
       </p>
       {!products && <p className="text-center">Sorry, No books found!</p>}
