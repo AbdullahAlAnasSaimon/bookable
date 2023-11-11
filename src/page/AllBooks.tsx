@@ -23,6 +23,10 @@ const AllBooks = () => {
         <SearchBar />
         <FilterDropdown />
       </div>
+      <p className="my-5 text-right text-sm">
+        <span className="font-semibold">{products?.length}</span> item
+        {products?.length > 1 && "'s"} available
+      </p>
       {!products && <p className="text-center">Sorry, No books found!</p>}
       <div className="grid grid-cols-5 gap-4">
         {products?.map((products: IProduct) => (
