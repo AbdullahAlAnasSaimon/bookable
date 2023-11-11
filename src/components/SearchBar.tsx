@@ -47,8 +47,12 @@ const SearchBar = () => {
           placeholder="Search books by title, author, or genre"
           {...register("searchData")}
         />
-        <Button variant="secondary" type="submit">
-          {isLoading ? <Loader2 /> : <Search className="" />}
+        <Button variant="secondary" type="submit" disabled={isLoading}>
+          {isLoading ? (
+            <Loader2 className="animate-spin" />
+          ) : (
+            <Search className="" />
+          )}
         </Button>
       </form>
     </div>
