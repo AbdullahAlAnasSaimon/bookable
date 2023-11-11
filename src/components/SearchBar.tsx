@@ -1,11 +1,10 @@
 // import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useSearchProductQuery } from "@/redux/features/api/apiSlice";
-import { Search } from "lucide-react";
+import { Loader2, Search } from "lucide-react";
 import { Button } from "./ui/button";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import Loader from "./Loader";
 import { setProducts } from "@/redux/features/product/productSlice";
 import { useAppDispatch } from "@/redux/hooks";
 
@@ -49,7 +48,7 @@ const SearchBar = () => {
           {...register("searchData")}
         />
         <Button variant="secondary" type="submit">
-          <Search className="" />
+          {isLoading ? <Loader2 /> : <Search className="" />}
         </Button>
       </form>
     </div>
