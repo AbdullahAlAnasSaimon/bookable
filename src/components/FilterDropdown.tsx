@@ -29,10 +29,6 @@ export function FilterDropdown() {
     skip: removeSkip,
   });
 
-  if (isLoading) {
-    return <Loader2 />;
-  }
-
   if (data?.data) {
     dispatch(setProducts(data?.data));
     setRemoveSkip(true);
@@ -81,7 +77,7 @@ export function FilterDropdown() {
             {...register("publication_date")}
           />
           <Button type="submit" variant="default" className="w-full">
-            Filter
+            {isLoading ? <Loader2 className="animate-spin" /> : "Filter"}
           </Button>
         </form>
       </DropdownMenuContent>
