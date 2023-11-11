@@ -31,9 +31,6 @@ const SearchBar = () => {
     skip: removeSkip,
   });
 
-  if (isLoading) {
-    return <Loader />;
-  }
   if (data) {
     setRemoveSkip(true);
     dispatch(setProducts(data.data));
