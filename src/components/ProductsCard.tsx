@@ -61,7 +61,10 @@ const ProductsCard = ({ product }: { product: IProduct }) => {
 
   return (
     <>
-      <Card className="hover:shadow-xl duration-300">
+      <Card className="hover:shadow-xl duration-300 relative">
+        <p className="my-1 text-[12px] absolute right-0 top-0 bg-slate-700 text-white px-2 rounded-full">
+          {genre}
+        </p>
         <Link to={`/book/${_id}`}>
           <img
             className="w-11/12 mx-auto h-[250px] mt-3 rounded-md"
@@ -79,7 +82,6 @@ const ProductsCard = ({ product }: { product: IProduct }) => {
             Publishing Date: {day}-{month}-{year}
           </p>
           <p className="text-sm">Author: {author}</p>
-          <p className="my-1 text-sm">{genre}</p>
           <p className="mb-2 text-lg text-slate-900 font-bold">${price}</p>
           <Button
             onClick={handleAddWishlist}
