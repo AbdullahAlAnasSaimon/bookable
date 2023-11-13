@@ -61,7 +61,7 @@ const ProductsCard = ({ product }: { product: IProduct }) => {
 
   return (
     <>
-      <Card>
+      <Card className="hover:shadow-xl duration-300">
         <Link to={`/book/${_id}`}>
           <img
             className="w-11/12 mx-auto h-[250px] mt-3 rounded-md"
